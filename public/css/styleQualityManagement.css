@@ -1,0 +1,354 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    display: flex; 
+    flex-direction: column; 
+    min-height: 100vh;
+}
+.container-fluid {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+.tittle {
+
+    color: #E6716E;
+}
+
+
+.btn-warning-custom { 
+    background-color: #FFC107 !important; 
+    color: #212529;     
+    border-color: #FFC107 !important;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; 
+    margin-top: 5px;
+}
+
+.btn-warning-custom:hover{
+    background-color: #e0a800;
+    border-color: #d39e00;
+    color: #212529;
+}
+
+.btn-warning-custom:active, .btn-warning-custom.active{ 
+    background-color: #ffffff !important;
+    color: #6B3F73 !important;
+    border-color: #ffffff !important;
+}
+
+.btn-warning-custom:focus{
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5) !important;
+}
+
+.btn-warning-custom.transicion-blanco { 
+    background-color: #ffffff;
+    color: #6B3F73;
+    border-color: #ffffff;
+}
+
+
+#headerQualityManagement {
+    background-color: #6B3F73;
+    padding: 0px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#headerQualityManagement .col-auto:first-child { 
+    padding-left: 30px; 
+}
+
+#headerQualityManagement .icono-usuario {
+    font-size: 2rem;
+    color: #ffffff;
+}
+
+#headerQualityManagement .dropdown-toggle {
+    background-color: transparent; 
+    border: none; 
+    color: #ffffff; 
+}
+
+#headerQualityManagement .dropdown-toggle:hover,
+#headerQualityManagement .dropdown-toggle:focus {
+    background-color: transparent; 
+    box-shadow: none; 
+    color: #ffffff; 
+}
+
+
+#headerQualityManagement .dropdown-menu {
+    background-color: #FFC107; 
+    border: none; 
+}
+
+#headerQualityManagement .dropdown-item {
+    color: #ffffff; 
+    transition: background-color 0.3s, color 0.3s; 
+}
+
+#headerQualityManagement .dropdown-item:hover {
+    background-color: #ffffff; 
+    color: #FFC107; 
+}
+
+
+#footerQualityManagement {
+    background-color: #6B3F73;
+    text-align: center;
+    color: #ffffff;
+    padding: 0px 0;
+
+}
+
+.sin-margen {
+    margin: 5;
+}
+
+.container { 
+    flex: 1; 
+}
+
+.icono-usuario {
+    font-size: 2rem;
+    color: #ffffff;
+}
+
+.seccion {
+    color: #ffffff;
+    background-color: #6B3F73; 
+    width: 90%;
+    margin-left: 5%;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-label {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    
+}
+
+/* Estilos generales */
+.row-centered {
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+}
+
+.col-md-6 {
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.form-label {
+    text-align: center; 
+    width: 100%; 
+}
+
+.form-select {
+    width: 100%; 
+}
+
+/* Estilos para los campos de fecha */
+.date-inputs-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    gap: 10px;
+    width: 100%; 
+    margin-top: 5px;
+}
+
+.date-inputs {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 10px;
+    margin-bottom: 10px; 
+}
+
+.date-inputs label {
+    margin-right: 5px; 
+}
+
+.date-inputs input {
+    flex: 1 1 auto; 
+    min-width: 150px; 
+}
+
+
+@media (max-width: 768px) {
+    .date-inputs {
+        flex-direction: column; 
+        align-items: stretch;
+    }
+
+    .date-inputs input {
+        min-width: auto; 
+        width: 100%;
+    }
+}
+
+.botones-menu {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.labelFiltroBusqueda {
+    padding-top: 6px;
+    padding-left: 13%;
+    text-align: right;
+    color: #ffffff;
+}
+
+.selectFiltroBusqueda {
+    padding-left: 10px;
+    border: 1px solid #E6716E !important; 
+    border-radius: 5px;
+}
+
+.inputGroupFiltroBusqueda {
+    padding-left: 10px;
+}
+
+.card {
+    color: #ffffff;
+    background-color: #6B3F73; 
+    border: 1px solid #E6716E !important ; 
+    border-radius: 10px;
+}
+
+.card-generalInfoQM {
+    width: 90%;
+    margin-left: 5%;
+}
+
+.card-titleQM {
+    color: #ffffff;
+    background-color: #6B3F73 !important; 
+    text-align: center;
+    border-bottom: solid 2px #E6716E !important; 
+}
+
+#buttonsCancelNextForm {
+    width: 90%;
+    margin-left: 5%;
+    text-align: end;
+}
+
+#buttonNextFormNoTypification {
+    color: #ffffff;
+    background-color: #E6716E !important ;
+    border: none;
+    border-radius: 5px;
+    padding: 7px 15px;
+}
+
+#buttonNextForm {
+    color: #ffffff;
+    background-color: #6B3F73 !important; 
+    border: none;
+    border-radius: 5px;
+    padding: 7px 15px;
+}
+
+#buttonCancelForm {
+    color: #ffffff;
+    background-color: #d80e0e !important;
+    border: none;
+    border-radius: 5px;
+    padding: 7px 15px;
+}
+
+.tableDataQuality {
+    color: #ffffff;
+    background-color: #6B3F73 !important; 
+    border-radius: 5px;
+    margin-top: 25px;
+}
+
+.tableDataQuality th {
+    color: #6B3F73 !important; 
+    border: 1px solid #6B3F73 !important; 
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tableDataQuality tr {
+    color: #6B3F73 !important; 
+    background-color: #ffffff; 
+
+}
+
+.tableDataQuality td {
+    border: 1px solid #E6716E !important ;
+}
+
+/* Estilo para la imagen, centrado y tamaño */
+.toggle-panel img {
+    max-width: 100px;
+    margin-bottom: 20px;
+}
+
+/* Fondo y estilo general del panel */
+.toggle-panel {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    transition: .6s ease-in-out;
+    background-color: #0047AB; /* Color de fondo */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+/* Estilo del formulario */
+#formLogin {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Botón de login */
+.btn-login {
+    background-color: #0066CC;
+    color: white;
+    width: 100%;
+    font-size: 18px;
+    border: none;
+    padding: 12px 0;
+    border-radius: 5px;
+}
+
+/* Input de texto */
+.form-control {
+    border-radius: 5px;
+}
+
+/* Icono del ojo */
+.input-group-text {
+    cursor: pointer;
+}
+
+/* Estilo de los títulos */
+h1, h3 {
+    font-weight: bold;
+}
+
+/* Hacer que el panel sea responsivo */
+@media (max-width: 768px) {
+    .toggle-panel {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
