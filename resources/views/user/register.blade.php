@@ -15,36 +15,30 @@
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre</label>
-                            <input id="name" type="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autofocus>
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <input id="name" type="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cedula" class="form-label">Cédula</label>
+                            <input id="cedula" type="number" class="form-control @error('cedula') is-invalid @enderror" name="cedula" value="{{ old('cedula') }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Correo Electrónico</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required>
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Contraseña</label>
                             <div class="input-group">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <span class="input-group-text" onclick="showPassword()">
-                                    <i class="bi bi-eye-fill" id="showIconPass"></i>
-                                    <i class="bi bi-eye-slash" id="hideIconPass" style="display: none;"></i>
-                                </span>
+                                <input id="password" type="text" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                             </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="roleId" class="form-label">Selecciona un Rol</label>
+                            <select id="roleId" name="roleId" class="form-control">
+                                <option value="">Seleccione un rol</option>
+                                @foreach($roles as $role)
+                                    <option value="{{ $role->id }}">{{ $role->nombre }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-3 text-center">
                             <button type="submit" class="btn btn-primary">

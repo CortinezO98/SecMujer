@@ -3,22 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    public function ViewRegister(Request $request){
+        $userAuthenticared = Auth::user();
+        if ($userAuthenticared && $userAuthenticared->roleId == 1){
+            $roles = UserRole::all();
+            return view('user.register', compact('roles'));
+        }
+        return redirect(route('inicio'));
+    }
+
+
     public function Register(Request $request){
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->save();
-
-        Auth::login($user);
-
-        return redirect(route('/inicio'));
+        $userAuthenticared = Auth::user();
+        if ($userAuthenticared && $userAuthenticared->roleId == 1){
+            $user = new User();
+            $user->name = $request->name;
+            $user->cedula = $request->cedula;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->roleId = $request->roleId;
+            $user->save();
+        }
+        return redirect(route('inicio'));
     }
 
     public function Login(Request $request){

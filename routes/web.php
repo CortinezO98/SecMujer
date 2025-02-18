@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 
-Route::view('/registro', 'user.register')->name('view-register');
+Route::get('/registro', [LoginController::class, 'ViewRegister'])->name('ViewRegister');
 Route::post('/register', [LoginController::class, 'Register'])->name('Register');
 
 Route::view('/login', 'user.login')->name('login');

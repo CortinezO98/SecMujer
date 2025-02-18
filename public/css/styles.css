@@ -1,0 +1,16 @@
+.btn-primary {
+    background-color: #6B3F73 !important; /* Color morado */
+    border-color: #5a32a3 !important; /* Borde ligeramente más oscuro */
+}
+
+.btn-primary:hover {
+    background-color: #5a32a3 !important; /* Color más oscuro al pasar el mouse */
+    border-color: #4a258c !important;
+}
+
+.btn-primary:focus, 
+.btn-primary:active {
+    background-color: #4a258c !important;
+    border-color: #3b1d72 !important;
+    box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.5) !important; /* Efecto de enfoque */
+}
