@@ -3,15 +3,13 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <!-- El div contenedor de la sección de login -->
         <div class="col-12 col-md-6 mx-auto position-relative">
-            <!-- Panel de login -->
             <div class="card">
                 <div class="card-body toggle-panel">
                     <form method="POST" action="{{ route('post-login') }}">
                         @csrf
                         <div class="mb-3 text-center">
-                            <img src="{{ asset('img/originals/logov.png') }}" class="img-fluid" alt="Logo">
+                            <img src="{{ asset('img/Mujer.png') }}" class="img-fluid" alt="Logo" width="500" height="500">
                         </div>
                         <div class="mb-3">
                             <h1 class="text-center">Secretaría Distrital de la Mujer</h1>

@@ -11,9 +11,28 @@ Route::post('/post-login', [LoginController::class, 'Login'])->name('post-login'
 
 Route::get('/logout', [LoginController::class, 'Logout'])->name('logout');
 
-Route::get('/', function () {
-    return "Holiwi";// view('welcome');
+
+
+Route::middleware(['auth'])->group(function () {
+    
+    Route::get('/roles/admin', function () {
+        return view('roles.admin');
+    })->name('roles.admin');
+
+    Route::get('/roles/supervisor', function () {
+        return view('roles.supervisor');
+    })->name('roles.supervisor');
+
+    Route::get('/roles/agente', function () {
+        return view('roles.agente');
+    })->name('roles.agente');
+
+    Route::get('/roles/lider', function () {
+        return view('roles.lider');
+    })->name('roles.lider');
+
 });
+
 
 Route::view('/inicio', 'inicio')->name('inicio');
 

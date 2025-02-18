@@ -19,7 +19,7 @@
         @yield('content')
     </div>
 
-    {{-- @include('quality/base.footer') --}}
+    @include('base.footer') 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

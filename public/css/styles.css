@@ -1,3 +1,75 @@
+body {
+    background-color: #f8f9fa; /* Color de fondo ligero */
+    margin: 0; /* Asegura que no haya márgenes en el body */
+}
+
+.container-fluid {
+    padding: 0; /* Eliminar el padding predeterminado del container */
+    padding-top: 50px; /* Espacio superior para separar del header */ /* Ajusta este valor según sea necesario */
+}
+
+/* Card del formulario */
+.card {
+    border: none; /* Sin bordes en la tarjeta */
+    box-shadow: 0 4px 8px #6B3F73; /* Sombra ligera */
+    margin-top: 20px; /* Margen superior para separar aún más del header (opcional) */
+}
+
+.card-body {
+    padding: 30px; /* Aumentar el padding del cuerpo de la tarjeta */
+}
+
+/* Imagen */
+.img-fluid {
+    max-width: 200px; /* Ajustar el ancho máximo de la imagen */
+    height: auto;
+    margin-bottom: 20px; /* Espacio debajo de la imagen */
+    display: block; /* Para que la imagen se centre correctamente */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Títulos */
+h1, h2, h3, h4, h5, h6 { /* Estilos para todos los encabezados */
+    color: #6B3F73; /* Morado */
+    margin-bottom: 10px;
+}
+
+/* Formulario */
+.form-label {
+    color: #343a40; /* Color de etiqueta más oscuro */
+}
+
+.form-control {
+    border: 1px solid #ced4da; /* Borde más claro */
+}
+
+.form-control:focus {
+    border-color: #80bdff; /* Borde azul al enfocar */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra azul al enfocar */
+}
+
+.input-group-text {
+    cursor: pointer; /* Cursor de puntero para el icono de mostrar/ocultar contraseña */
+    background-color: white; /* Mantener el fondo blanco para el icono */
+    border: 1px solid #ced4da; /* Borde igual al input */
+    border-left: none; /* Quitar el borde izquierdo */
+}
+
+.input-group-text:hover {
+    background-color: #eee; /* Fondo gris claro al pasar el mouse */
+}
+
+/* Select */
+.form-select {
+    border: 1px solid #ced4da; /* Borde más claro */
+}
+
+.form-select:focus {
+    border-color: #80bdff; /* Borde azul al enfocar */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra azul al enfocar */
+}
+
 .btn-primary {
     background-color: #6B3F73 !important; /* Color morado */
     border-color: #5a32a3 !important; /* Borde ligeramente más oscuro */
@@ -13,4 +85,30 @@
     background-color: #4a258c !important;
     border-color: #3b1d72 !important;
     box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.5) !important; /* Efecto de enfoque */
+}
+
+#footerQualityManagement {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #6B3F73;
+    text-align: center;
+    color: #ffffff;
+    padding: 5px 0;
+    z-index: 999;
+
+}
+
+.sin-margen {
+    margin: 0;
+}
+#headerQualityManagement {
+    background-color: #6B3F73;
+    padding: 0px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#headerQualityManagement .col-auto:first-child { 
+    padding-left: 30px; 
 }

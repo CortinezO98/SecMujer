@@ -1,5 +1,6 @@
 <header id="headerQualityManagement" class="container-fluid">
-    <div class="row align-items-center justify-content-between">  <div class="col-auto">  <img class="img-fluid" src="{{ asset('img/bogota.png') }}" alt="Logo" width="140" height="140">
+    
+    <div class="row align-items-center justify-content-between">  <div class="col-auto">  <img class="img-fluid" src="{{ asset('img/bogota.png') }}" alt="Logo" width="130" height="130">
     </div>
     <div class="col-auto">  
         @auth
