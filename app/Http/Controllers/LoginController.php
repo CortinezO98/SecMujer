@@ -45,9 +45,10 @@ class LoginController extends Controller
             $request->session()->regenerate();
             $user = Auth::user();
 
+
             switch ($user->roleId) {
                 case 1:
-                    return redirect()->intended(route('roles.admin')); // Para administradores
+                    return redirect()->intended(route('ViewRegister')); // Para administradores
                 case 2:
                     return redirect()->intended(route('roles.supervisor')); // Para supervisores
                 case 3:

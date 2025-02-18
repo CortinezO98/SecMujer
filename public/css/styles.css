@@ -1,91 +1,87 @@
 body {
-    background-color: #f8f9fa; /* Color de fondo ligero */
-    margin: 0; /* Asegura que no haya márgenes en el body */
+    background-color: #f8f9fa;
 }
 
 .container-fluid {
-    padding: 0; /* Eliminar el padding predeterminado del container */
-    padding-top: 50px; /* Espacio superior para separar del header */ /* Ajusta este valor según sea necesario */
+    padding-top: 50px; 
 }
 
-/* Card del formulario */
+
 .card {
-    border: none; /* Sin bordes en la tarjeta */
-    box-shadow: 0 4px 8px #6B3F73; /* Sombra ligera */
-    margin-top: 20px; /* Margen superior para separar aún más del header (opcional) */
+    border: none;
+    box-shadow: 0 4px 8px #6B3F73;
+    margin-top: 20px;
 }
 
 .card-body {
-    padding: 30px; /* Aumentar el padding del cuerpo de la tarjeta */
+    padding: 30px;
 }
 
-/* Imagen */
+
 .img-fluid {
-    max-width: 200px; /* Ajustar el ancho máximo de la imagen */
+    max-width: 200px;
     height: auto;
-    margin-bottom: 20px; /* Espacio debajo de la imagen */
-    display: block; /* Para que la imagen se centre correctamente */
-    margin-left: auto;
-    margin-right: auto;
+    margin: 20px auto;
+    display: block;
 }
 
-/* Títulos */
-h1, h2, h3, h4, h5, h6 { /* Estilos para todos los encabezados */
-    color: #6B3F73; /* Morado */
+
+h1, h2, h3, h4, h5, h6 {
+    color: #6B3F73;
     margin-bottom: 10px;
 }
 
-/* Formulario */
+
 .form-label {
-    color: #343a40; /* Color de etiqueta más oscuro */
+    color: #343a40;
 }
 
 .form-control {
-    border: 1px solid #ced4da; /* Borde más claro */
+    border: 1px solid #ced4da;
 }
 
 .form-control:focus {
-    border-color: #80bdff; /* Borde azul al enfocar */
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra azul al enfocar */
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .input-group-text {
-    cursor: pointer; /* Cursor de puntero para el icono de mostrar/ocultar contraseña */
-    background-color: white; /* Mantener el fondo blanco para el icono */
-    border: 1px solid #ced4da; /* Borde igual al input */
-    border-left: none; /* Quitar el borde izquierdo */
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-left: none;
 }
 
 .input-group-text:hover {
-    background-color: #eee; /* Fondo gris claro al pasar el mouse */
+    background-color: #eee;
 }
 
-/* Select */
 .form-select {
-    border: 1px solid #ced4da; /* Borde más claro */
+    border: 1px solid #ced4da;
 }
 
 .form-select:focus {
-    border-color: #80bdff; /* Borde azul al enfocar */
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra azul al enfocar */
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .btn-primary {
-    background-color: #6B3F73 !important; /* Color morado */
-    border-color: #5a32a3 !important; /* Borde ligeramente más oscuro */
+    background-color: #6B3F73 !important; 
+    border-color: #5a32a3 !important; 
 }
 
 .btn-primary:hover {
-    background-color: #5a32a3 !important; /* Color más oscuro al pasar el mouse */
+    background-color: #5a32a3 !important;
     border-color: #4a258c !important;
 }
 
-.btn-primary:focus, 
+.btn-primary:focus,
 .btn-primary:active {
-    background-color: #4a258c !important;
-    border-color: #3b1d72 !important;
-    box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.5) !important; /* Efecto de enfoque */
+    background-color: #4a258c;
+    border-color: #3b1d72;
+    box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.5);
 }
+
 
 #footerQualityManagement {
     position: fixed;
@@ -97,18 +93,188 @@ h1, h2, h3, h4, h5, h6 { /* Estilos para todos los encabezados */
     color: #ffffff;
     padding: 5px 0;
     z-index: 999;
+}
+
+
+#headerQualityManagement {
+    background-color: #6B3F73;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px; 
+}
+
+#headerQualityManagement .col-auto:first-child {
+    padding-left: 15px; 
+}
+
+
+.tableDataQuality {
+    color: #ffffff;
+    background-color: #6B3F73;
+    border-radius: 5px;
+    margin-top: 25px;
+    width: 100%; 
+}
+
+.tableDataQuality th {
+    color: #6B3F73;
+    border: 1px solid #6B3F73;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tableDataQuality tr {
+    color: #6B3F73;
+    background-color: #ffffff;
+}
+
+.tableDataQuality td {
+    border: 1px solid #E6716E;
+}
+
+
+.seccion {
+    background-color: #6B3F73;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px auto; 
+    width: 90%; 
 
 }
+
+
+.row-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.col-md-6 { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 .sin-margen {
     margin: 0;
 }
-#headerQualityManagement {
-    background-color: #6B3F73;
-    padding: 0px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+.icono-usuario {
+    font-size: 2rem;
+    color: #ffffff;
 }
 
-#headerQualityManagement .col-auto:first-child { 
-    padding-left: 30px; 
+
+
+.form-label {
+    text-align: center;
+    width: 100%;
 }
+
+.form-select {
+    width: 100%;
+}
+
+.date-inputs-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.date-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.date-inputs label {
+    margin-right: 5px;
+}
+
+.date-inputs input {
+    flex: 1 1 auto;
+    min-width: 150px;
+}
+
+@media (max-width: 768px) {
+    .date-inputs {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .date-inputs input {
+        min-width: auto;
+        width: 100%;
+    }
+}
+
+.btn-warning-custom {
+    background-color: #FFC107;
+    color: #212529;
+    border-color: #FFC107;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    margin-top: 5px;
+}
+
+.btn-warning-custom { 
+    background-color: #FFC107 !important; 
+    color: #212529;     
+    border-color: #FFC107 !important;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; 
+    margin-top: 5px;
+}
+
+.btn-warning-custom:hover{
+    background-color: #e0a800;
+    border-color: #d39e00;
+    color: #212529;
+}
+
+.btn-warning-custom:active, .btn-warning-custom.active{ 
+    background-color: #ffffff !important;
+    color: #6B3F73 !important;
+    border-color: #ffffff !important;
+}
+
+.btn-warning-custom:focus{
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5) !important;
+}
+
+.btn-warning-custom.transicion-blanco { 
+    background-color: #ffffff;
+    color: #6B3F73;
+    border-color: #ffffff;
+}
+
+
+.labelFiltroBusqueda {
+    padding-top: 6px;
+    text-align: right;
+    color: #ffffff;
+    padding-right: 15px;
+    border-radius: 5px;
+}
+
+.selectFiltroBusqueda {
+    border: 1px solid #ced4da; 
+    border-radius: 5px;
+    width: auto; 
+    margin-top: 10px !important;
+
+}
+
+.inputGroupFiltroBusqueda {
+    padding-left: 10px;
+    
+}
+
+
+

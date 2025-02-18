@@ -5,7 +5,7 @@
     <div class="col-auto">  
         @auth
             <div class="d-flex align-items-center">  
-                <p class="pt-3 px-3">
+                <p class="pt-3 px-3 text-white">
                     <i class="bi bi-person-circle icono-usuario me-2"></i>  
                     {{ Auth::user()->name }}
                 </p>
