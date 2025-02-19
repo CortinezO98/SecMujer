@@ -12,18 +12,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_roles', function (Blueprint $table) {
+        Schema::create('canals', function (Blueprint $table) {
             $table->id();
             $table->string('descripcion', 100)->unique();
         });
 
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        DB::table('user_roles')->insert([
-            ['id' => 1, 'descripcion' => 'Administrador'],
-            ['id' => 2, 'descripcion' => 'Supervisor'],
-            ['id' => 3, 'descripcion' => 'Agente'],
-            ['id' => 4, 'descripcion' => 'Líder'],
-            ['id' => 5, 'descripcion' => 'Coordinador'],
+        DB::table('canals')->insert([
+            ['id' => 1, 'descripcion' => 'Inbound'],
+            ['id' => 2, 'descripcion' => 'Outbound'],
+            ['id' => 3, 'descripcion' => 'Virtual'],
+            ['id' => 4, 'descripcion' => 'Presencial']
         ]);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_roles');
+        Schema::dropIfExists('canals');
     }
 };
