@@ -1,4 +1,4 @@
-@extends('base.base') {{-- Asegúrate de usar tu layout principal --}}
+@extends('base.base') 
 
 @section('content')
 @php
