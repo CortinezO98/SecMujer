@@ -21,25 +21,25 @@ class MatrizSeeder extends Seeder
         Matriz::create([
             'id' => 1,
             'descripcion' => 'Atención psicosocial',
-            'canal_id' => Canales::TELEFONICO->value
+            'canal_id' => Canales::Telefonico->value
         ]);
 
         Matriz::create([
             'id' => 2,
             'descripcion' => 'Contacto inicial',
-            'canal_id' => Canales::TELEFONICO->value
+            'canal_id' => Canales::Telefonico->value
         ]);
 
         Matriz::create([
             'id' => 3,
             'descripcion' => 'Contacto inicial',
-            'canal_id' => Canales::WHATSAPP->value
+            'canal_id' => Canales::Whatsapp->value
         ]);
 
         Matriz::create([
             'id' => 4,
             'descripcion' => 'Atención psicosocial',
-            'canal_id' => Canales::WHATSAPP->value
+            'canal_id' => Canales::Whatsapp->value
         ]);
     }
 }

@@ -4,6 +4,6 @@ namespace App\Enums;
 
 enum Canales: int
 {
-    case TELEFONICO = 1;
-    case WHATSAPP = 2;
+    case Telefonico = 1;
+    case Whatsapp = 2;
 }

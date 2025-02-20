@@ -15,20 +15,16 @@
                         <div class="row">
                             <div class="col">
                                 <h3>Canal y Matriz</h3>
-                                <label>Seleccione un canal:</label>
-                                <select class="form-select mb-3" name="canalQM" id="canalQM" required></select>
-
-                                <label>Seleccione una matriz:</label>
-                                <select class="form-select mb-3" name="matrizQM" id="matrizQM" required></select>
-
-                                <label for="">Tipo de Monitoreo:</label>
-                                <select class="form-select mb-3" name="monitoringType" id="monitoringType" required></select>
+                                
+                                @include('monitoreo.moduloFormSelect') 
 
                                 <label for="">Fecha Interacción:</label>
                                 <input class="form-control mb-3" type="date" name="interactionDate" id="interactionDate" required>
 
                                 <label for="">Agente:</label>
-                                <select class="form-select mb-3" name="agentName" id="agentName" required></select>
+                                <select class="form-select mb-3" name="agentName" id="agentName" required>
+                                    <option value="">Seleccione un agente</option>
+                                </select>
 
                                 <input type="submit" class="btn text-bg-warning" value="Continuar Evaluación" id="buttonNextFormNoTypification">
                             </div>
@@ -36,10 +32,28 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-                <input type="hidden" name="userRecord" id="userRecord" value="{{ $userLogin }}">
-            </div>
         </div>
     </form>
+@endsection
+
+@section('script')
+    @include('scripts.selectDatosMonitoreo')
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/user/getUserWithRole/'+3,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    let agenteSelect = $('#agentName');
+                    agenteSelect.empty().append('<option value="">Seleccione un canal</option>');
+                    $.each(data, function (key, user) {
+                        agenteSelect.append('<option value="' + user.id + '">' + user.name + '</option>');
+                    });
+                }
+            });
+        });
+    </script>
+
 @endsection
