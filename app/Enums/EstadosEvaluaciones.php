@@ -8,5 +8,4 @@ enum EstadosEvaluaciones: int
     case Pendiente = 2;
     case ReEvaluado = 3;
     case Refutado = 4;
-
 }

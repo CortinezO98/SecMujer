@@ -15,8 +15,8 @@ class EstadoEvaluacionSeeder extends Seeder
      */
     public function run(): void
     {
-        if (DB::table('tipo_monitoreos')->exists()) {
-            DB::table('tipo_monitoreos')->truncate();
+        if (DB::table('estado_evaluacions')->exists()) {
+            DB::table('estado_evaluacions')->truncate();
         }
 
         EstadoEvaluacion::create([

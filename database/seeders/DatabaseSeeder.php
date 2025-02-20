@@ -2,6 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Atributo;
+use App\Models\Evaluacion;
+use App\Models\EvaluacionAtributo;
+use App\Models\EvaluacionSubItem;
+use App\Models\Interaccion;
+use App\Models\Item;
+use App\Models\SubItem;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,11 +20,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // User::factory(4)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            UserRolSeeder::class,
+            UserSeeder::class,
+            CanalSeeder::class,
+            MatrizSeeder::class,
+            TipoMonitoreoSeeder::class,
+            EstadoEvaluacionSeeder::class,
+            // Atributo::class,
+            // Item::class,
+            // SubItem::class,
+            // Evaluacion::class,
+            // EvaluacionAtributo::class,
+            // EvaluacionSubItem::class,
+            // Interaccion::class,
         ]);
     }
 }

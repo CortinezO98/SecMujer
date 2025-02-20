@@ -34,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
 Route::view('/inicio', 'inicio')->name('inicio');
 
 require __DIR__ . '/monitoreoRoutes.php';
+require __DIR__ . '/evaluacionRoutes.php';
 require __DIR__ . '/userRoutes.php';
 
 

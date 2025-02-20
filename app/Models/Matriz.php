@@ -14,4 +14,11 @@ class Matriz extends Model
     public $timestamps = false;
 
     protected $fillable = ['descripcion', 'canal_id'];
+
+    protected $with = ['canal']; 
+
+    public function canal()
+    {
+        return $this->belongsTo(Canal::class, 'canal_id');
+    }
 }

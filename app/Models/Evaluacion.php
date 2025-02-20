@@ -29,4 +29,32 @@ class Evaluacion extends Model
         'tipo_monitoreo_id',
         'estado_evaluacion_id'
     ];
+    
+    protected $with = ['matriz', 'agente', 'tipo_monitoreo', 'estado_evaluacion', 'interaccion']; 
+
+    public function matriz()
+    {
+        return $this->belongsTo(Matriz::class, 'matriz_id');
+    }
+
+    public function agente()
+    {
+        return $this->belongsTo(User::class, 'agente_id');
+    }
+
+    public function tipo_monitoreo()
+    {
+        return $this->belongsTo(TipoMonitoreo::class, 'tipo_monitoreo_id');
+    }
+
+    public function estado_evaluacion()
+    {
+        return $this->belongsTo(EstadoEvaluacion::class, 'estado_evaluacion_id');
+    }
+    
+    public function interaccion()
+    {
+        return $this->hasOne(Interaccion::class, 'evaluacion_id');
+    }
+
 }

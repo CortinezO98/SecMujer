@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('descripcion', 100);
             $table->integer('peso');
             $table->boolean('activo')->default(1);
+            $table->foreignId('matriz_id')->nullable()->constrained('matrizs')->nullOnDelete();
         });
     }
 

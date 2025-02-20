@@ -6,7 +6,7 @@
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                let canalSelect = $('#canalQM');
+                let canalSelect = $('#canal_id');
                 canalSelect.empty().append('<option value="">Seleccione un canal</option>');
                 $.each(data, function (key, canal) {
                     canalSelect.append('<option value="' + canal.id + '">' + canal.descripcion + '</option>');
@@ -15,9 +15,9 @@
         });
 
 
-        $('#canalQM').change(function () {
+        $('#canal_id').change(function () {
             let canalId = $(this).val();
-            let matrizSelect = $('#matrizQM');
+            let matrizSelect = $('#matriz_id');
             matrizSelect.empty().append('<option value="">Seleccione una matriz</option>');
 
             if (canalId) {
@@ -39,7 +39,7 @@
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                let tipoMonitoreoSelect = $('#monitoringType');
+                let tipoMonitoreoSelect = $('#tipo_monitoreo_id');
                 tipoMonitoreoSelect.empty().append('<option value="">Seleccione un tipo de monitoreo</option>');
                 $.each(data, function (key, tipoMonitoreo) {
                     tipoMonitoreoSelect.append('<option value="' + tipoMonitoreo.id + '">' + tipoMonitoreo.descripcion + '</option>');
