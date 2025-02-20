@@ -32,10 +32,6 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <input type="hidden" name="userRecord" id="userRecord" value="{{ $userLogin }}">
-            <input type="hidden" name="userIP" id="userIP" value="{{ request()->ip() }}">
-        </div>
     </div>
 </form>
 @endsection

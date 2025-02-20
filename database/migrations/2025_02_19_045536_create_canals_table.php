@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -14,17 +13,8 @@ return new class extends Migration
     {
         Schema::create('canals', function (Blueprint $table) {
             $table->id();
-            $table->string('descripcion', 100)->unique();
+            $table->string('descripcion', 100);
         });
-
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        DB::table('canals')->insert([
-            ['id' => 1, 'descripcion' => 'Inbound'],
-            ['id' => 2, 'descripcion' => 'Outbound'],
-            ['id' => 3, 'descripcion' => 'Virtual'],
-            ['id' => 4, 'descripcion' => 'Presencial']
-        ]);
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 
     /**

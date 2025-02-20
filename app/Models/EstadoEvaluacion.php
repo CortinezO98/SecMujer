@@ -1,15 +1,14 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Model;
 
-class Canal extends Model
+class EstadoEvaluacion extends Model
 {
     use HasFactory;
-
-    protected $table = 'canals';
+    protected $table = 'estado_evaluacions';
 
     public $timestamps = false;
 

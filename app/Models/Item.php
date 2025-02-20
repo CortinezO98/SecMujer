@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Canal extends Model
+class Item extends Model
 {
     use HasFactory;
-
-    protected $table = 'canals';
+    protected $table = 'items';
 
     public $timestamps = false;
 
-    protected $fillable = ['descripcion'];
+    protected $fillable = ['descripcion', 'Peso', 'Activo', 'atributo_id' ];
 }

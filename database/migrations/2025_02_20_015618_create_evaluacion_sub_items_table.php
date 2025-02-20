@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_roles', function (Blueprint $table) {
+        Schema::create('evaluacion_sub_items', function (Blueprint $table) {
             $table->id();
-            $table->string('descripcion', 100)->unique();
+            $table->foreignId('evaluacion_id')->nullable()->constrained('evaluacions')->nullOnDelete();
+            $table->foreignId('sub_item_id')->nullable()->constrained('sub_items')->nullOnDelete();
+            $table->boolean('cumple')->default(1);
         });
     }
 
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_roles');
+        Schema::dropIfExists('evaluacion_sub_items');
     }
 };

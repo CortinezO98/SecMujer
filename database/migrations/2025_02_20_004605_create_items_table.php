@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_roles', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->string('descripcion', 100)->unique();
+            $table->string('descripcion', 150);
+            $table->integer('peso');
+            $table->boolean('activo')->default(1);
+            $table->foreignId('atributo_id')->nullable()->constrained('atributos')->nullOnDelete();
+
         });
     }
 
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_roles');
+        Schema::dropIfExists('items');
     }
 };

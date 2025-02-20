@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('roleId')->nullable()->after('email');
             $table->foreign('roleId')->references('id')->on('user_roles')->onDelete('set null');
-            $table->integer('cedula')->unique()->after('roleId');
+            $table->integer('cedula')->unique()->nullable()->after('roleId');
             $table->boolean('activo')->default(true);
         });
     }

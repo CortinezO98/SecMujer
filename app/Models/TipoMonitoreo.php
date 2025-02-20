@@ -1,15 +1,14 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Model;
 
-class Canal extends Model
+class TipoMonitoreo extends Model
 {
     use HasFactory;
-
-    protected $table = 'canals';
+    protected $table = 'tipo_monitoreos';
 
     public $timestamps = false;
 
