@@ -12,5 +12,12 @@ class Item extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['descripcion', 'Peso', 'Activo', 'atributo_id' ];
+    protected $fillable = ['descripcion', 'peso', 'activo', 'atributo_id' ];
+
+    protected $with = ['subitems']; 
+
+    public function subitems()
+    {
+        return $this->hasMany(SubItem::class, 'item_id');
+    }
 }

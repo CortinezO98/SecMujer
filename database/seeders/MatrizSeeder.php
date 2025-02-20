@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\Matriz;
 use App\Enums\Canales;
+use App\Enums\Matrices;
 
 class MatrizSeeder extends Seeder
 {
@@ -19,26 +20,26 @@ class MatrizSeeder extends Seeder
         }
 
         Matriz::create([
-            'id' => 1,
+            'id' => Matrices::AtencionPsicosocialTelefonico->value,
             'descripcion' => 'Atención psicosocial',
             'canal_id' => Canales::Telefonico->value
         ]);
 
         Matriz::create([
-            'id' => 2,
+            'id' => Matrices::ContactoInicialTelefonico->value,
             'descripcion' => 'Contacto inicial',
             'canal_id' => Canales::Telefonico->value
         ]);
 
         Matriz::create([
-            'id' => 3,
-            'descripcion' => 'Contacto inicial',
+            'id' => Matrices::AtencionPsicosocialWhatsapp->value,
+            'descripcion' => 'Atención psicosocial',
             'canal_id' => Canales::Whatsapp->value
         ]);
 
         Matriz::create([
-            'id' => 4,
-            'descripcion' => 'Atención psicosocial',
+            'id' => Matrices::ContactoInicialWhatsapp->value,
+            'descripcion' => 'Contacto inicial',
             'canal_id' => Canales::Whatsapp->value
         ]);
     }

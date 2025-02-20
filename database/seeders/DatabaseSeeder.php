@@ -2,15 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Atributo;
-use App\Models\Evaluacion;
-use App\Models\EvaluacionAtributo;
-use App\Models\EvaluacionSubItem;
-use App\Models\Interaccion;
-use App\Models\Item;
-use App\Models\SubItem;
-use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -29,13 +22,13 @@ class DatabaseSeeder extends Seeder
             MatrizSeeder::class,
             TipoMonitoreoSeeder::class,
             EstadoEvaluacionSeeder::class,
-            // Atributo::class,
-            // Item::class,
-            // SubItem::class,
-            // Evaluacion::class,
-            // EvaluacionAtributo::class,
-            // EvaluacionSubItem::class,
-            // Interaccion::class,
+            AtributoSeeder::class,
+            ItemSeeder::class,
+            SubItemSeeder::class,
+            // EvaluacionSeeder::class,
+            // EvaluacionAtributoSeeder::class,
+            // EvaluacionSubItemSeeder::class,
+            // InteraccionSeeder::class,
         ]);
     }
 }

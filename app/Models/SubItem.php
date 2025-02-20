@@ -11,5 +11,5 @@ class SubItem extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['descripcion', 'Activo', 'item_id' ];
+    protected $fillable = ['descripcion', 'activo', 'item_id' ];
 }
