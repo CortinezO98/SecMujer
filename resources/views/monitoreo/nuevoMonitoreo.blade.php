@@ -18,9 +18,6 @@
                                 
                                 @include('monitoreo.moduloFormSelect') 
 
-                                <label for="">Fecha Interacción:</label>
-                                <input class="form-control mb-3" type="date" name="fecha_interaccion" id="fecha_interaccion" required>
-
                                 <label for="">Agente:</label>
                                 <select class="form-select mb-3" name="agente_id" id="agente_id" required>
                                     <option value="">Seleccione un agente</option>

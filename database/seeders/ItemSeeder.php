@@ -164,14 +164,14 @@ class ItemSeeder extends Seeder
         Item::create([
             'id' => 20,
             'descripcion' => 'Habilidades Escritas',
-            'peso' => 19,
+            'peso' => 9.5,
             'atributo_id' => Atributos::ErroresCriticosNegocioAPW->value
         ]);
 
         Item::create([
             'id' => 21,
             'descripcion' => 'Tipificación Inconcert',
-            'peso' => 19,
+            'peso' => 9.5,
             'atributo_id' => Atributos::ErroresCriticosNegocioAPW->value
         ]);
 

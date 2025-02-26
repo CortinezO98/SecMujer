@@ -29,14 +29,14 @@ class AtributoSeeder extends Seeder
         Atributo::create([
             'id' => 2,
             'descripcion' => 'Errores Críticos de Negocio',
-            'peso' => 100,
+            'peso' => 34,
             'matriz_id' => Matrices::ContactoInicialWhatsapp->value
         ]);
 
         Atributo::create([
             'id' => 3,
             'descripcion' => 'Errores Críticos de Usuario Final',
-            'peso' => 100,
+            'peso' => 66,
             'matriz_id' => Matrices::ContactoInicialWhatsapp->value
         ]);
 
@@ -52,14 +52,14 @@ class AtributoSeeder extends Seeder
         Atributo::create([
             'id' => 5,
             'descripcion' => 'Errores Críticos de Negocio',
-            'peso' => 100,
+            'peso' => 64,
             'matriz_id' => Matrices::AtencionPsicosocialWhatsapp->value
         ]);
 
         Atributo::create([
             'id' => 6,
             'descripcion' => 'Errores Críticos de Usuario Final',
-            'peso' => 100,
+            'peso' => 36,
             'matriz_id' => Matrices::AtencionPsicosocialWhatsapp->value
         ]);
 
@@ -75,19 +75,29 @@ class AtributoSeeder extends Seeder
         Atributo::create([
             'id' => 8,
             'descripcion' => 'Errores Críticos de Negocio',
-            'peso' => 100,
+            'peso' => 50,
             'matriz_id' => Matrices::ContactoInicialTelefonico->value
         ]);
 
         Atributo::create([
             'id' => 9,
             'descripcion' => 'Errores Críticos de Usuario Final',
-            'peso' => 100,
+            'peso' => 50,
             'matriz_id' => Matrices::ContactoInicialTelefonico->value
         ]);
 
+        Atributo::create([
+            'id' => 10,
+            'descripcion' => 'Errores No Críticos',
+            'peso' => 100,
+            'matriz_id' => Matrices::AtencionPsicosocialTelefonico->value
+        ]);
 
-
-
+        Atributo::create([
+            'id' => 11,
+            'descripcion' => 'Errores Críticos',
+            'peso' => 100,
+            'matriz_id' => Matrices::AtencionPsicosocialTelefonico->value
+        ]);
     }
 }

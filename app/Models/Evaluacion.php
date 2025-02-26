@@ -57,4 +57,8 @@ class Evaluacion extends Model
         return $this->hasOne(Interaccion::class, 'evaluacion_id');
     }
 
+    public function subitems()
+    {
+        return $this->hasMany(Interaccion::class, 'evaluacion_id');
+    }
 }

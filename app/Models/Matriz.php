@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class Matriz extends Model
 {
@@ -20,5 +21,10 @@ class Matriz extends Model
     public function canal()
     {
         return $this->belongsTo(Canal::class, 'canal_id');
+    }
+
+    public function atributos()
+    {
+        return $this->hasMany(Atributo::class, 'matriz_id');
     }
 }

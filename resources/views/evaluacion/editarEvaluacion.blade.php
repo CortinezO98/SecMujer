@@ -152,7 +152,7 @@
                             </div>
                             <div class="pt-4 text-center">
                                 <button type="submit" class="btn btn-primary">Evaluar</button>
-                                <button type="submit" class="btn btn-outline-danger">Cancelar</button>
+                                <a href="{{ route('eliminarEvaluacion', $evaluacion->id) }}" class="btn btn-outline-danger">Cancelar</a>
                             </div>
                         </form>
                     </div>

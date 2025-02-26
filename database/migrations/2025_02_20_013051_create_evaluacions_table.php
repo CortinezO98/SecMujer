@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('evaluacions', function (Blueprint $table) {
             $table->id();
             $table->string('consecutivo', 100)->unique();
-            $table->integer('nota_total')->nullable();
+            $table->decimal('nota_total')->nullable();
             $table->text('observaciones')->nullable();
             $table->text('aspectos_positivos')->nullable();
             $table->text('aspectos_a_mejorar')->nullable();

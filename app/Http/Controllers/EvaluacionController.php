@@ -6,6 +6,7 @@ use App\Models\Evaluacion;
 use App\Models\Interaccion;
 use App\Enums\EstadosEvaluaciones;
 use App\Models\Atributo;
+use App\Models\EvaluacionAtributo;
 use App\Models\EvaluacionSubItem;
 use App\Utilities\Utility;
 
@@ -26,10 +27,11 @@ class EvaluacionController extends Controller
         $evaluacion->consecutivo = 'EV'.$consecutivo;
         $evaluacion->fecha_registro = now();
         $evaluacion->estado_evaluacion_id = EstadosEvaluaciones::Pendiente->value;
-
+        
         $interaccion = new Interaccion($request->all());
         $interaccion->consecutivo = 'IN'.$consecutivo;
         $interaccion->numero = Utility::ObtenerNumeroInteraccionSinTipificacion();
+        $interaccion->fecha_interaccion = now();
         $interaccion->fecha_registro = now();
         $interaccion->usuario_registro_id = Auth::id();
 
@@ -74,28 +76,110 @@ class EvaluacionController extends Controller
             foreach($atributos as $atributo){
                 foreach ($atributo->items as $item){
                     foreach ($item->subitems as $subitem){
-                        $valor = $request->get('subitem-'.$item->id);
+                        $valor = $request->get('subitem-'.$subitem->id);
                         if ($valor != null){
-                            $evaluacionSubItem = new EvaluacionSubItem();
-                            $evaluacionSubItem->evaluacion_id = $evaluacion->id;
-                            $evaluacionSubItem->sub_item_id = $subitem->id;
-                            $evaluacionSubItem->cumple = $valor;
-                            $evaluacionSubItem->save();
+                            $this->CreateUpdateEvaluacionSubItem($evaluacion->id, $subitem->id, $valor);
                         }
                     }
                 }
             }
+            $this->CalcularNotas($evaluacion);
            
             DB::commit();
             Alert::success('Exitó', 'La evaluación se guardó correctamente.')->persistent(true);
-            return redirect(route('roles.supervisor'));
+            return redirect(route('home'));
         } 
         catch (Exception $e) 
         {
             DB::rollBack();
-            Alert::error('Error', 'Ocurrió un error al guardar los datos.')->persistent(true);
+            Alert::error('Error', 'Ocurrió un error al guardar los datos.'.$e)->persistent(true);
             return redirect()->back();
         }
-        // dd($request);
+    }
+
+    public function CalcularNotas($evaluacion) {
+        $nota_total = 0;
+        foreach($evaluacion->matriz->atributos as $atributo)
+        {
+            $sumatoriaNotas = 0;
+            foreach ($atributo->items as $item)
+            {
+                $valorPorcentualSubitem = $item->peso / $item->subitems->count();
+                $cantidadCumplen = 0;
+                foreach ($item->subitems as $subitem)
+                {
+                    $evaluacionSubItem = EvaluacionSubItem::where([
+                        'evaluacion_id' => $evaluacion->id,
+                        'sub_item_id'    => $subitem->id,
+                    ])->first();
+                    if ($evaluacionSubItem && $evaluacionSubItem->cumple){
+                        $cantidadCumplen += 1;
+                    }
+                }
+                $sumatoriaNotas += $valorPorcentualSubitem * $cantidadCumplen;
+            }
+            $this->CreateUpdateEvaluacionAtributo($evaluacion, $atributo, $sumatoriaNotas);
+            $nota_total += $sumatoriaNotas;
+        }
+        $evaluacion->nota_total = $nota_total;
+        $evaluacion->save();
+    }
+
+    public function eliminarEvaluacion($id) {
+        $evaluacion = Evaluacion::find($id);
+
+        if (!$evaluacion) {
+            Alert::error('Error', 'No existe la evaluación.')->persistent(true);
+            return redirect()->back();
+        }
+        try 
+        {
+            DB::beginTransaction();
+
+            $evaluacion->interaccion->delete();
+            $evaluacion->delete();
+            
+            DB::commit();
+        } 
+        catch (\Exception $e) 
+        {
+            DB::rollBack();
+            Alert::error('Error', 'No fue posible eliminar la evaluación.')->persistent(true);
+            return redirect()->back();
+        }    
+        return redirect(route('home'));
+    }
+
+    public function CreateUpdateEvaluacionSubItem($evaluacion_id, $sub_item_id, $cumple) {
+        $evaluacionSubItem = EvaluacionSubItem::where([
+            'evaluacion_id' => $evaluacion_id,
+            'sub_item_id'    => $sub_item_id,
+        ])->first();
+        
+        if (!$evaluacionSubItem)
+        {
+            $evaluacionSubItem = new EvaluacionSubItem([
+                'evaluacion_id' => $evaluacion_id,
+                'sub_item_id'    => $sub_item_id,
+            ]);
+        } 
+        $evaluacionSubItem->cumple = $cumple;
+        $evaluacionSubItem->save();
+    }
+
+    public function CreateUpdateEvaluacionAtributo($evaluacion, $atributo, $nota){
+        $evaluacionAtributo =  EvaluacionAtributo::where([
+            'evaluacion_id' => $evaluacion->id,
+            'atributo_id' => $atributo->id
+        ])->first();
+
+        if (!$evaluacionAtributo){
+            $evaluacionAtributo = new EvaluacionAtributo([
+                'evaluacion_id' => $evaluacion->id,
+                'atributo_id' => $atributo->id
+            ]);
+        }
+        $evaluacionAtributo->nota = $nota;
+        $evaluacionAtributo->save();
     }
 }

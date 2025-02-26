@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('evaluacion_id')->nullable()->constrained('evaluacions')->nullOnDelete();
             $table->foreignId('atributo_id')->nullable()->constrained('atributos')->nullOnDelete();
-            $table->integer('nota');
+            $table->decimal('nota');
         });
     }
 
