@@ -106,7 +106,7 @@
                         <th>Observaciones</th>
                         <th>Aspectos Positivos</th>
                         <th>Aspectos a Mejorar</th>
-                        <th>Comentarios Refutación</th>
+                        <th>Comentarios</th>
                         <th>Compromisos</th>
                         <th>Observación Final</th>
                         <th>Registrado por</th>
@@ -127,7 +127,7 @@
                             <td>{{ $evaluacion->fecha_registro }}</td>
                             <td style="white-space: nowrap;">
                                 @foreach($evaluacion->notas_atributos as $notas)
-                                    {{ $notas->atributo->descripcion }}  {{ $notas->nota }} @if (!$loop->last) | @endif
+                                    {{ $notas->atributo->abreviatura }}  {{ $notas->nota }} @if (!$loop->last) | @endif
                                 @endforeach
 
                             </td>
@@ -135,7 +135,7 @@
                             <td>{{ $evaluacion->observaciones }}</td>
                             <td>{{ $evaluacion->aspectos_positivos }}</td>
                             <td>{{ $evaluacion->aspectos_a_mejorar }}</td>
-                            <td>{{ $evaluacion->comentarios_refutacion }}</td>
+                            <td>{{ $evaluacion->comentarios }}</td>
                             <td>{{ $evaluacion->observacion_final }}</td>
                             <td>{{ $evaluacion->compromisos }}</td>
                             <td>{{ $evaluacion->usuario_registro->name }}</td>

@@ -2,7 +2,7 @@
 
 @section('content')
 <h2 class="text-center">Detalle Evaluación Presencial</h2>
-<form method="post" id="formRefutationInbound">
+
     <div class="container-fluid">
         <div class="row mb-3">
             <div class="card card-generalInfoQM">
@@ -25,21 +25,18 @@
                                         <th>Nota Total Evaluación</th>
                                     </tr>
                                     <tr>
-                                    @foreach($evaluaciones as $evaluacion)
-                                        <tr>
-                                            <td>{{ $evaluacion->consecutivo }}</td>
-                                            <td>{{ $evaluacion->matriz->canal->descripcion }}</td>
-                                            <td>{{ $evaluacion->matriz->descripcion }}</td>
-                                            <td>{{ $evaluacion->llamada_id }}</td>
-                                            <td>{{ $evaluacion->fecha_registro }}</td>
-                                            <td style="white-space: nowrap;">
-                                                @foreach($evaluacion->notas_atributos as $notas)
-                                                    {{ $notas->atributo->descripcion }}  {{ $notas->nota }} @if (!$loop->last) | @endif
-                                                @endforeach
-                                            </td>
-                                            <td>{{ $evaluacion->nota_total }}</td>
-                                        </tr>
-                                    @endforeach
+                                        <td>{{ $evaluacion->consecutivo }}</td>
+                                        <td>{{ $evaluacion->matriz->canal->descripcion }}</td>
+                                        <td>{{ $evaluacion->matriz->descripcion }}</td>
+                                        <td>{{ $evaluacion->llamada_id }}</td>
+                                        <td>{{ $evaluacion->fecha_registro }}</td>
+                                        <td style="white-space: nowrap;">
+                                            @foreach($evaluacion->notas_atributos as $notas)
+                                                {{ $notas->atributo->abreviatura }}  {{ $notas->nota }} @if (!$loop->last) | @endif
+                                            @endforeach
+                                        </td>
+                                        <td>{{ $evaluacion->nota_total }}</td>
+                                    </tr>
                                 </thead>
                             </table>
                         </div>
@@ -47,19 +44,19 @@
                     <div class="row">
                         <div class="col mb-3">
                             <label>Observaciones:</label>
-                            <textarea class="form-control" name="observations" id="observations" rows="5" disabled>{{ $evaluacion->observaciones }}</textarea>
+                            <textarea class="form-control" name="observations" id="observations" rows="3" disabled>{{ $evaluacion->observaciones }}</textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
                             <label>Aspectos Positivos:</label>
-                            <textarea class="form-control" name="positiveAspects" id="positiveAspects" rows="5" disabled>{{ $evaluacion->aspectos_positivos }}</textarea>
+                            <textarea class="form-control" name="positiveAspects" id="positiveAspects" rows="3" disabled>{{ $evaluacion->aspectos_positivos }}</textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
                             <label>Aspectos a Mejorar:</label>
-                            <textarea class="form-control" name="improveAspects" id="improveAspects" rows="5" disabled>{{ $evaluacion->aspectos_a_mejorar }}</textarea>
+                            <textarea class="form-control" name="improveAspects" id="improveAspects" rows="3" disabled>{{ $evaluacion->aspectos_a_mejorar }}</textarea>
                         </div>
                     </div>
                     <div class="row mt-4">
@@ -67,54 +64,27 @@
                             Si está de acuerdo con las calificaciones y con la evaluación en general, por favor haga click en el botón <strong>APROBAR EVALUACIÓN</strong>. 
                             Por el contrario, si considera que no está de acuerdo y quiere manifestarlo, haga click en el botón <strong>REFUTAR EVALUACIÓN</strong>.
                         </p>
-                        <div class="col text-center">
-                            <button type="button" class="btn btn-success" id="btnAprobarEvaluacion" 
-                                onclick="aprobarEvaluacion('{{ $evaluacion->consecutivo }}', '{{ Auth::user()->name }}');">
-                                Aprobar Evaluación
-                            </button>
-                        </div>
-                        <div class="col text-center">
-                            <button type="button" class="btn btn-danger" id="btnRefutarEvaluacion" 
-                                onclick="refutarEvaluacion('{{ $evaluacion->consecutivo }}', '{{ Auth::user()->name }}');">
-                                Refutar Evaluación
-                            </button>
-                        </div>
-                    </div>
-                    <div id="divRefutacionEvaluacion">
-                        <div class="row mt-4">
-                            <div class="col">
-                                <label>Comentarios refutación:</label>
-                                <textarea class="form-control" name="commentsRebuttal" id="commentsRebuttal" rows="5"></textarea>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col mb-4"></div>
-                            <div class="col mb-4 text-center">
-                                <button type="button" class="btn btn-danger" id="btnContinuarRefutarEvaluacion" 
-                                    onclick="continuarRefutacionEvaluacion('{{ $evaluacion->consecutivo }}', '{{ Auth::user()->name }}');">
-                                    Continuar Refutación Evaluación
-                                </button>
-                            </div>
-                            <div class="col mb-4"></div>
-                        </div>
                     </div>
                     <div id="divCompromisos">
-                        <div class="row mt-4">
-                            <div class="col">
-                                <label>Compromisos:</label>
-                                <textarea class="form-control" name="commitments" id="commitments" rows="5"></textarea>
+                        <form method="post" action="{{ route('aprobarEvaluacion') }}">
+                            @csrf
+
+                            <input type="number" class="d-none" name="evaluacion_id" id="evaluacion_id" value="{{ $evaluacion->id }}">
+
+                            <div class="row mt-4">
+                                <div class="col">
+                                    <label>Comentarios agente:</label>
+                                    <textarea class="form-control" name="comentarios" id="comentarios" rows="3"></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col mb-4"></div>
-                            <div class="col mb-4 text-center">
-                                <button type="button" class="btn btn-success" id="btnContinuarAprobacionEvaluacion" 
-                                    onclick="continuarAprobacionEvaluacion('{{ $evaluacion->consecutivo }}', '{{ Auth::user()->name }}');">
-                                    Continuar Aprobación Evaluación
-                                </button>
+                            <div class="row mt-3">
+                                <div class="col mb-4 text-center">
+                                    <button type="submit" class="btn btn-success" id="btnContinuarAprobacionEvaluacion">
+                                        Continuar Aprobación Evaluación
+                                    </button>
+                                </div>
                             </div>
-                            <div class="col mb-4"></div>
-                        </div>
+                        </form> 
                     </div>
 
                 </div>
@@ -217,5 +187,6 @@
                 </div>
             </div>
         </div>
+    </div>
 @endsection
 

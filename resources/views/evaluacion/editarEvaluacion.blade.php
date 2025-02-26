@@ -40,7 +40,8 @@
 
             <form method="post" action="{{ Route('guardarEvaluacion') }}">
                 @csrf
-
+                <input type="number" class="d-none" name="evaluacion_id" id="evaluacion_id" value="{{ $evaluacion->id }}">
+                
                 <div class="row mb-3">
                     <div class="card card-generalInfoQM">
                         <div class="card-header">
@@ -88,7 +89,6 @@
                             <h5 class="card-header card-titleQM text-center">Datos de Evaluación</h5>
                         </div>
                         <div class="card-body">
-                                <input type="number" class="d-none" name="evaluacion_id" id="evaluacion_id" value="{{ $evaluacion->id }}">
 
                                 <div class="row">
                                     <div class="col">

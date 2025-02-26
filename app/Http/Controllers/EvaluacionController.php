@@ -177,16 +177,32 @@ class EvaluacionController extends Controller
     }
 
 
-    public function detalleEvaluacion(){
-        $evaluaciones = Evaluacion::all();
-    
-        if($evaluaciones->isNotEmpty()){
-            $evaluacion = $evaluaciones->first();
-            $atributos = Atributo::where('matriz_id', $evaluacion->matriz_id)->get();
-        } else {
-            $atributos = collect();
+    public function detalleEvaluacion($consecutivo){
+        $evaluacion = Evaluacion::where('consecutivo', $consecutivo)->first();
+        $atributos = Atributo::where('matriz_id', $evaluacion->matriz_id)->get();
+
+        return view('evaluacion.detalleEvaluacion', compact('evaluacion', 'atributos'));
+    }
+
+    public function aprobarEvaluacion(Request $request){
+
+        // dd($request);
+        $evaluacion = Evaluacion::where('id', $request->evaluacion_id)->first();
+        $evaluacion->comentarios = $request->comentarios;
+        $evaluacion->estado_evaluacion_id = EstadosEvaluaciones::Evaluado;
+        
+        try 
+        {
+            $evaluacion->save();
+            Alert::success('Exitó', 'La evaluación se aprobó exitosamente.')->persistent(true);
+            return redirect(route('home'));
+        } 
+        catch (\Exception $e)  
+        {
+            Alert::error('Error', 'No fue posible aprobar la evaluación.')->persistent(true);
+            return redirect()->back();
         }
-        return view('evaluacion.detalleEvaluacion', compact('evaluaciones', 'atributos'));
+
     }
     
 }
