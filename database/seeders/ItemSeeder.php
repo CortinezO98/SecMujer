@@ -341,5 +341,107 @@ class ItemSeeder extends Seeder
         ]);
 
 
+
+
+
+
+
+        Item::create([
+            'id' => 44,
+            'descripcion' => 'Guion de Bienvenida',
+            'peso' => 11,
+            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
+        ]);
+
+        Item::create([
+            'id' => 45,
+            'descripcion' => 'Disponibilidad',
+            'peso' => 11,
+            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
+        ]);
+
+        Item::create([
+            'id' => 46,
+            'descripcion' => 'Tiempos',
+            'peso' => 22,
+            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
+        ]);
+
+        Item::create([
+            'id' => 47,
+            'descripcion' => 'Claridad de la Información',
+            'peso' => 11,
+            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
+        ]);
+
+        Item::create([
+            'id' => 48,
+            'descripcion' => 'Despedida',
+            'peso' => 11,
+            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
+        ]);
+
+        Item::create([
+            'id' => 49,
+            'descripcion' => 'Encuesta de satisfacción',
+            'peso' => 11,
+            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
+        ]);
+
+        Item::create([
+            'id' => 50,
+            'descripcion' => 'Inconcert',
+            'peso' => 22,
+            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
+        ]);
+
+
+        
+
+
+        Item::create([
+            'id' => 51,
+            'descripcion' => 'Cuelgue Pasivo',
+            'peso' => 5.01,
+            'atributo_id' => Atributos::ErroresCriticosAPT->value
+        ]);
+
+        Item::create([
+            'id' => 52,
+            'descripcion' => 'SIMISIONAL',
+            'peso' => 24.96,
+            'atributo_id' => Atributos::ErroresCriticosAPT->value
+        ]);
+
+        Item::create([
+            'id' => 53,
+            'descripcion' => 'Información Confidencial',
+            'peso' => 5,
+            'atributo_id' => Atributos::ErroresCriticosAPT->value
+        ]);
+
+        Item::create([
+            'id' => 54,
+            'descripcion' => 'Acciones No Permitidas',
+            'peso' => 8.52,
+            'atributo_id' => Atributos::ErroresCriticosAPT->value
+        ]);
+
+        Item::create([
+            'id' => 55,
+            'descripcion' => 'Atención Psicosocial',
+            'peso' => 51.54,
+            'atributo_id' => Atributos::ErroresCriticosAPT->value
+        ]);
+
+        Item::create([
+            'id' => 56,
+            'descripcion' => 'Documentación de uso para LPD.',
+            'peso' => 5.01,
+            'atributo_id' => Atributos::ErroresCriticosAPT->value
+        ]);
+
+
+
     }
 }

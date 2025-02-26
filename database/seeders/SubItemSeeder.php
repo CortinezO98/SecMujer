@@ -7,6 +7,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+use function Ramsey\Uuid\v1;
+
 class SubItemSeeder extends Seeder
 {
     /**
@@ -481,5 +483,203 @@ class SubItemSeeder extends Seeder
             'descripcion' => 'Ofrece alternativas de solución a la solicitud expuesta',
             'item_id' => 43
         ]);
+
+
+
+
+
+        SubItem::create([
+            'id' => 77,
+            'descripcion' => 'Utiliza el guion de bienvenida definido para Línea Púrpura Distrital.',
+            'item_id' => 44
+        ]);
+
+        SubItem::create([
+            'id' => 78,
+            'descripcion' => 'Contesta la llamada antes de los 10 segundos.',
+            'item_id' => 45
+        ]);
+
+        SubItem::create([
+            'id' => 79,
+            'descripcion' => 'Usa el "Mute".',
+            'item_id' => 46
+        ]);
+
+        SubItem::create([
+            'id' => 80,
+            'descripcion' => 'Retoma y agradece la espera.',
+            'item_id' => 46
+        ]);
+
+        SubItem::create([
+            'id' => 81,
+            'descripcion' => 'Confirma la información brindada al finalizar la llamada. ',
+            'item_id' => 47
+        ]);
+
+        SubItem::create([
+            'id' => 82,
+            'descripcion' => 'Utiliza el guion de despedida definido para Línea Púrpura Distrital.',
+            'item_id' => 48
+        ]);
+
+        SubItem::create([
+            'id' => 83,
+            'descripcion' => 'Transfiere la llamada a la encuesta de satisfacción.',
+            'item_id' => 49
+        ]);
+
+        SubItem::create([
+            'id' => 84,
+            'descripcion' => 'Registra el ID de la llamada arrojado por el sistema Inconcert en la herramienta del SIMISIONAL',
+            'item_id' => 50
+        ]);
+
+        SubItem::create([
+            'id' => 85,
+            'descripcion' => 'Tipifica de forma correcta la llamada en el sistema Inconcert de acuerdo con el resultado de la llamada.',
+            'item_id' => 50
+        ]);
+
+
+
+
+        SubItem::create([
+            'id' => 86,
+            'descripcion' => 'Incentiva el cuelgue de la llamada por parte de la mujer; o la profesional termina la llamada.',
+            'item_id' => 51
+        ]);
+
+        SubItem::create([
+            'id' => 87,
+            'descripcion' => 'Conocimiento y autorización de datos.',
+            'item_id' => 52
+        ]);
+
+        SubItem::create([
+            'id' => 88,
+            'descripcion' => 'Registra la atención/llamada en el sistema SIMISIONAL. ',
+            'item_id' => 52
+        ]);
+
+        SubItem::create([
+            'id' => 89,
+            'descripcion' => 'Caracterización de la mujer y la atención.',
+            'item_id' => 52
+        ]);
+
+        SubItem::create([
+            'id' => 90,
+            'descripcion' => 'Diligenciamiento de la atención.',
+            'item_id' => 52
+        ]);
+
+        SubItem::create([
+            'id' => 91,
+            'descripcion' => 'Habilidades escritas',
+            'item_id' => 52
+        ]);
+
+        SubItem::create([
+            'id' => 92,
+            'descripcion' => 'No brinda información confidencial.',
+            'item_id' => 53
+        ]);
+
+        SubItem::create([
+            'id' => 93,
+            'descripcion' => 'Duración de la llamada',
+            'item_id' => 54
+        ]);
+
+        SubItem::create([
+            'id' => 94,
+            'descripcion' => 'Culminación de la atención',
+            'item_id' => 54
+        ]);
+
+        SubItem::create([
+            'id' => 95,
+            'descripcion' => 'Atención Integral',
+            'item_id' => 54
+        ]);
+
+        SubItem::create([
+            'id' => 96,
+            'descripcion' => 'Escucha Activa',
+            'item_id' => 55
+        ]);
+
+        SubItem::create([
+            'id' => 97,
+            'descripcion' => 'Postura horizontal y relación de colaboración con la mujer',
+            'item_id' => 55
+        ]);
+
+        SubItem::create([
+            'id' => 98,
+            'descripcion' => 'Violencias',
+            'item_id' => 55
+        ]);
+
+        SubItem::create([
+            'id' => 99,
+            'descripcion' => 'Abordaje emocional',
+            'item_id' => 55
+        ]);
+
+        SubItem::create([
+            'id' => 100,
+            'descripcion' => 'Conceptualización del caso',
+            'item_id' => 55
+        ]);
+
+        SubItem::create([
+            'id' => 101,
+            'descripcion' => 'Redes de apoyo',
+            'item_id' => 55
+        ]);
+
+        SubItem::create([
+            'id' => 102,
+            'descripcion' => 'Factores de Riesgo & Protectores (Anexo 6. Guía Orientadora para La Identificación de Factores de Riesgo y Protectores Frente al Feminicidio).',
+            'item_id' => 55
+        ]);
+
+        SubItem::create([
+            'id' => 103,
+            'descripcion' => 'Remisiones',
+            'item_id' => 55
+        ]);
+
+        SubItem::create([
+            'id' => 104,
+            'descripcion' => 'Orientación general en aspectos jurídicos',
+            'item_id' => 55
+        ]);
+
+        SubItem::create([
+            'id' => 105,
+            'descripcion' => 'Alertantes',
+            'item_id' => 55
+        ]);
+
+        SubItem::create([
+            'id' => 106,
+            'descripcion' => 'Seguimientos',
+            'item_id' => 55
+        ]);
+
+
+        
+
+        SubItem::create([
+            'id' => 107,
+            'descripcion' => 'Uso de la Guía, Anexos, Documentos, Novedades y Actualizaciones generadas a los mismos. ',
+            'item_id' => 56
+        ]);
+
+
     }
 }

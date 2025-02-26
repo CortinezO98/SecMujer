@@ -14,7 +14,6 @@ enum Atributos: int
     case ErroresCriticosNegocioCIT= 8;
     case ErroresCriticosUsuarioFinalCIT= 9;
     case ErroresNoCriticosAPT= 10;
-    case ErroresCriticosNegocioAPT= 11;
-    case ErroresCriticosUsuarioFinalAPT= 12;
+    case ErroresCriticosAPT= 11;
 
 }
