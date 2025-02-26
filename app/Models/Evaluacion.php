@@ -61,4 +61,9 @@ class Evaluacion extends Model
     {
         return $this->hasMany(EvaluacionAtributo::class, 'evaluacion_id');
     }
+
+    public function usuario_registro()
+    {
+        return $this->belongsTo(User::class, 'usuario_registro_id');
+    }
 }

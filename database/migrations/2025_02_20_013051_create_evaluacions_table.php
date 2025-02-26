@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('consecutivo', 100)->unique();
 
-            $table->string('llamada_id', 50)->index();
-            $table->integer('mujer_telefono')->index();
-            $table->integer('mujer_identificacion')->nullable();
+            $table->string('llamada_id', 50)->index()->nullable();
+            $table->string('mujer_telefono',20)->index()->nullable();
+            $table->bigInteger('mujer_identificacion')->nullable();
             $table->string('mujer_nombre')->nullable();
             
             $table->decimal('nota_total')->nullable();

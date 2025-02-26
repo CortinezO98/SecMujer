@@ -26,8 +26,6 @@ class EvaluacionController extends Controller
         $evaluacion->fecha_registro = now();
         $evaluacion->estado_evaluacion_id = EstadosEvaluaciones::Pendiente->value;
         $evaluacion->usuario_registro_id = Auth::id();
-        $evaluacion->llamada_id = '1';
-        $evaluacion->mujer_telefono = 1;
         try 
         {
             DB::beginTransaction();
@@ -58,12 +56,16 @@ class EvaluacionController extends Controller
         $evaluacion->observaciones = $request->observaciones;
         $evaluacion->aspectos_positivos = $request->aspectos_positivos;
         $evaluacion->aspectos_a_mejorar = $request->aspectos_a_mejorar;
+        $evaluacion->llamada_id = $request->llamada_id;
+        $evaluacion->mujer_telefono = $request->mujer_telefono;
+        $evaluacion->mujer_identificacion = $request->mujer_identificacion;
+        $evaluacion->mujer_nombre = $request->mujer_nombre;
 
         $atributos = Atributo::where('matriz_id', $evaluacion->matriz_id)->get();
         try 
         {
             DB::beginTransaction();
-            
+            // dd($request->all());
             $evaluacion->save();
             foreach($atributos as $atributo){
                 foreach ($atributo->items as $item){
@@ -76,14 +78,14 @@ class EvaluacionController extends Controller
                 }
             }
             $this->CalcularNotas($evaluacion);
-           
             DB::commit();
             Alert::success('Exitó', 'La evaluación se guardó correctamente.')->persistent(true);
             return redirect(route('home'));
         } 
-        catch (Exception $e) 
+        catch (Exception $e)
         {
             DB::rollBack();
+            dd($e);
             Alert::error('Error', 'Ocurrió un error al guardar los datos.')->persistent(true);
             return redirect()->back();
         }

@@ -57,7 +57,8 @@
                 <select class="form-select selectFiltroBusqueda w-50" name="filterSearch" id="filterSearch">
                     <option value="" selected></option>
                     <option value="filterConsecutive">Consecutivo</option>
-                    <option value="filterNumInteraction">Número Interacción</option>
+                    <option value="llamada_id">ID Llamada Mujer</option>
+                    <option value="mujer_telefono">Numero de Telefono Mujer</option>
                     <option value="filterNameAgent">Agente</option>
                     <option value="filterRangeDate">Rango Fechas</option>
                 </select><br>
@@ -92,6 +93,8 @@
                 <thead>
                     <tr>
                         <th>Consecutivo</th>
+                        <th>ID Llamada</th>
+                        <th>Numero de Telefono</th>
                         <th>Estado Evaluación</th>
                         <th>Canal</th>
                         <th>Matriz</th>
@@ -114,6 +117,8 @@
                     @foreach($evaluaciones as $evaluacion)
                         <tr>
                             <td>{{ $evaluacion->consecutivo }}</td>
+                            <td>{{ $evaluacion->llamada_id }}</td>
+                            <td>{{ $evaluacion->mujer_telefono }}</td>
                             <td>{{ $evaluacion->estado_evaluacion->descripcion }}</td>
                             <td>{{ $evaluacion->matriz->canal->descripcion }}</td>
                             <td>{{ $evaluacion->matriz->descripcion }}</td>

@@ -24,7 +24,7 @@ class TipoMonitoreoSeeder extends Seeder
 
         TipoMonitoreo::create([
             'id' => 2,
-            'descripcion' => 'Gabración'
+            'descripcion' => 'Grabración'
         ]);
 
         TipoMonitoreo::create([
