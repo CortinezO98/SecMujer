@@ -23,7 +23,7 @@ class HomeController extends Controller
                     return $this->viewSupervisor();
 
                 case Roles::Agente->value:
-                    return view('roles.agente');
+                    return $this->viewAgente();
 
                 default:
                     return redirect(route('logout'));
@@ -38,5 +38,10 @@ class HomeController extends Controller
     public function viewSupervisor(){
         $evaluaciones = Evaluacion::all();
         return view('roles.supervisor', compact('evaluaciones'));
+    }
+
+    public function viewAgente(){
+        $evaluaciones = Evaluacion::all();
+        return view('roles.agente', compact('evaluaciones'));
     }
 }

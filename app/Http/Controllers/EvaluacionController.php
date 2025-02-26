@@ -175,4 +175,18 @@ class EvaluacionController extends Controller
         $evaluacionAtributo->nota = $nota;
         $evaluacionAtributo->save();
     }
+
+
+    public function detalleEvaluacion(){
+        $evaluaciones = Evaluacion::all();
+    
+        if($evaluaciones->isNotEmpty()){
+            $evaluacion = $evaluaciones->first();
+            $atributos = Atributo::where('matriz_id', $evaluacion->matriz_id)->get();
+        } else {
+            $atributos = collect();
+        }
+        return view('evaluacion.detalleEvaluacion', compact('evaluaciones', 'atributos'));
+    }
+    
 }

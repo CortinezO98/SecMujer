@@ -44,37 +44,62 @@
                     <div class="table-responsive">
                         <table id="tableDataEvaluationsAgent" class="table tableDataQuality text-center">
                             <thead>
-                                <tr>
-                                    <th>Consecutivo</th>
-                                    <th>Estado Evaluación</th>
-                                    <th>Canal</th>
-                                    <th>Matriz</th>
-                                    <th>Tipo Monitoreo</th>
-                                    <th>Número Interacción</th>
-                                    <th>Fecha Interacción</th>
-                                    <th>Nota ENC</th>
-                                    <th>Nota ECN</th>
-                                    <th>Nota ECUF</th>
-                                    <th>Nota ECC</th>
-                                    <th>Nota Total Evaluación</th>
-                                    <th>Observaciones</th>
-                                    <th>Aspectos Positivos</th>
-                                    <th>Aspectos a Mejorar</th>
-                                    <th>Comentarios Refutación</th>
-                                    <th>Compromisos</th>
-                                    <th>Observaciones Final</th>
-                                    <th>Evaluado por</th>
-                                    <th>Fecha Evaluación</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
+                    <tr>
+                        <th>Consecutivo</th>
+                        <th>Estado Evaluación</th>
+                        <th>Canal</th>
+                        <th>Matriz</th>
+                        <th>Tipo de Monitoreo</th>
+                        <th>Agente</th>
+                        <th>Fecha Registro</th>
+                        <th>Notas</th>
+                        <th>Nota Total Evaluación</th>
+                        <th>Observaciones</th>
+                        <th>Aspectos Positivos</th>
+                        <th>Aspectos a Mejorar</th>
+                        <th>Comentarios Refutación</th>
+                        <th>Compromisos</th>
+                        <th>Observación Final</th>
+                        <th>Registrado por</th>
+                        <th>Fecha Evaluación</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($evaluaciones as $evaluacion)
+                        <tr>
+                            <td>{{ $evaluacion->consecutivo }}</td>
+                            <td>{{ $evaluacion->estado_evaluacion->descripcion }}</td>
+                            <td>{{ $evaluacion->matriz->canal->descripcion }}</td>
+                            <td>{{ $evaluacion->matriz->descripcion }}</td>
+                            <td>{{ $evaluacion->tipo_monitoreo->descripcion }}</td>
+                            <td>{{ $evaluacion->agente->name }}</td>
+                            <td>{{ $evaluacion->fecha_registro }}</td>
+                            <td style="white-space: nowrap;">
+                                @foreach($evaluacion->notas_atributos as $notas)
+                                    {{ $notas->atributo->descripcion }}  {{ $notas->nota }} @if (!$loop->last) | @endif
+                                @endforeach
 
-                {{-- Campos ocultos --}}
-                <input type="hidden" name="userRecord" id="userRecord" value="{{ $userRecord }}">
-                <input type="hidden" name="agentNameQM" id="agentNameQM" value="{{ $userAgent }}">
+                            </td>
+                            <td>{{ $evaluacion->nota_total }}</td>
+                            <td>{{ $evaluacion->observaciones }}</td>
+                            <td>{{ $evaluacion->aspectos_positivos }}</td>
+                            <td>{{ $evaluacion->aspectos_a_mejorar }}</td>
+                            <td>{{ $evaluacion->comentarios_refutacion }}</td>
+                            <td>{{ $evaluacion->observacion_final }}</td>
+                            <td>{{ $evaluacion->compromisos }}</td>
+                            <td>{{ $evaluacion->usuario_registro->name }}</td>
+                            <td style="white-space: nowrap;">
+                                {{ $evaluacion->fecha_registro }}
+                            </td>
+                            <td>
+                                <a href="{{ route('detalleEvaluacion', $evaluacion->id) }}" class="btn btn-info btn-sm">
+                                    Ver Detalle Evaluación
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
             </form>
         </div>
     </div>
