@@ -30,7 +30,7 @@ class Evaluacion extends Model
         'estado_evaluacion_id'
     ];
     
-    protected $with = ['matriz', 'agente', 'tipo_monitoreo', 'estado_evaluacion', 'interaccion']; 
+    protected $with = ['matriz', 'agente', 'tipo_monitoreo', 'estado_evaluacion']; 
 
     public function matriz()
     {
@@ -50,11 +50,6 @@ class Evaluacion extends Model
     public function estado_evaluacion()
     {
         return $this->belongsTo(EstadoEvaluacion::class, 'estado_evaluacion_id');
-    }
-    
-    public function interaccion()
-    {
-        return $this->hasOne(Interaccion::class, 'evaluacion_id');
     }
 
     public function subitems()

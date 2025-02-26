@@ -28,7 +28,6 @@ class DatabaseSeeder extends Seeder
             // EvaluacionSeeder::class,
             // EvaluacionAtributoSeeder::class,
             // EvaluacionSubItemSeeder::class,
-            // InteraccionSeeder::class,
         ]);
     }
 }

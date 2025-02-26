@@ -20,7 +20,7 @@
                                             <th>Tipo de Monitoreo</th>
                                             <th>Agente</th>
                                             <th>Consecutivo</th>
-                                            <th>Fecha Interacción</th>
+                                            <th>Fecha Registro</th>
                                         </tr>
                                         <tr>
                                             <td>{{ $evaluacion->matriz->canal->descripcion }}</td>
@@ -28,7 +28,7 @@
                                             <td>{{ $evaluacion->tipo_monitoreo->descripcion }}</td>
                                             <td>{{ $evaluacion->agente->name }}</td>
                                             <td>{{ $evaluacion->consecutivo }}</td>
-                                            <td>{{ $evaluacion->interaccion->fecha_interaccion }}</td>
+                                            <td>{{ $evaluacion->fecha_registro }}</td>
                                         </tr>
                                     </thead>
                                 </table>

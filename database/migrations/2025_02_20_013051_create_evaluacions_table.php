@@ -14,6 +14,12 @@ return new class extends Migration
         Schema::create('evaluacions', function (Blueprint $table) {
             $table->id();
             $table->string('consecutivo', 100)->unique();
+
+            $table->string('llamada_id', 50)->index();
+            $table->integer('mujer_telefono')->index();
+            $table->integer('mujer_identificacion')->nullable();
+            $table->string('mujer_nombre')->nullable();
+            
             $table->decimal('nota_total')->nullable();
             $table->text('observaciones')->nullable();
             $table->text('aspectos_positivos')->nullable();
@@ -22,8 +28,11 @@ return new class extends Migration
             $table->text('comentarios_refutacion')->nullable();
             $table->text('observacion_final')->nullable();
             $table->text('compromisos')->nullable();
+
             $table->dateTime('fecha_registro');
             $table->foreignId('agente_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('usuario_registro_id')->nullable()->constrained('users')->nullOnDelete();
+            
             $table->foreignId('matriz_id')->nullable()->constrained('matrizs')->nullOnDelete();
             $table->foreignId('tipo_monitoreo_id')->nullable()->constrained('tipo_monitoreos')->nullOnDelete();
             $table->foreignId('estado_evaluacion_id')->nullable()->constrained('estado_evaluacions')->nullOnDelete();
