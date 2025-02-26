@@ -19,7 +19,7 @@
                                             <th>Matriz</th>
                                             <th>Tipo de Monitoreo</th>
                                             <th>Agente</th>
-                                            <th>Número Interacción</th>
+                                            <th>Consecutivo</th>
                                             <th>Fecha Interacción</th>
                                         </tr>
                                         <tr>
@@ -27,7 +27,7 @@
                                             <td>{{ $evaluacion->matriz->descripcion }}</td>
                                             <td>{{ $evaluacion->tipo_monitoreo->descripcion }}</td>
                                             <td>{{ $evaluacion->agente->name }}</td>
-                                            <td>{{ $evaluacion->interaccion->numero }}</td>
+                                            <td>{{ $evaluacion->consecutivo }}</td>
                                             <td>{{ $evaluacion->interaccion->fecha_interaccion }}</td>
                                         </tr>
                                     </thead>

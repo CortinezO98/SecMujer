@@ -22,4 +22,9 @@ class Interaccion extends Model
         'agente_id',
         'usuario_registro_id'
     ];
+
+    public function usuario_registro()
+    {
+        return $this->belongsTo(User::class, 'usuario_registro_id');
+    }
 }

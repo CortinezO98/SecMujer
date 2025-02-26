@@ -65,6 +65,8 @@ class AtributoSeeder extends Seeder
 
 
 
+
+
         Atributo::create([
             'id' => 7,
             'descripcion' => 'Errores No Críticos',
@@ -75,16 +77,19 @@ class AtributoSeeder extends Seeder
         Atributo::create([
             'id' => 8,
             'descripcion' => 'Errores Críticos de Negocio',
-            'peso' => 50,
+            'peso' => 46,
             'matriz_id' => Matrices::ContactoInicialTelefonico->value
         ]);
 
         Atributo::create([
             'id' => 9,
             'descripcion' => 'Errores Críticos de Usuario Final',
-            'peso' => 50,
+            'peso' => 54,
             'matriz_id' => Matrices::ContactoInicialTelefonico->value
         ]);
+
+
+
 
         Atributo::create([
             'id' => 10,
