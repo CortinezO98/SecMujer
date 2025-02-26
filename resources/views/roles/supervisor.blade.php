@@ -5,7 +5,7 @@
     <div class="container-fluid seccion">
         <div class="row">
             <div class="col-mb-6 text-center botones-menu">
-                <a href="{{ route('MonitoreoNoTipificacion', ['userLogin' => Auth::user()?->name]) }}" class="btn btn-warning-custom">
+                <a href="{{ route('NuevoMonitoreo') }}" class="btn btn-warning-custom">
                     <i class="bi bi-file-earmark-spreadsheet"></i> Nuevo monitoreo 
                 </a>
                 <label class="btn btn-warning-custom" id="btnPendientes"><i class="bi bi-person-dash"></i> Pendientes <span class="countNotifications" id="countPendingSupervisor"></span></label>

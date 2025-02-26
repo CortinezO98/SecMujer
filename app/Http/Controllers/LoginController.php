@@ -41,24 +41,14 @@ class LoginController extends Controller
             "password" => $request->password
         ];
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) 
+        {
             $request->session()->regenerate();
             $user = Auth::user();
-
-
-            switch ($user->roleId) {
-                case 1:
-                    return redirect()->intended(route('ViewRegister')); // Para administradores
-                case 2:
-                    return redirect()->intended(route('roles.supervisor')); // Para supervisores
-                case 3:
-                    return redirect()->intended(route('roles.agente')); // Para agentes
-                case 4:
-                    return redirect()->intended(route('roles.lider')); // Para Lider
-                default:
-                    return redirect()->intended(route('inicio')); // Para otros roles
-            }
-        } else {
+            return redirect(route('home'));
+        } 
+        else 
+        {
             return back()->withErrors([
                 'login' => 'Las credenciales proporcionadas son incorrectas.'
             ])->withInput();

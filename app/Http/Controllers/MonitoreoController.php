@@ -9,14 +9,9 @@ use App\Models\TipoMonitoreo;
 
 class MonitoreoController extends Controller
 {
-    public function showNuevoMonitoreo()
+    public function NuevoMonitoreo()
     {
         return view('monitoreo.nuevoMonitoreo');
-    }
-
-    public function MonitoreoNoTipificacion()
-    {
-        return view('monitoreo.MonitoreoNoTipificacion');
     }
 
     public function getCanales()
