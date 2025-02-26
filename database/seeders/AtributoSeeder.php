@@ -39,5 +39,55 @@ class AtributoSeeder extends Seeder
             'peso' => 100,
             'matriz_id' => Matrices::ContactoInicialWhatsapp->value
         ]);
+
+
+
+        Atributo::create([
+            'id' => 4,
+            'descripcion' => 'Errores No Críticos',
+            'peso' => 100,
+            'matriz_id' => Matrices::AtencionPsicosocialWhatsapp->value
+        ]);
+
+        Atributo::create([
+            'id' => 5,
+            'descripcion' => 'Errores Críticos de Negocio',
+            'peso' => 100,
+            'matriz_id' => Matrices::AtencionPsicosocialWhatsapp->value
+        ]);
+
+        Atributo::create([
+            'id' => 6,
+            'descripcion' => 'Errores Críticos de Usuario Final',
+            'peso' => 100,
+            'matriz_id' => Matrices::AtencionPsicosocialWhatsapp->value
+        ]);
+
+
+
+        Atributo::create([
+            'id' => 7,
+            'descripcion' => 'Errores No Críticos',
+            'peso' => 100,
+            'matriz_id' => Matrices::ContactoInicialTelefonico->value
+        ]);
+
+        Atributo::create([
+            'id' => 8,
+            'descripcion' => 'Errores Críticos de Negocio',
+            'peso' => 100,
+            'matriz_id' => Matrices::ContactoInicialTelefonico->value
+        ]);
+
+        Atributo::create([
+            'id' => 9,
+            'descripcion' => 'Errores Críticos de Usuario Final',
+            'peso' => 100,
+            'matriz_id' => Matrices::ContactoInicialTelefonico->value
+        ]);
+
+
+
+
     }
 }

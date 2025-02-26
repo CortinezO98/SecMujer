@@ -5,11 +5,8 @@
     <div class="container-fluid seccion">
         <div class="row">
             <div class="col-mb-6 text-center botones-menu">
-                <a href="{{ route('nuevoMonitoreo', ['userLogin' => Auth::user()?->name]) }}" class="btn btn-warning-custom">
-                    <i class="bi bi-plus"></i> Nuevo Monitoreo
-                </a>
                 <a href="{{ route('MonitoreoNoTipificacion', ['userLogin' => Auth::user()?->name]) }}" class="btn btn-warning-custom">
-                    <i class="bi bi-file-earmark-spreadsheet"></i> Nuevo monitoreo sin tipificación
+                    <i class="bi bi-file-earmark-spreadsheet"></i> Nuevo monitoreo 
                 </a>
                 <label class="btn btn-warning-custom" id="btnPendientes"><i class="bi bi-person-dash"></i> Pendientes <span class="countNotifications" id="countPendingSupervisor"></span></label>
                 <label class="btn btn-warning-custom"><i class="bi bi-person-slash"></i> Refutados <span class="countNotifications" id="countRefutationSupervisor"></span></label>

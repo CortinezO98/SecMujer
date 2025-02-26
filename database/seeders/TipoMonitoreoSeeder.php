@@ -24,32 +24,23 @@ class TipoMonitoreoSeeder extends Seeder
 
         TipoMonitoreo::create([
             'id' => 2,
-            'descripcion' => 'Intrusión'
+            'descripcion' => 'Gabración'
         ]);
 
         TipoMonitoreo::create([
             'id' => 3,
-            'descripcion' => 'Lado'
-        ]);
-
-        TipoMonitoreo::create([
-            'id' => 4,
-            'descripcion' => 'Remoción'
-        ]);
-
-        TipoMonitoreo::create([
-            'id' => 5,
             'descripcion' => 'Remoto'
         ]);
 
         TipoMonitoreo::create([
-            'id' => 6,
-            'descripcion' => 'Seguimiento'
+            'id' => 4,
+            'descripcion' => 'Solicitud del Cliente'
         ]);
 
         TipoMonitoreo::create([
-            'id' => 7,
-            'descripcion' => 'Cliente Incognito'
+            'id' => 5,
+            'descripcion' => 'Seguimiento Simisional'
         ]);
+
     }
 }

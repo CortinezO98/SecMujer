@@ -102,5 +102,244 @@ class ItemSeeder extends Seeder
             'peso' => 28,
             'atributo_id' => Atributos::ErroresCriticosUsuarioFinalCIW->value
         ]);
+
+
+
+
+
+        Item::create([
+            'id' => 13,
+            'descripcion' => 'Apertura de la interacción por Whatsapp',
+            'peso' => 10,
+            'atributo_id' => Atributos::ErroresNoCriticosAPW->value
+        ]);
+
+        Item::create([
+            'id' => 14,
+            'descripcion' => 'Presentación de la profesional. (Aplica cuando se realizan orientaciones con elementos psicosociales por el canal de Whatsapp)',
+            'peso' => 10,
+            'atributo_id' => Atributos::ErroresNoCriticosAPW->value
+        ]);
+
+        Item::create([
+            'id' => 15,
+            'descripcion' => 'Empatía y Etiqueta',
+            'peso' => 10,
+            'atributo_id' => Atributos::ErroresNoCriticosAPW->value
+        ]);
+
+        Item::create([
+            'id' => 16,
+            'descripcion' => 'Tecnicismos',
+            'peso' => 10,
+            'atributo_id' => Atributos::ErroresNoCriticosAPW->value
+        ]);
+
+        Item::create([
+            'id' => 17,
+            'descripcion' => 'Tiempos',
+            'peso' => 30,
+            'atributo_id' => Atributos::ErroresNoCriticosAPW->value
+        ]);
+
+        Item::create([
+            'id' => 18,
+            'descripcion' => 'Guión de devolución',
+            'peso' => 15,
+            'atributo_id' => Atributos::ErroresNoCriticosAPW->value
+        ]);
+
+        Item::create([
+            'id' => 19,
+            'descripcion' => 'Guiones de Despedida',
+            'peso' => 15,
+            'atributo_id' => Atributos::ErroresNoCriticosAPW->value
+        ]);
+
+
+
+
+
+
+        Item::create([
+            'id' => 20,
+            'descripcion' => 'Habilidades Escritas',
+            'peso' => 19,
+            'atributo_id' => Atributos::ErroresCriticosNegocioAPW->value
+        ]);
+
+        Item::create([
+            'id' => 21,
+            'descripcion' => 'Tipificación Inconcert',
+            'peso' => 19,
+            'atributo_id' => Atributos::ErroresCriticosNegocioAPW->value
+        ]);
+
+        Item::create([
+            'id' => 22,
+            'descripcion' => ' Atención Psicosocial por WhatsApp (Aplica cuando se realizan orientaciones con elementos psicosociales por el canal de Whatsapp)',
+            'peso' => 37,
+            'atributo_id' => Atributos::ErroresCriticosNegocioAPW->value
+        ]);
+
+        Item::create([
+            'id' => 23,
+            'descripcion' => 'Manejo de herramientas y aplicativos',
+            'peso' => 8,
+            'atributo_id' => Atributos::ErroresCriticosNegocioAPW->value
+        ]);
+
+
+
+
+        Item::create([
+            'id' => 24,
+            'descripcion' => 'Lectura Previa',
+            'peso' => 6,
+            'atributo_id' => Atributos::ErroresCriticosUsuarioFinalAPW->value
+        ]);
+
+        Item::create([
+            'id' => 25,
+            'descripcion' => 'Trato a la mujer',
+            'peso' => 6,
+            'atributo_id' => Atributos::ErroresCriticosUsuarioFinalAPW->value
+        ]);
+
+        Item::create([
+            'id' => 26,
+            'descripcion' => ' Preguntas filtro',
+            'peso' => 6,
+            'atributo_id' => Atributos::ErroresCriticosUsuarioFinalAPW->value
+        ]);
+
+        Item::create([
+            'id' => 27,
+            'descripcion' => 'Solución del Requerimiento',
+            'peso' => 18,
+            'atributo_id' => Atributos::ErroresCriticosUsuarioFinalAPW->value
+        ]);
+
+
+
+
+        Item::create([
+            'id' => 28,
+            'descripcion' => 'Apertura de la llamada',
+            'peso' => 6,
+            'atributo_id' => Atributos::ErroresNoCriticosCIT->value
+        ]);
+
+        Item::create([
+            'id' => 29,
+            'descripcion' => 'Disponibilidad',
+            'peso' => 5,
+            'atributo_id' => Atributos::ErroresNoCriticosCIT->value
+        ]);
+
+        Item::create([
+            'id' => 30,
+            'descripcion' => 'Escucha activa',
+            'peso' => 10,
+            'atributo_id' => Atributos::ErroresNoCriticosCIT->value
+        ]);
+
+        Item::create([
+            'id' => 31,
+            'descripcion' => 'Etiqueta Telefónica',
+            'peso' => 16,
+            'atributo_id' => Atributos::ErroresNoCriticosCIT->value
+        ]);
+
+        Item::create([
+            'id' => 32,
+            'descripcion' => 'Tiempos',
+            'peso' => 20,
+            'atributo_id' => Atributos::ErroresNoCriticosCIT->value
+        ]);
+
+        Item::create([
+            'id' => 33,
+            'descripcion' => 'Guiones de transferencia',
+            'peso' => 30,
+            'atributo_id' => Atributos::ErroresNoCriticosCIT->value
+        ]);
+
+        Item::create([
+            'id' => 34,
+            'descripcion' => 'Uso de guiones',
+            'peso' => 5,
+            'atributo_id' => Atributos::ErroresNoCriticosCIT->value
+        ]);
+
+        Item::create([
+            'id' => 35,
+            'descripcion' => 'Guion de Despedida',
+            'peso' => 4,
+            'atributo_id' => Atributos::ErroresNoCriticosCIT->value
+        ]);
+
+        Item::create([
+            'id' => 36,
+            'descripcion' => 'Encuesta',
+            'peso' => 4,
+            'atributo_id' => Atributos::ErroresNoCriticosCIT->value
+        ]);
+
+
+
+        Item::create([
+            'id' => 37,
+            'descripcion' => 'Abandono de llamada',
+            'peso' => 20,
+            'atributo_id' => Atributos::ErroresCriticosNegocioCIT->value
+        ]);
+
+        Item::create([
+            'id' => 38,
+            'descripcion' => 'Tipificación Inconcert',
+            'peso' => 10,
+            'atributo_id' => Atributos::ErroresCriticosNegocioCIT->value
+        ]);
+
+        Item::create([
+            'id' => 39,
+            'descripcion' => 'SIMISIONAL',
+            'peso' => 10,
+            'atributo_id' => Atributos::ErroresCriticosNegocioCIT->value
+        ]);
+
+        Item::create([
+            'id' => 40,
+            'descripcion' => 'Manejo de herramientas y aplicativos',
+            'peso' => 6,
+            'atributo_id' => Atributos::ErroresCriticosNegocioCIT->value
+        ]);
+
+        
+
+
+        Item::create([
+            'id' => 41,
+            'descripcion' => 'Trato a la mujer',
+            'peso' => 18,
+            'atributo_id' => Atributos::ErroresCriticosUsuarioFinalCIT->value
+        ]);
+
+        Item::create([
+            'id' => 42,
+            'descripcion' => 'Preguntas Filtro',
+            'peso' => 18,
+            'atributo_id' => Atributos::ErroresCriticosUsuarioFinalCIT->value
+        ]);
+
+        Item::create([
+            'id' => 43,
+            'descripcion' => 'Solución del Requerimiento',
+            'peso' => 18,
+            'atributo_id' => Atributos::ErroresCriticosUsuarioFinalCIT->value
+        ]);
+
+
     }
 }
