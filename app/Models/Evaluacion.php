@@ -59,6 +59,11 @@ class Evaluacion extends Model
 
     public function subitems()
     {
-        return $this->hasMany(Interaccion::class, 'evaluacion_id');
+        return $this->hasMany(SubItem::class, 'evaluacion_id');
+    }
+
+    public function notas_atributos()
+    {
+        return $this->hasMany(EvaluacionAtributo::class, 'evaluacion_id');
     }
 }

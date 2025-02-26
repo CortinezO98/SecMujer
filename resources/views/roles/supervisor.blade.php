@@ -91,7 +91,6 @@
             <table id="tableDataRecordsQuality" class="table tableDataQuality text-center ancho_auto">
                 <thead>
                     <tr>
-                        <th></th>
                         <th>Consecutivo</th>
                         <th>Estado Evaluación</th>
                         <th>Canal</th>
@@ -100,10 +99,10 @@
                         <th>Agente</th>
                         <th>Número Interacción</th>
                         <th>Fecha Interacción</th>
-                        <th>Nota ENC</th>
-                        <th>Nota ECN</th>
+                        <th>Notas</th>
+                        {{-- <th>Nota ECN</th>
                         <th>Nota ECUF</th>
-                        <th>Nota ECC</th>
+                        <th>Nota ECC</th> --}}
                         <th>Nota Total Evaluación</th>
                         <th>Observaciones</th>
                         <th>Aspectos Positivos</th>
@@ -115,6 +114,37 @@
                         <th>Fecha Evaluación</th>
                     </tr>
                 </thead>
+                <tbody>
+                    @foreach($evaluaciones as $evaluacion)
+                        <tr>
+                            <td>{{ $evaluacion->consecutivo }}</td>
+                            <td>{{ $evaluacion->estado_evaluacion->descripcion }}</td>
+                            <td>{{ $evaluacion->matriz->canal->descripcion }}</td>
+                            <td>{{ $evaluacion->matriz->descripcion }}</td>
+                            <td>{{ $evaluacion->tipo_monitoreo->descripcion }}</td>
+                            <td>{{ $evaluacion->agente->name }}</td>
+                            <td>{{ $evaluacion->interaccion->numero }}</td>
+                            <td>{{ $evaluacion->interaccion->fecha_interaccion }}</td>
+                            <td style="white-space: nowrap;">
+                                @foreach($evaluacion->notas_atributos as $notas)
+                                    {{ $notas->atributo->descripcion }}  {{ $notas->nota }} @if (!$loop->last) | @endif
+                                @endforeach
+
+                            </td>
+                            <td>{{ $evaluacion->nota_total }}</td>
+                            <td>{{ $evaluacion->observaciones }}</td>
+                            <td>{{ $evaluacion->aspectos_positivos }}</td>
+                            <td>{{ $evaluacion->aspectos_a_mejorar }}</td>
+                            <td>{{ $evaluacion->comentarios_refutacion }}</td>
+                            <td>{{ $evaluacion->observacion_final }}</td>
+                            <td>{{ $evaluacion->compromisos }}</td>
+                            <td>{{ $evaluacion->agente->name }}</td>
+                            <td style="white-space: nowrap;">
+                                {{ $evaluacion->fecha_registro }}
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
             </table>
         </div>
     </div>

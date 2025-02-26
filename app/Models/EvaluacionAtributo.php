@@ -17,4 +17,9 @@ class EvaluacionAtributo extends Model
         'atributo_id',
         'nota'
     ];
+
+    public function atributo()
+    {
+        return $this->belongsTo(Atributo::class, 'atributo_id');
+    }
 }
