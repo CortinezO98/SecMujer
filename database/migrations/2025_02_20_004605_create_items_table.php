@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('descripcion', 150);
             $table->decimal('peso');
             $table->boolean('activo')->default(1);
-            $table->foreignId('atributo_id')->nullable()->constrained('atributos')->nullOnDelete();
-
+            $table->foreignId('atributo_id')->constrained('atributos')->onDelete('cascade');
         });
     }
 

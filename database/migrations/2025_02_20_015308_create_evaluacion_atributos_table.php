@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('evaluacion_atributos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('evaluacion_id')->nullable()->constrained('evaluacions')->nullOnDelete();
-            $table->foreignId('atributo_id')->nullable()->constrained('atributos')->nullOnDelete();
             $table->decimal('nota');
+            $table->foreignId('evaluacion_id')->constrained('evaluacions')->onDelete('cascade');
+            $table->foreignId('atributo_id')->constrained('atributos')->onDelete('cascade');
+            $table->foreignId('abreviatura_id')->constrained('abreviaturas')->onDelete('cascade');
         });
     }
 

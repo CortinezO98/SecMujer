@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('evaluacion_nivels', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('evaluacion_id')->nullable()->constrained('evaluacions')->nullOnDelete();
-            $table->foreignId('nivel_id')->nullable()->constrained('nivels')->nullOnDelete();
+            $table->foreignId('evaluacion_id')->constrained('evaluacions')->onDelete('cascade');
+            $table->foreignId('nivel_id')->constrained('nivels')->onDelete('cascade');
             $table->boolean('cumple')->default(1);
         });
     }

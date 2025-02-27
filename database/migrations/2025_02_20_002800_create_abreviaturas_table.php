@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('nivels', function (Blueprint $table) {
+        Schema::create('abreviaturas', function (Blueprint $table) {
             $table->id();
-            $table->text('descripcion');
-            $table->boolean('activo')->default(1);
-            $table->foreignId('sub_item_id')->constrained('sub_items')->onDelete('cascade');
+            $table->string('abreviatura', 10);
         });
     }
 
@@ -24,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('nivels');
+        Schema::dropIfExists('abreviaturas');
     }
 };

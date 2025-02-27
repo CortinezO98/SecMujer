@@ -22,7 +22,6 @@
                                         <th>ID Llamada</th>
                                         <th>Fecha Registro</th>
                                         <th>Notas</th>
-                                        <th>Nota Total Evaluación</th>
                                     </tr>
                                     <tr>
                                         <td>{{ $evaluacion->consecutivo }}</td>
@@ -35,7 +34,6 @@
                                                 {{ $notas->atributo->abreviatura }}  {{ $notas->nota }} @if (!$loop->last) | @endif
                                             @endforeach
                                         </td>
-                                        <td>{{ $evaluacion->nota_total }}</td>
                                     </tr>
                                 </thead>
                             </table>

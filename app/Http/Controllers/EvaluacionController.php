@@ -92,7 +92,6 @@ class EvaluacionController extends Controller
     }
 
     public function CalcularNotas($evaluacion) {
-        $nota_total = 0;
         foreach($evaluacion->matriz->atributos as $atributo)
         {
             $sumatoriaNotas = 0;
@@ -113,10 +112,7 @@ class EvaluacionController extends Controller
                 $sumatoriaNotas += $valorPorcentualSubitem * $cantidadCumplen;
             }
             $this->CreateUpdateEvaluacionAtributo($evaluacion, $atributo, $sumatoriaNotas);
-            $nota_total += $sumatoriaNotas;
         }
-        $evaluacion->nota_total = $nota_total;
-        $evaluacion->save();
     }
 
     public function eliminarEvaluacion($id) {
@@ -163,16 +159,23 @@ class EvaluacionController extends Controller
     public function CreateUpdateEvaluacionAtributo($evaluacion, $atributo, $nota){
         $evaluacionAtributo =  EvaluacionAtributo::where([
             'evaluacion_id' => $evaluacion->id,
-            'atributo_id' => $atributo->id
+            'abreviatura_id' => $atributo->abreviatura_id
         ])->first();
 
-        if (!$evaluacionAtributo){
+        if (!$evaluacionAtributo)
+        {
             $evaluacionAtributo = new EvaluacionAtributo([
                 'evaluacion_id' => $evaluacion->id,
-                'atributo_id' => $atributo->id
+                'atributo_id' => $atributo->id,
+                'abreviatura_id' => $atributo->abreviatura_id,
+                'nota' => $nota
             ]);
+        } 
+        else 
+        {
+            $evaluacionAtributo->nota += $nota;
         }
-        $evaluacionAtributo->nota = $nota;
+        // dd($evaluacionAtributo);
         $evaluacionAtributo->save();
     }
 

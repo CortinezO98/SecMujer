@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('matrizs', function (Blueprint $table) {
             $table->id();
             $table->string('descripcion', 100);
-            $table->foreignId('canal_id')->nullable()->constrained('canals')->nullOnDelete();
+            $table->foreignId('canal_id')->constrained('canals')->onDelete('cascade');
         });
     }
 

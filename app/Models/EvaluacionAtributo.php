@@ -15,11 +15,17 @@ class EvaluacionAtributo extends Model
     protected $fillable = [
         'evaluacion_id',
         'atributo_id',
+        'abreviatura_id',
         'nota'
     ];
 
     public function atributo()
     {
         return $this->belongsTo(Atributo::class, 'atributo_id');
+    }
+
+    public function abreviatura()
+    {
+        return $this->belongsTo(Abreviatura::class, 'abreviatura_id');
     }
 }

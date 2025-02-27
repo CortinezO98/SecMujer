@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('evaluacion_sub_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('evaluacion_id')->nullable()->constrained('evaluacions')->nullOnDelete();
-            $table->foreignId('sub_item_id')->nullable()->constrained('sub_items')->nullOnDelete();
+            $table->foreignId('evaluacion_id')->constrained('evaluacions')->onDelete('cascade');
+            $table->foreignId('sub_item_id')->constrained('sub_items')->onDelete('cascade');
             $table->boolean('cumple')->default(1);
         });
     }

@@ -102,7 +102,6 @@
                         <th>Agente</th>
                         <th>Fecha Registro</th>
                         <th>Notas</th>
-                        <th>Nota Total Evaluación</th>
                         <th>Observaciones</th>
                         <th>Aspectos Positivos</th>
                         <th>Aspectos a Mejorar</th>
@@ -127,11 +126,10 @@
                             <td>{{ $evaluacion->fecha_registro }}</td>
                             <td style="white-space: nowrap;">
                                 @foreach($evaluacion->notas_atributos as $notas)
-                                    {{ $notas->atributo->abreviatura }}  {{ $notas->nota }} @if (!$loop->last) | @endif
+                                    {{ $notas->abreviatura->abreviatura }}  {{ $notas->nota }} @if (!$loop->last) | @endif
                                 @endforeach
 
                             </td>
-                            <td>{{ $evaluacion->nota_total }}</td>
                             <td>{{ $evaluacion->observaciones }}</td>
                             <td>{{ $evaluacion->aspectos_positivos }}</td>
                             <td>{{ $evaluacion->aspectos_a_mejorar }}</td>
