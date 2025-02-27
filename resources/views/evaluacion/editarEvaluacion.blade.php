@@ -38,7 +38,7 @@
                 </div>
             </div>
 
-            <form method="post" action="{{ Route('guardarEvaluacion') }}">
+            <form method="post" action="{{ Route('guardarEvaluacion') }}" enctype="multipart/form-data">
                 @csrf
                 <input type="number" class="d-none" name="evaluacion_id" id="evaluacion_id" value="{{ $evaluacion->id }}">
                 
@@ -192,6 +192,13 @@
                                         <textarea class="form-control" name="aspectos_a_mejorar" id="aspectos_a_mejorar" rows="2"></textarea>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col py-3">
+                                        <label for="archivos">Selecciona los archivos:</label>
+                                        <input type="file" name="archivos[]" id="archivos" class="form-control" multiple>
+                                    </div>
+                                </div>
+
                                 <div class="pt-4 text-center">
                                     <button type="submit" class="btn btn-primary">Evaluar</button>
                                     <a href="{{ route('eliminarEvaluacion', $evaluacion->id) }}" class="btn btn-outline-danger">Cancelar</a>

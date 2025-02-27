@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Evaluacion;
 use App\Enums\EstadosEvaluaciones;
+use App\Models\Adjunto;
 use App\Models\Atributo;
 use App\Models\EvaluacionAtributo;
 use App\Models\EvaluacionSubItem;
@@ -78,6 +79,8 @@ class EvaluacionController extends Controller
                 }
             }
             $this->CalcularNotas($evaluacion);
+            $this->GuardarAdjuntos($request, $evaluacion);
+
             DB::commit();
             Alert::success('Exitó', 'La evaluación se guardó correctamente.')->persistent(true);
             return redirect(route('home'));
@@ -88,6 +91,28 @@ class EvaluacionController extends Controller
             dd($e);
             Alert::error('Error', 'Ocurrió un error al guardar los datos.')->persistent(true);
             return redirect()->back();
+        }
+    }
+
+    public function GuardarAdjuntos(Request $request, $evaluacion) {
+        $request->validate([
+            'archivos.*'   => 'required|file|mimes:jpg,jpeg,png,pdf'
+        ]);
+
+        if ($request->hasFile('archivos')) {
+            foreach ($request->file('archivos') as $file) 
+            {
+                $path = $file->store('adjuntos', 'public');
+                
+                Adjunto::create([
+                    'evaluacion_id'  => $evaluacion->id,
+                    'nombre_archivo' => $file->getClientOriginalName(),
+                    'ruta'           => $path,
+                    'tipo'           => $file->getClientMimeType(),
+                    'peso'         => $file->getSize(),
+                    'fecha_borrado'   => now()->addDays(45)->toDateString()
+                ]);
+            }
         }
     }
 
