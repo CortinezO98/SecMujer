@@ -107,7 +107,6 @@
                         <th>Aspectos a Mejorar</th>
                         <th>Comentarios</th>
                         <th>Compromisos</th>
-                        <th>Observación Final</th>
                         <th>Registrado por</th>
                         <th>Fecha Evaluación</th>
                     </tr>
@@ -134,7 +133,6 @@
                             <td>{{ $evaluacion->aspectos_positivos }}</td>
                             <td>{{ $evaluacion->aspectos_a_mejorar }}</td>
                             <td>{{ $evaluacion->comentarios }}</td>
-                            <td>{{ $evaluacion->observacion_final }}</td>
                             <td>{{ $evaluacion->compromisos }}</td>
                             <td>{{ $evaluacion->usuario_registro->name }}</td>
                             <td style="white-space: nowrap;">

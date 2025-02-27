@@ -19,7 +19,6 @@ class Evaluacion extends Model
         'aspectos_positivos',
         'aspectos_a_mejorar',
         'comentarios',
-        'observacion_final',
         'compromisos',
         'fecha_registro',
         'agente_id',

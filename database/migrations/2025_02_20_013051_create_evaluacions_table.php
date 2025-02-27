@@ -24,7 +24,6 @@ return new class extends Migration
             $table->text('aspectos_positivos')->nullable();
             $table->text('aspectos_a_mejorar')->nullable();
             $table->text('comentarios')->nullable();
-            $table->text('observacion_final')->nullable();
             $table->text('compromisos')->nullable();
 
             $table->dateTime('fecha_registro');
