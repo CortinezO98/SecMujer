@@ -13,6 +13,11 @@ Route::post('/post-login', [LoginController::class, 'Login'])->name('post-login'
 
 Route::get('/logout', [LoginController::class, 'Logout'])->name('logout');
 
+Route::get('/run-adjuntos-borrar', function () {
+    \Illuminate\Support\Facades\Artisan::call('adjuntos:borrar');
+    return 'Se ejecuto la tarea de borrado.';
+});
+
 Route::middleware(['auth'])->group(function () {
 
     require __DIR__ . '/monitoreoRoutes.php';
