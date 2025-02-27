@@ -30,9 +30,7 @@
                                         <td>{{ $evaluacion->llamada_id }}</td>
                                         <td>{{ $evaluacion->fecha_registro }}</td>
                                         <td style="white-space: nowrap;">
-                                            @foreach($evaluacion->notas_atributos as $notas)
-                                                {{ $notas->atributo->abreviatura }}  {{ $notas->nota }} @if (!$loop->last) | @endif
-                                            @endforeach
+                                            {{ $evaluacion->mostrarNotas() }}
                                         </td>
                                     </tr>
                                 </thead>
@@ -69,6 +67,15 @@
                                     <textarea class="form-control" name="comentarios" id="comentarios" rows="3"></textarea>
                                 </div>
                             </div>
+
+                            <div class="row mt-4">
+                                <div class="col">
+                                    <label>Compromisos:</label>
+                                    <textarea class="form-control" name="compromisos" id="compromisos" rows="3"></textarea>
+                                </div>
+                            </div>
+
+
                             <div class="row mt-3">
                                 <div class="col mb-4 text-center">
                                     <button type="submit" class="btn btn-success" id="btnContinuarAprobacionEvaluacion">

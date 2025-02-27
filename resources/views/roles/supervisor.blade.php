@@ -124,10 +124,7 @@
                             <td>{{ $evaluacion->agente->name }}</td>
                             <td>{{ $evaluacion->fecha_registro }}</td>
                             <td style="white-space: nowrap;">
-                                @foreach($evaluacion->notas_atributos as $notas)
-                                    {{ $notas->abreviatura->abreviatura }}  {{ $notas->nota }} @if (!$loop->last) | @endif
-                                @endforeach
-
+                                {{ $evaluacion->mostrarNotas() }}
                             </td>
                             <td>{{ $evaluacion->observaciones }}</td>
                             <td>{{ $evaluacion->aspectos_positivos }}</td>
