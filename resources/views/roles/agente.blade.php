@@ -93,7 +93,7 @@
                                 {{ $evaluacion->fecha_registro }}
                             </td>
                             <td>
-                                <a href="{{ route('detalleEvaluacion', $evaluacion->id) }}" class="btn btn-info btn-sm">
+                                <a href="{{ route('detalleEvaluacion', $evaluacion->consecutivo) }}" class="btn btn-info btn-sm">
                                     Ver Detalle Evaluación
                                 </a>
                             </td>

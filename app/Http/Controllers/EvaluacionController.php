@@ -177,7 +177,7 @@ class EvaluacionController extends Controller
     }
 
 
-    public function detalleEvaluacion($consecutivo){
+    public function detalleEvaluacion($consecutivo,){
         $evaluacion = Evaluacion::where('consecutivo', $consecutivo)->first();
         $atributos = Atributo::where('matriz_id', $evaluacion->matriz_id)->get();
 
@@ -186,7 +186,6 @@ class EvaluacionController extends Controller
 
     public function aprobarEvaluacion(Request $request){
 
-        // dd($request);
         $evaluacion = Evaluacion::where('id', $request->evaluacion_id)->first();
         $evaluacion->comentarios = $request->comentarios;
         $evaluacion->estado_evaluacion_id = EstadosEvaluaciones::Evaluado;

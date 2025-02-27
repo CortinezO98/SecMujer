@@ -59,12 +59,6 @@
                             <textarea class="form-control" name="improveAspects" id="improveAspects" rows="3" disabled>{{ $evaluacion->aspectos_a_mejorar }}</textarea>
                         </div>
                     </div>
-                    <div class="row mt-4">
-                        <p>
-                            Si está de acuerdo con las calificaciones y con la evaluación en general, por favor haga click en el botón <strong>APROBAR EVALUACIÓN</strong>. 
-                            Por el contrario, si considera que no está de acuerdo y quiere manifestarlo, haga click en el botón <strong>REFUTAR EVALUACIÓN</strong>.
-                        </p>
-                    </div>
                     <div id="divCompromisos">
                         <form method="post" action="{{ route('aprobarEvaluacion') }}">
                             @csrf
