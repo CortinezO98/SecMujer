@@ -55,12 +55,34 @@
                             <textarea class="form-control" name="improveAspects" id="improveAspects" rows="3" disabled>{{ $evaluacion->aspectos_a_mejorar }}</textarea>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col pt-4">
+                            <div class="list-group">
+                                <a class="list-group-item list-group-item-action disabled" aria-disabled="true">
+                                    <b>
+                                        @if($evaluacion->adjuntos->isEmpty())
+                                            No se adjuntaron archivos a esta evaluación
+                                        @else  
+                                            Archivos Adjuntos
+                                        @endif
+                                    </b>
+                                </a>
+
+                                @foreach($evaluacion->adjuntos as $adjunto)
+                                    <a href="{{ route('downloadAdjunto', $adjunto->id) }}" class="list-group-item list-group-item-action">
+                                        {{ $adjunto->nombre_archivo }}
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div id="divCompromisos">
                         <form method="post" action="{{ route('aprobarEvaluacion') }}">
                             @csrf
-
                             <input type="number" class="d-none" name="evaluacion_id" id="evaluacion_id" value="{{ $evaluacion->id }}">
-
                             <div class="row mt-4">
                                 <div class="col">
                                     <label>Comentarios agente:</label>

@@ -12,4 +12,7 @@ Route::prefix('evaluacion')->group(function () {
     
     Route::post('/guardar', [EvaluacionController::class, 'guardarEvaluacion'])->name('guardarEvaluacion');
     Route::get('/eliminar/{id}', [EvaluacionController::class, 'eliminarEvaluacion'])->name('eliminarEvaluacion');
+
+    Route::get('/adjuntos/{adjunto}/download', [EvaluacionController::class, 'downloadAdjunto'])->name('downloadAdjunto');
+
 });

@@ -64,6 +64,11 @@ class Evaluacion extends Model
         return $this->belongsTo(User::class, 'usuario_registro_id');
     }
 
+    public function adjuntos()
+    {
+        return $this->hasMany(Adjunto::class, 'evaluacion_id');
+    }
+
     public function mostrarNotas(){
         return $this->notas_atributos->map(function ($nota) {
             return $nota->abreviatura->abreviatura . ' ' . $nota->nota;

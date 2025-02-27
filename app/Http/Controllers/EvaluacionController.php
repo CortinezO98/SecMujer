@@ -13,10 +13,10 @@ use App\Utilities\Utility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 use RealRashid\SweetAlert\Facades\Alert;
 use Exception;
-
 
 class EvaluacionController extends Controller
 {
@@ -232,4 +232,10 @@ class EvaluacionController extends Controller
         $evaluacionAtributo->save();
     }
     
+    public function downloadAdjunto(Adjunto $adjunto)
+    {
+        $filePath = Storage::disk('public')->path($adjunto->ruta);
+        return response()->download($filePath, $adjunto->nombre_archivo);
+    }
+
 }
