@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('descripcion');
             $table->boolean('activo')->default(1);
-            $table->foreignId('item_id')->nullable()->constrained('items')->nullOnDelete();
+            $table->foreignId('item_id')->constrained('items')->onDelete('cascade');
         });
     }
 

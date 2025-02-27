@@ -16,16 +16,14 @@ return new class extends Migration
             $table->string('consecutivo', 100)->unique();
 
             $table->string('llamada_id', 50)->index()->nullable();
-            $table->string('mujer_telefono',20)->index()->nullable();
+            $table->string('mujer_telefono', 20)->index()->nullable();
             $table->bigInteger('mujer_identificacion')->nullable();
             $table->string('mujer_nombre')->nullable();
-            
-            $table->decimal('nota_total')->nullable();
+
             $table->text('observaciones')->nullable();
             $table->text('aspectos_positivos')->nullable();
             $table->text('aspectos_a_mejorar')->nullable();
             $table->text('comentarios')->nullable();
-            $table->text('comentarios_refutacion')->nullable();
             $table->text('observacion_final')->nullable();
             $table->text('compromisos')->nullable();
 
@@ -33,9 +31,9 @@ return new class extends Migration
             $table->foreignId('agente_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('usuario_registro_id')->nullable()->constrained('users')->nullOnDelete();
             
-            $table->foreignId('matriz_id')->nullable()->constrained('matrizs')->nullOnDelete();
-            $table->foreignId('tipo_monitoreo_id')->nullable()->constrained('tipo_monitoreos')->nullOnDelete();
-            $table->foreignId('estado_evaluacion_id')->nullable()->constrained('estado_evaluacions')->nullOnDelete();
+            $table->foreignId('matriz_id')->constrained('matrizs')->onDelete('cascade');
+            $table->foreignId('tipo_monitoreo_id')->constrained('tipo_monitoreos')->onDelete('cascade');
+            $table->foreignId('estado_evaluacion_id')->constrained('estado_evaluacions')->onDelete('cascade');
         });
     }
 

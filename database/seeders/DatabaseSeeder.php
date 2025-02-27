@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             MatrizSeeder::class,
             TipoMonitoreoSeeder::class,
             EstadoEvaluacionSeeder::class,
+            AbreviaturaSeeder::class,
             AtributoSeeder::class,
             ItemSeeder::class,
             SubItemSeeder::class,

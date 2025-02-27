@@ -92,7 +92,6 @@ class EvaluacionController extends Controller
     }
 
     public function CalcularNotas($evaluacion) {
-        $nota_total = 0;
         foreach($evaluacion->matriz->atributos as $atributo)
         {
             $sumatoriaNotas = 0;
@@ -113,10 +112,7 @@ class EvaluacionController extends Controller
                 $sumatoriaNotas += $valorPorcentualSubitem * $cantidadCumplen;
             }
             $this->CreateUpdateEvaluacionAtributo($evaluacion, $atributo, $sumatoriaNotas);
-            $nota_total += $sumatoriaNotas;
         }
-        $evaluacion->nota_total = $nota_total;
-        $evaluacion->save();
     }
 
     public function eliminarEvaluacion($id) {

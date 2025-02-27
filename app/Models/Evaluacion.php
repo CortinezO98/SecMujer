@@ -15,12 +15,10 @@ class Evaluacion extends Model
 
     protected $fillable = [
         'consecutivo',
-        'nota_total',
         'observaciones',
         'aspectos_positivos',
         'aspectos_a_mejorar',
         'comentarios',
-        'comentarios_refutacion',
         'observacion_final',
         'compromisos',
         'fecha_registro',

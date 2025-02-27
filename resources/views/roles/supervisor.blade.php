@@ -102,7 +102,6 @@
                         <th>Agente</th>
                         <th>Fecha Registro</th>
                         <th>Notas</th>
-                        <th>Nota Total Evaluación</th>
                         <th>Observaciones</th>
                         <th>Aspectos Positivos</th>
                         <th>Aspectos a Mejorar</th>
@@ -131,7 +130,6 @@
                                 @endforeach
 
                             </td>
-                            <td>{{ $evaluacion->nota_total }}</td>
                             <td>{{ $evaluacion->observaciones }}</td>
                             <td>{{ $evaluacion->aspectos_positivos }}</td>
                             <td>{{ $evaluacion->aspectos_a_mejorar }}</td>
