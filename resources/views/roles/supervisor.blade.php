@@ -126,7 +126,7 @@
                             <td>{{ $evaluacion->fecha_registro }}</td>
                             <td style="white-space: nowrap;">
                                 @foreach($evaluacion->notas_atributos as $notas)
-                                    {{ $notas->abreviatura->abreviatura }}  {{ $notas->nota }} @if (!$loop->last) | @endif
+                                    {{ $notas->abreviatura->abreviatur }}  {{ $notas->nota }} @if (!$loop->last) | @endif
                                 @endforeach
 
                             </td>
