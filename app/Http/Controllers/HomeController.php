@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Evaluacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Ramsey\Uuid\FeatureSet;
 
 class HomeController extends Controller
 {
@@ -20,7 +21,7 @@ class HomeController extends Controller
                     return redirect(route('ViewRegister'));
 
                 case Roles::Supervisor->value:
-                    return $this->viewSupervisor();
+                    return redirect(route('viewSupervisor'));
 
                 case Roles::Agente->value:
                     return $this->viewAgente();
@@ -35,8 +36,15 @@ class HomeController extends Controller
         }
     }
 
-    public function viewSupervisor(){
-        $evaluaciones = Evaluacion::all();
+    public function viewSupervisor(Request $request)
+    {
+        $nombreCampo = $request->query('filtro');
+        $valorBusqueda = $request->query('valor');
+    
+        $evaluaciones = Evaluacion::when($nombreCampo, function ($query) use ($nombreCampo, $valorBusqueda) {
+            return $query->where($nombreCampo, $valorBusqueda);
+        })->get();
+
         return view('roles.supervisor', compact('evaluaciones'));
     }
 

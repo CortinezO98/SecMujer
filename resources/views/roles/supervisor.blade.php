@@ -1,20 +1,31 @@
 @extends('base.base')
 
+@php
+    use App\Enums\EstadosEvaluaciones;
+@endphp
+
 @section('content')
     <h2 class="text-center tittle">Gestión de Calidad</h2>
-    <div class="container-fluid seccion">
+    <div class="container seccion">
         <div class="row">
             <div class="col-mb-6 text-center botones-menu">
                 <a href="{{ route('NuevoMonitoreo') }}" class="btn btn-warning-custom">
                     <i class="bi bi-file-earmark-spreadsheet"></i> Nuevo monitoreo 
                 </a>
-                <label class="btn btn-warning-custom" id="btnPendientes"><i class="bi bi-person-dash"></i> Pendientes <span class="countNotifications" id="countPendingSupervisor"></span></label>
-                <label class="btn btn-warning-custom"><i class="bi bi-person-slash"></i> Refutados <span class="countNotifications" id="countRefutationSupervisor"></span></label>
+                <a href="{{ route('viewSupervisor', ['filtro' => 'estado_evaluacion_id', 'valor' => EstadosEvaluaciones::Pendiente->value]) }}" class="btn btn-warning-custom">
+                    <i class="bi bi-hourglass-split"></i> Pendientes
+                </a>
+                <a href="{{ route('viewSupervisor', ['filtro' => 'estado_evaluacion_id', 'valor' => EstadosEvaluaciones::Evaluado->value]) }}" class="btn btn-warning-custom">
+                    <i class="bi bi-clipboard-check"></i> Evaluados
+                </a>
                 <a class="btn btn-warning-custom" id="menuBotonesExportarCanales"><i class="bi bi-chevron-down"></i> Exportar reporte por canal</a>
+                <a href="{{ route('viewSupervisor') }}" class="btn btn-warning-custom">
+                    <i class="bi bi-x-octagon"></i> Limpiar filtros
+                </a>
             </div>
         </div>
 
-        <form method="post" id="formExportsChannels" style="display: none;">  </form>
+        <form method="post">            
             <div class="row botonesExportarCanalesOcultar" id="btnsExportarCanales" style="display: none;">
                 <div class="row row-centered">
                     <div class="col-md-6">
@@ -51,8 +62,37 @@
 
         </form>
         
-        <form method="post" id="formSearchQualityManagement">
-            <div class="row botones-menu m-2">
+        <form method="get" action="{{ route('viewSupervisor') }}">
+
+            <div class="row mt-3 align-items-center">
+                <div class="col-sm-0 col-lg-2"></div>
+
+                <div class="col-sm-12 col-lg-2 py-1 text-center ">
+                    <h5 class="pt-2">Filtro Busqueda:</h5>
+                </div>
+
+                <div class="col-sm-12 col-lg-2 py-1">
+                    <select class="form-select" name="filtro" id="filtro">
+                        <option value="" selected></option>
+                        <option value="consecutivo">Consecutivo</option>
+                        <option value="llamada_id">ID Llamada Mujer</option>
+                        <option value="mujer_telefono">Numero de Telefono Mujer</option>
+                        <option value="agente">Agente</option>
+                        <option value="rangoFechas">Rango Fechas</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-12 col-lg-3 py-1">
+                    <input type="text" class="form-control" name="valor" id="valor" required>
+                </div>
+                <div class="col-sm-12 col-lg-1 py-1">
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-warning btn-block" >Buscar</button>
+                    </div>
+                </div>
+            </div>
+
+            {{-- <div class="row botones-menu m-2">
                 <label class="form-label labelFiltroBusqueda w-25" for="seach"><b>Filtro Busqueda:</b></label>
                 <select class="form-select selectFiltroBusqueda w-50" name="filterSearch" id="filterSearch">
                     <option value="" selected></option>
@@ -62,8 +102,8 @@
                     <option value="filterNameAgent">Agente</option>
                     <option value="filterRangeDate">Rango Fechas</option>
                 </select><br>
-            </div>
-            <div class="row botones-menu" id="divSearchConseNumInterHide" style="display: none;" >
+            </div> --}}
+            {{-- <div class="row botones-menu" id="divSearchConseNumInterHide" style="display: none;" >
                 <div class="containerFiltersSearch input-group inputGroupFiltroBusqueda ">
                     <button class="btn text-bg-warning" id="btnSearch">Buscar</button>
                     <input class="form-control form-control-sm" type="text" name="dataSearch" id="dataSearch">
@@ -83,7 +123,7 @@
                     <input type="date" name="dateEnd" id="dateEnd" required>
                     <button class="btn text-bg-warning" id="btnSearchDateRange">Buscar</button>
                 </div>
-            </div>
+            </div> --}}
         </form>
     </div>
 
@@ -143,35 +183,6 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuBotonesExportarCanales = document.getElementById('menuBotonesExportarCanales');
-            const btnsExportarCanales = document.getElementById('btnsExportarCanales');
-    
-            menuBotonesExportarCanales.addEventListener('click', () => {
-                btnsExportarCanales.style.display = (btnsExportarCanales.style.display === 'none' || btnsExportarCanales.style.display === '') ? 'block' : 'none';
-            });
-        });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const filterSearch = document.getElementById('filterSearch');
-            const divSearchConseNumInter = document.getElementById('divSearchConseNumInterHide');
-            const divSearchAgent = document.getElementById('divSearchAgentHide');
-            const divSearchRangeDate = document.getElementById('divSearchRangeDateHide');
-    
-            filterSearch.addEventListener('change', function() {
-                divSearchConseNumInter.style.display = 'none';
-                divSearchAgent.style.display = 'none';
-                divSearchRangeDate.style.display = 'none';
-                
-                if (this.value === 'filterConsecutive' || this.value === 'filterNumInteraction') {
-                    divSearchConseNumInter.style.display = 'block';
-                } else if (this.value === 'filterNameAgent') {
-                    divSearchAgent.style.display = 'block';
-                } else if (this.value === 'filterRangeDate') {
-                    divSearchRangeDate.style.display = 'block';
-                }
-            });
-        });
+        
     </script>
 @endsection
