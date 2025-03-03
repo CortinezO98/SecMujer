@@ -71,7 +71,12 @@
 
                                 @foreach($evaluacion->adjuntos as $adjunto)
                                     <a href="{{ route('downloadAdjunto', $adjunto->id) }}" class="list-group-item list-group-item-action">
-                                        {{ $adjunto->nombre_archivo }}
+                                        {{ $adjunto->nombre_archivo }} 
+                                        @if($adjunto->eliminado)
+                                            <span class="badge rounded-pill text-bg-secondary">No disponible</span>
+                                        @else
+                                            <span class="badge rounded-pill text-bg-success">Disponible</span>
+                                        @endif
                                     </a>
                                 @endforeach
                             </div>

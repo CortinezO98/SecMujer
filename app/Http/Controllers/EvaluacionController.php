@@ -228,14 +228,18 @@ class EvaluacionController extends Controller
         {
             $evaluacionAtributo->nota += $nota;
         }
-        // dd($evaluacionAtributo);
         $evaluacionAtributo->save();
     }
     
     public function downloadAdjunto(Adjunto $adjunto)
     {
-        $filePath = Storage::disk('public')->path($adjunto->ruta);
-        return response()->download($filePath, $adjunto->nombre_archivo);
+        if ($adjunto->eliminado) {
+            Alert::info('Archivo no disponible', 'Este archivo supero el limite de tiempo de almacenamiento, por lo cual no esta disponible.')->persistent(true);
+            return redirect()->back();
+        } else {
+            $filePath = Storage::disk('public')->path($adjunto->ruta);
+            return response()->download($filePath, $adjunto->nombre_archivo);
+        }
     }
 
 }
