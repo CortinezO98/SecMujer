@@ -130,6 +130,7 @@
                         <th>Compromisos</th>
                         <th>Registrado por</th>
                         <th>Fecha Evaluación</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -155,6 +156,10 @@
                             <td>{{ $evaluacion->usuario_registro->name }}</td>
                             <td style="white-space: nowrap;">
                                 {{ $evaluacion->fecha_registro }}
+                            </td>
+                            <td>
+                                <a href="{{ route('editarEvaluacion', $evaluacion->consecutivo) }}"
+                                    class="btn btn-primary">Editar</a>
                             </td>
                         </tr>
                     @endforeach

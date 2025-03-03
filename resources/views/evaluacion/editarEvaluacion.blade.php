@@ -63,16 +63,16 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <input type="text" name="llamada_id" id="llamada_id" class="form-control" required>
+                                                        <input type="text" name="llamada_id" id="llamada_id" class="form-control" value="{{ $evaluacion->llamada_id }}" required>
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="mujer_telefono" id="mujer_telefono" class="form-control" required>
+                                                        <input type="number" name="mujer_telefono" id="mujer_telefono" class="form-control" value="{{ $evaluacion->mujer_telefono }}" required>
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="mujer_identificacion" id="mujer_identificacion" class="form-control">
+                                                        <input type="number" name="mujer_identificacion" id="mujer_identificacion" value="{{ $evaluacion->mujer_identificacion }}" class="form-control">
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="mujer_nombre" id="mujer_nombre" class="form-control">
+                                                        <input type="text" name="mujer_nombre" id="mujer_nombre" value="{{ $evaluacion->mujer_nombre }}" class="form-control">
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -118,19 +118,19 @@
                                 <div class="row">
                                     <div class="col mb-3">
                                         <label>Observaciones:</label>
-                                        <textarea class="form-control" name="observaciones" id="observaciones" rows="2"></textarea>
+                                        <textarea class="form-control" name="observaciones" id="observaciones" rows="2">{{ $evaluacion->observaciones }}</textarea>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col mb-3">
                                         <label>Aspectos Positivos:</label>
-                                        <textarea class="form-control" name="aspectos_positivos" id="aspectos_positivos" rows="2"></textarea>
+                                        <textarea class="form-control" name="aspectos_positivos" id="aspectos_positivos" rows="2">{{ $evaluacion->aspectos_positivos }}</textarea>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <label>Aspectos a Mejorar:</label>
-                                        <textarea class="form-control" name="aspectos_a_mejorar" id="aspectos_a_mejorar" rows="2"></textarea>
+                                        <textarea class="form-control" name="aspectos_a_mejorar" id="aspectos_a_mejorar" rows="2">{{ $evaluacion->aspectos_a_mejorar }}</textarea>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -138,7 +138,10 @@
                                         <label for="archivos">Selecciona los archivos:</label>
                                         <input type="file" name="archivos[]" id="archivos" class="form-control" multiple>
                                     </div>
+
                                 </div>
+                                
+                                @include('evaluacion.descargaDeAdjuntos')
 
                                 <div class="pt-4 text-center">
                                     <button type="submit" class="btn btn-primary">Evaluar</button>
