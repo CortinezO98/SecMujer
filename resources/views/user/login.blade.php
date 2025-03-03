@@ -23,7 +23,7 @@
                             <label for="password" class="form-label">Contraseña</label>
                             <div class="input-group">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                                <span class="input-group-text" onclick="showPassword()">
+                                <span class="input-group-text" id="btnVisibilidad">
                                     <i class="bi bi-eye-fill" id="showIconPass"></i>
                                     <i class="bi bi-eye-slash" id="hideIconPass" style="display: none;"></i>
                                 </span>
@@ -47,4 +47,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById("btnVisibilidad").addEventListener("click", function () {
+    let passwordInput = document.getElementById("password");
+    let showIcon = document.getElementById("showIconPass");
+    let hideIcon = document.getElementById("hideIconPass");
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        showIcon.style.display = "none";
+        hideIcon.style.display = "inline";
+    } else {
+        passwordInput.type = "password";
+        showIcon.style.display = "inline";
+        hideIcon.style.display = "none";
+    }
+});
+
+</script>
+
 @endsection

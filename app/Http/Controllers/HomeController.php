@@ -11,13 +11,14 @@ use Ramsey\Uuid\FeatureSet;
 
 class HomeController extends Controller
 {
-    public function homeView(){
+    public function homeView(Request $request){
         $userAuthenticared = Auth::user();
         if ($userAuthenticared) 
         {
             switch ($userAuthenticared->roleId) 
             {
                 case Roles::Administrador->value:
+                    // dd($request);
                     return redirect(route('ViewRegister'));
 
                 case Roles::Supervisor->value:

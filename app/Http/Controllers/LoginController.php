@@ -7,6 +7,8 @@ use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -16,22 +18,31 @@ class LoginController extends Controller
             $roles = UserRole::all();
             return view('user.register', compact('roles'));
         }
-        return redirect(route('inicio'));
+        return redirect(route('home'));
     }
 
 
     public function Register(Request $request){
         $userAuthenticared = Auth::user();
         if ($userAuthenticared && $userAuthenticared->roleId == 1){
-            $user = new User();
-            $user->name = $request->name;
-            $user->cedula = $request->cedula;
-            $user->email = $request->email;
-            $user->password = Hash::make($request->password);
-            $user->roleId = $request->roleId;
-            $user->save();
+            try
+            {
+                $user = new User();
+                $user->name = $request->name;
+                $user->cedula = $request->cedula;
+                $user->email = $request->email;
+                $user->password = Hash::make($request->password);
+                $user->roleId = $request->roleId;
+                $user->save();
+                Alert::success('Exitó', 'Usuario registrado correctamente.')->persistent(true);
+            } 
+            catch (\Exception $e) 
+            {
+                DB::rollBack();
+                Alert::error('Error', 'No fue posible registrar a el usuario.')->persistent(true);
+            }    
         }
-        return redirect(route('inicio'));
+        return redirect()->back();
     }
 
     public function Login(Request $request)
