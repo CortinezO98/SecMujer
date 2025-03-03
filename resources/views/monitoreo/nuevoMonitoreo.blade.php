@@ -44,7 +44,7 @@
                 dataType: 'json',
                 success: function (data) {
                     let agenteSelect = $('#agente_id');
-                    agenteSelect.empty().append('<option value="">Seleccione un canal</option>');
+                    agenteSelect.empty().append('<option value="">Seleccione un agente</option>');
                     $.each(data, function (key, user) {
                         agenteSelect.append('<option value="' + user.id + '">' + user.name + '</option>');
                     });

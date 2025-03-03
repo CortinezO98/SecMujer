@@ -77,53 +77,34 @@
                         <option value="consecutivo">Consecutivo</option>
                         <option value="llamada_id">ID Llamada Mujer</option>
                         <option value="mujer_telefono">Numero de Telefono Mujer</option>
-                        <option value="agente">Agente</option>
+                        <option value="agente_id">Agente</option>
                         <option value="rangoFechas">Rango Fechas</option>
                     </select>
                 </div>
 
                 <div class="col-sm-12 col-lg-3 py-1">
                     <input type="text" class="form-control" name="valor" id="valor" required>
+
+                    <select class="form-select" name="agente_id" id="agente_id" style="display: none;"></select>
+
+                    <div id="selectorFechas" style="display: none;">
+                        <div class="row">
+                            <div class="col-6">
+                                <input type="date" class="form-control" name="fechaInicio" id="fechaInicio">
+                            </div>
+                            <div class="col-6">
+                                <input type="date" class="form-control" name="fechaFin" id="fechaFin">
+                            </div>
+                        </div>  
+                    </div>
+
                 </div>
                 <div class="col-sm-12 col-lg-1 py-1">
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-warning btn-block" >Buscar</button>
                     </div>
                 </div>
-            </div>
-
-            {{-- <div class="row botones-menu m-2">
-                <label class="form-label labelFiltroBusqueda w-25" for="seach"><b>Filtro Busqueda:</b></label>
-                <select class="form-select selectFiltroBusqueda w-50" name="filterSearch" id="filterSearch">
-                    <option value="" selected></option>
-                    <option value="filterConsecutive">Consecutivo</option>
-                    <option value="llamada_id">ID Llamada Mujer</option>
-                    <option value="mujer_telefono">Numero de Telefono Mujer</option>
-                    <option value="filterNameAgent">Agente</option>
-                    <option value="filterRangeDate">Rango Fechas</option>
-                </select><br>
-            </div> --}}
-            {{-- <div class="row botones-menu" id="divSearchConseNumInterHide" style="display: none;" >
-                <div class="containerFiltersSearch input-group inputGroupFiltroBusqueda ">
-                    <button class="btn text-bg-warning" id="btnSearch">Buscar</button>
-                    <input class="form-control form-control-sm" type="text" name="dataSearch" id="dataSearch">
-                </div>
-            </div>
-            <div class="row" id="divSearchAgentHide" style="display: none;">
-                <div class="containerFiltersSearch text-center">
-                    <select class="form-select mb-3" name="agentName" id="agentName"></select>
-                    <button class="btn text-bg-warning" id="btnSearchAgent">Buscar</button>
-                </div>
-            </div>
-            <div class="row" id="divSearchRangeDateHide" style="display: none;">
-                <div class="containerFiltersSearch text-center">
-                    <label for="dateStart">Fecha Inicio:</label>
-                    <input type="date" name="dateStart" id="dateStart" required>
-                    <label for="dateEnd">Fecha Fin:</label>
-                    <input type="date" name="dateEnd" id="dateEnd" required>
-                    <button class="btn text-bg-warning" id="btnSearchDateRange">Buscar</button>
-                </div>
-            </div> --}}
+            </div>            
         </form>
     </div>
 
@@ -180,9 +161,89 @@
                 </tbody>
             </table>
         </div>
+        
     </div>
 
+    @include('base.paginacion') 
+
+
     <script>
-        
+        document.addEventListener("DOMContentLoaded", function () {
+        const filtro = document.getElementById("filtro");
+        const valor = document.getElementById("valor");
+        const selectAgente = document.getElementById("agente_id");
+        const selectorFechas = document.getElementById("selectorFechas");
+
+        filtro.addEventListener("change", function () {
+            if (["consecutivo", "llamada_id", "mujer_telefono"].includes(filtro.value)) {
+                
+                cambiarVisibilidadInputValor(true);
+                cambiarVisibilidadSelectAgente(false);
+                cambiarVisibilidadSelectorFechas(false);
+
+            } else if (filtro.value === "agente_id") {
+
+                $.ajax({
+                    url: '/user/getUserWithRole/'+3,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        let agenteSelect = $('#agente_id');
+                        agenteSelect.empty().append('<option value="">Seleccione un agente</option>');
+                        $.each(data, function (key, user) {
+                            agenteSelect.append('<option value="' + user.id + '">' + user.name + '</option>');
+                        });
+                    }
+                });
+
+                cambiarVisibilidadInputValor(false);
+                cambiarVisibilidadSelectAgente(true);
+                cambiarVisibilidadSelectorFechas(false);
+
+            } else if (filtro.value === "rangoFechas") {
+                
+                cambiarVisibilidadInputValor(false);
+                cambiarVisibilidadSelectAgente(false);
+                cambiarVisibilidadSelectorFechas(true);
+
+            } else {
+                cambiarVisibilidadInputValor(true);
+                cambiarVisibilidadSelectAgente(false);
+                cambiarVisibilidadSelectorFechas(false);
+            }
+        });
+
+        function cambiarVisibilidadInputValor(mostrar) {
+            if (mostrar) {
+                valor.style.display = "block";
+                valor.required = true;
+            } else {
+                valor.style.display = "none";
+                valor.required = false;
+            }
+            valor.value = "";
+        }
+
+        function cambiarVisibilidadSelectAgente(mostrar) {
+            if (mostrar) {
+                selectAgente.style.display = "block";
+                selectAgente.required = true;
+            } else {
+                selectAgente.style.display = "none";
+                selectAgente.required = false;
+            }
+        }
+
+        function cambiarVisibilidadSelectorFechas(mostrar) {
+            if (mostrar) {
+                selectorFechas.style.display = "block";
+                selectorFechas.required = true;
+            } else {
+                selectorFechas.style.display = "none";
+                selectorFechas.required = false;
+            }
+        }
+    });
+
     </script>
 @endsection

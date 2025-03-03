@@ -276,5 +276,25 @@ h1, h2, h3, h4, h5, h6 {
     
 }
 
+.pagination .page-link {
+    color: #6B3F73 !important; 
+}
+
+.pagination .page-link:hover {
+    background-color: #502A59 !important; 
+    color: #ffffff !important;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #502A59 !important; 
+    border-color: #502A59 !important;
+    color: #ffffff !important;
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: #D3B8DC !important;
+    color: #ffffff !important;
+    border-color: #D3B8DC !important;
+}
 
 
