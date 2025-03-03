@@ -93,84 +93,25 @@
                                 <div class="row">
                                     <div class="col">
                                         <table class="table table-bordered tableDataQualityEvaluation">
-                                            <th id="tituleDataQualityEvaluation">Atributo</th>
-                                            <th id="tituleDataQualityEvaluation">Peso Ponderado</th>
-                                            <th id="tituleDataQualityEvaluation">Peso Item</th>
-                                            <th id="tituleDataQualityEvaluation">item</th>
-                                            <th id="tituleDataQualityEvaluation">Diccionario de Conceptos</th>
-                                            <th id="tituleDataQualityEvaluation">Cumple</th>
-                                            <th id="tituleDataQualityEvaluation">No Cumple</th>
-                                            @foreach($atributos as $atributo)
-                                                <tr>
-                                                    <td rowspan="{{ $atributo->cantidadSubItems() }}">{{ $atributo->descripcion  }}  </td>
-                                                    <td rowspan="{{ $atributo->cantidadSubItems() }}">{{ $atributo->peso  }}% </td>
-        
-                                                    <td rowspan="{{ count($atributo->items->first()->subitems) }}">{{$atributo->items->first()->peso}}%</td>
-                                                    <td rowspan="{{ count($atributo->items->first()->subitems) }}">{{$atributo->items->first()->descripcion}}</td>
-        
-                                                    <td>{{$atributo->items->first()->subitems->first()->descripcion}}</td>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" 
-                                                            name="subitem-{{ $atributo->items->first()->subitems->first()->id }}" 
-                                                            id="subitem{{ $atributo->items->first()->subitems->first()->id }}-1" value="1" checked>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" 
-                                                            name="subitem-{{ $atributo->items->first()->subitems->first()->id }}" 
-                                                            id="subitem{{ $atributo->items->first()->subitems->first()->id }}-0" value="0">
-                                                        </div>
-                                                    </td>
-                                                </tr>
-        
-                                                @foreach($atributo->items as $item)
-                                                    @if(!$loop->first) 
-                                                        <tr>
-                                                            <td rowspan="{{ count($item->subitems) }}">{{ $item->peso }}%</td>
-                                                            <td rowspan="{{ count($item->subitems) }}">{{ $item->descripcion }}</td>
-                                                            <td>{{ $item->subitems->first()->descripcion }}</td>
-                                                            <td>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" 
-                                                                    name="subitem-{{ $item->subitems->first()->id }}" 
-                                                                    id="subitem{{ $item->subitems->first()->id }}-1" value="1" checked>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" 
-                                                                    name="subitem-{{ $item->subitems->first()->id }}" 
-                                                                    id="subitem{{ $item->subitems->first()->id }}-0" value="0">
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    @endif 
-        
-                                                    @foreach($item->subitems as $subitem)
-                                                        @if(!$loop->first) 
-                                                            <tr>
-                                                                <td>{{ $subitem->descripcion }}</td>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" 
-                                                                        name="subitem-{{ $subitem->id }}" 
-                                                                        id="subitem{{ $subitem->id }}-1" value="1" checked>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" 
-                                                                        name="subitem-{{ $subitem->id }}" 
-                                                                        id="subitem{{ $subitem->id }}-0" value="0">
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        @endif 
-                                                    @endforeach
-                                                @endforeach
-                                            @endforeach
+                                            <thead>
+                                                <th>Atributo</th>
+                                                <th>Peso Ponderado</th>
+                                                <th>Peso Item</th>
+                                                <th>Item</th>
+                                                <th>Sub Item</th>
+                                                @if($evaluacion->tieneNiveles())
+                                                    <th>Nivel</th>
+                                                @endif
+                                                <th>Cumple</th>
+                                                <th>No Cumple</th>
+                                            </thead>
+                                            <tbody>
+                                                @if($evaluacion->tieneNiveles())
+                                                    @include('evaluacion.tablaConNiveles')
+                                                @else
+                                                    @include('evaluacion.tablaSinNiveles')
+                                                @endif
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>

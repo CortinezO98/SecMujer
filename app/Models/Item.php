@@ -20,4 +20,16 @@ class Item extends Model
     {
         return $this->hasMany(SubItem::class, 'item_id');
     }
+
+    public function rowSpan() {
+        $cantidad = 0;
+        foreach($this->subitems as $subitem){
+            if (count($subitem->niveles)){
+                $cantidad += count($subitem->niveles);
+            } else {
+                $cantidad += 1;
+            }
+        }
+        return $cantidad;
+    }
 }

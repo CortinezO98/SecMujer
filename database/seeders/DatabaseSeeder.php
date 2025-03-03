@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             AtributoSeeder::class,
             ItemSeeder::class,
             SubItemSeeder::class,
+            NivelSeeder::class,
             // EvaluacionSeeder::class,
             // EvaluacionAtributoSeeder::class,
             // EvaluacionSubItemSeeder::class,

@@ -53,6 +53,7 @@ class EvaluacionController extends Controller
     }
 
     public function guardarEvaluacion(Request $request) {
+        // dd($request);
         $evaluacion = Evaluacion::where('id', $request->evaluacion_id)->first();
         $evaluacion->observaciones = $request->observaciones;
         $evaluacion->aspectos_positivos = $request->aspectos_positivos;

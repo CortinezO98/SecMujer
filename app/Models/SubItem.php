@@ -12,4 +12,11 @@ class SubItem extends Model
     public $timestamps = false;
 
     protected $fillable = ['descripcion', 'activo', 'item_id' ];
+
+    protected $with = ['niveles']; 
+
+    public function niveles()
+    {
+        return $this->hasMany(Nivel::class, 'sub_item_id');
+    }
 }

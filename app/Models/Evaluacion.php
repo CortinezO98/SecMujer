@@ -74,4 +74,17 @@ class Evaluacion extends Model
             return $nota->abreviatura->abreviatura . ' ' . $nota->nota;
         })->implode(' | ');
     }
+
+    public function tieneNiveles(){
+        foreach($this->matriz->atributos as $atributo){
+            foreach ($atributo->items as $item){
+                foreach ($item->subitems as $subitem){
+                    if(count($subitem->niveles)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }

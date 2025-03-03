@@ -22,11 +22,30 @@ class Atributo extends Model
         return $this->hasMany(Item::class, 'atributo_id');
     }
 
-    public function cantidadSubItems() {
+    public function cantidadRowSpan() {
         $suma = 0;
         foreach ($this->items as $item){
-            $suma += count($item->subitems);
+            foreach ($item->subitems as $subitem){
+                if(count($subitem->niveles)){
+                    $suma += count($subitem->niveles);
+                } else {
+                    $suma += 1;
+                }
+            }
         }
         return $suma;
+    }
+
+    public function tieneNiveles() {
+        foreach($this->matriz->atributos as $atributo){
+            foreach ($atributo->items as $item){
+                foreach ($item->subitems as $subitem){
+                    if(count($subitem->niveles)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
