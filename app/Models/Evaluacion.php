@@ -27,7 +27,13 @@ class Evaluacion extends Model
         'estado_evaluacion_id'
     ];
     
-    protected $with = ['matriz', 'agente', 'tipo_monitoreo', 'estado_evaluacion']; 
+    protected $with = [
+        'matriz', 
+        'agente', 
+        'tipo_monitoreo', 
+        'estado_evaluacion',
+        'evaluacionSubitems'
+    ]; 
 
     public function matriz()
     {
@@ -67,6 +73,11 @@ class Evaluacion extends Model
     public function adjuntos()
     {
         return $this->hasMany(Adjunto::class, 'evaluacion_id');
+    }
+
+    public function evaluacionSubitems()
+    {
+        return $this->hasMany(EvaluacionSubItem::class, 'evaluacion_id');
     }
 
     public function mostrarNotas(){

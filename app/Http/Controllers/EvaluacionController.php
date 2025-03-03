@@ -48,8 +48,9 @@ class EvaluacionController extends Controller
     public function editarEvaluacion($consecutivo){
         $evaluacion = Evaluacion::where('consecutivo', $consecutivo)->first();
         $atributos = Atributo::where('matriz_id', $evaluacion->matriz_id)->get();
+        $disabledCumple = '';
         // dd($atributos);
-        return view('evaluacion.editarEvaluacion', compact('evaluacion','atributos'));
+        return view('evaluacion.editarEvaluacion', compact('evaluacion','atributos','disabledCumple'));
     }
 
     public function guardarEvaluacion(Request $request) {
@@ -144,8 +145,9 @@ class EvaluacionController extends Controller
     public function detalleEvaluacion($consecutivo,){
         $evaluacion = Evaluacion::where('consecutivo', $consecutivo)->first();
         $atributos = Atributo::where('matriz_id', $evaluacion->matriz_id)->get();
+        $disabledCumple = 'disabled';
 
-        return view('evaluacion.detalleEvaluacion', compact('evaluacion', 'atributos'));
+        return view('evaluacion.detalleEvaluacion', compact('evaluacion', 'atributos', 'disabledCumple'));
     }
 
     public function aprobarEvaluacion(Request $request){
