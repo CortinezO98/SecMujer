@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Evaluacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Ramsey\Uuid\FeatureSet;
 
 class HomeController extends Controller
 {
@@ -25,7 +24,7 @@ class HomeController extends Controller
                     return redirect(route('viewSupervisor'));
 
                 case Roles::Agente->value:
-                    return $this->viewAgente();
+                    return redirect(route('viewAgente'));
 
                 default:
                     return redirect(route('logout'));
@@ -68,8 +67,19 @@ class HomeController extends Controller
         return view('roles.supervisor', compact('evaluaciones'));
     }
 
-    public function viewAgente(){
-        $evaluaciones = Evaluacion::all();
+    public function viewAgente(Request $request)
+    {
+        $fechaInicio =  $request->query('fechaInicio');
+        $fechaFin =  $request->query('fechaFin');
+        $agenteLogeadoId = Auth::user()->id;
+
+        $evaluaciones = Evaluacion::when($agenteLogeadoId, function ($query) use ($agenteLogeadoId) {
+            return $query->where('agente_id', $agenteLogeadoId);
+        })
+        ->when($fechaInicio && $fechaFin, function ($query) use ($fechaInicio, $fechaFin) {
+            return $query->whereBetween('fecha_registro', [$fechaInicio, $fechaFin]);
+        })->paginate(10);
+    
         return view('roles.agente', compact('evaluaciones'));
     }
 }
