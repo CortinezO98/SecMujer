@@ -17,15 +17,15 @@
         <td>
             <div class="form-check">
                 <input class="form-check-input" type="radio" 
-                name="nivel-{{ $atributo->items->first()->subitems->first()->id }}" 
-                id="nivel{{ $atributo->items->first()->subitems->first()->id }}-1" value="1" checked>
+                name="nivel-{{ $atributo->items->first()->subitems->first()->niveles->first()->id }}" 
+                id="nivel{{ $atributo->items->first()->subitems->first()->niveles->first()->id }}-1" value="1" checked>
             </div>
         </td>
         <td>
             <div class="form-check">
                 <input class="form-check-input" type="radio" 
-                name="nivel-{{ $atributo->items->first()->subitems->first()->id }}" 
-                id="nivel{{ $atributo->items->first()->subitems->first()->id }}-0" value="0">
+                name="nivel-{{ $atributo->items->first()->subitems->first()->niveles->first()->id }}" 
+                id="nivel{{ $atributo->items->first()->subitems->first()->niveles->first()->id }}-0" value="0">
             </div>
         </td>
     </tr>
@@ -46,15 +46,15 @@
                 <td>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" 
-                        name="nivel-{{ $item->subitems->first()->id }}" 
-                        id="nivel{{ $item->subitems->first()->id }}-1" value="1" checked>
+                        name="nivel-{{ $item->subitems->first()->niveles->first()->id }}" 
+                        id="nivel{{ $item->subitems->first()->niveles->first()->id }}-1" value="1" checked>
                     </div>
                 </td>
                 <td>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" 
-                        name="nivel-{{ $item->subitems->first()->id }}" 
-                        id="nivel{{ $item->subitems->first()->id }}-0" value="0">
+                        name="nivel-{{ $item->subitems->first()->niveles->first()->id }}" 
+                        id="nivel{{ $item->subitems->first()->niveles->first()->id }}-0" value="0">
                     </div>
                 </td>
             </tr>
@@ -74,15 +74,15 @@
                     <td>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" 
-                            name="nivel-{{ $subitem->id }}" 
-                            id="nivel{{ $subitem->id }}-1" value="1" checked>
+                            name="nivel-{{ $subitem->niveles->first()->id }}" 
+                            id="nivel{{ $subitem->niveles->first()->id }}-1" value="1" checked>
                         </div>
                     </td>
                     <td>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" 
-                            name="nivel-{{ $subitem->id }}" 
-                            id="nivel{{ $subitem->id }}-0" value="0">
+                            name="nivel-{{ $subitem->niveles->first()->id }}" 
+                            id="nivel{{ $subitem->niveles->first()->id }}-0" value="0">
                         </div>
                     </td>
                 </tr>

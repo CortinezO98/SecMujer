@@ -18,14 +18,14 @@
                 <a href="{{ route('viewSupervisor', ['filtro' => 'estado_evaluacion_id', 'valor' => EstadosEvaluaciones::Evaluado->value]) }}" class="btn btn-warning-custom">
                     <i class="bi bi-clipboard-check"></i> Evaluados
                 </a>
-                <a class="btn btn-warning-custom" id="menuBotonesExportarCanales"><i class="bi bi-chevron-down"></i> Exportar reporte por canal</a>
+                {{-- <a class="btn btn-warning-custom" id="menuBotonesExportarCanales"><i class="bi bi-chevron-down"></i> Exportar reporte por canal</a> --}}
                 <a href="{{ route('viewSupervisor') }}" class="btn btn-warning-custom">
                     <i class="bi bi-x-octagon"></i> Limpiar filtros
                 </a>
             </div>
         </div>
 
-        <form method="post">            
+        {{-- <form method="post">            
             <div class="row botonesExportarCanalesOcultar" id="btnsExportarCanales" style="display: none;">
                 <div class="row row-centered">
                     <div class="col-md-6">
@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-        </form>
+        </form> --}}
         
         <form method="get" action="{{ route('viewSupervisor') }}">
 

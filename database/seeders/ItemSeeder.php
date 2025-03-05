@@ -349,49 +349,49 @@ class ItemSeeder extends Seeder
         Item::create([
             'id' => 44,
             'descripcion' => 'Guion de Bienvenida',
-            'peso' => 11,
+            'peso' => 11.2,
             'atributo_id' => Atributos::ErroresNoCriticosAPT->value
         ]);
 
         Item::create([
             'id' => 45,
             'descripcion' => 'Disponibilidad',
-            'peso' => 11,
+            'peso' => 11.1,
             'atributo_id' => Atributos::ErroresNoCriticosAPT->value
         ]);
 
         Item::create([
             'id' => 46,
             'descripcion' => 'Tiempos',
-            'peso' => 22,
+            'peso' => 22.2,
             'atributo_id' => Atributos::ErroresNoCriticosAPT->value
         ]);
 
         Item::create([
             'id' => 47,
             'descripcion' => 'Claridad de la Información',
-            'peso' => 11,
+            'peso' => 11.1,
             'atributo_id' => Atributos::ErroresNoCriticosAPT->value
         ]);
 
         Item::create([
             'id' => 48,
             'descripcion' => 'Despedida',
-            'peso' => 11,
+            'peso' => 11.1,
             'atributo_id' => Atributos::ErroresNoCriticosAPT->value
         ]);
 
         Item::create([
             'id' => 49,
             'descripcion' => 'Encuesta de satisfacción',
-            'peso' => 11,
+            'peso' => 11.1,
             'atributo_id' => Atributos::ErroresNoCriticosAPT->value
         ]);
 
         Item::create([
             'id' => 50,
             'descripcion' => 'Inconcert',
-            'peso' => 22,
+            'peso' => 22.2,
             'atributo_id' => Atributos::ErroresNoCriticosAPT->value
         ]);
 
@@ -430,7 +430,7 @@ class ItemSeeder extends Seeder
         Item::create([
             'id' => 55,
             'descripcion' => 'Atención Psicosocial',
-            'peso' => 51.54,
+            'peso' => 51.5,
             'atributo_id' => Atributos::ErroresCriticosAPT->value
         ]);
 

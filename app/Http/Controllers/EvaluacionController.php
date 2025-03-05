@@ -8,6 +8,7 @@ use App\Models\Adjunto;
 use App\Models\Atributo;
 use App\Models\EvaluacionAbreviatura;
 use App\Models\EvaluacionAtributo;
+use App\Models\EvaluacionNivel;
 use App\Models\EvaluacionSubItem;
 use App\Utilities\Utility;
 
@@ -64,21 +65,15 @@ class EvaluacionController extends Controller
         $evaluacion->mujer_nombre = $request->mujer_nombre;
 
         $atributos = Atributo::where('matriz_id', $evaluacion->matriz_id)->get();
+        $tieneNiveles = $evaluacion->tieneNiveles();
+
         try 
         {
             DB::beginTransaction();
             $evaluacion->save();
-            foreach($atributos as $atributo){
-                foreach ($atributo->items as $item){
-                    foreach ($item->subitems as $subitem){
-                        $valor = $request->get('subitem-'.$subitem->id);
-                        if ($valor != null){
-                            $this->CreateUpdateEvaluacionSubItem($evaluacion->id, $subitem->id, $valor);
-                        }
-                    }
-                }
-            }
-            $this->CalcularNotas($evaluacion);
+
+            $this->GuardarRegistroCumple($request, $evaluacion, $atributos, $tieneNiveles);
+            $this->CalcularNotas($evaluacion, $tieneNiveles);
             $this->GuardarAdjuntos($request, $evaluacion);
 
             DB::commit();
@@ -93,6 +88,34 @@ class EvaluacionController extends Controller
             return redirect()->back();
         }
     }
+
+    public function GuardarRegistroCumple(Request $request, $evaluacion, $atributos, $tieneNiveles)
+    {
+        foreach($atributos as $atributo){
+            foreach ($atributo->items as $item){
+                foreach ($item->subitems as $subitem){
+                    if ($tieneNiveles) 
+                    {
+                        foreach ($subitem->niveles as $nivel)
+                        {
+                            $valor = $request->get('nivel-'.$nivel->id);
+                            if ($valor != null){
+                                $this->CreateUpdateEvaluacionNivel($evaluacion->id, $nivel->id, $valor);
+                            }
+                        }
+                    } 
+                    else 
+                    {
+                        $valor = $request->get('subitem-'.$subitem->id);
+                        if ($valor != null){
+                            $this->CreateUpdateEvaluacionSubItem($evaluacion->id, $subitem->id, $valor);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     public function GuardarAdjuntos(Request $request, $evaluacion) {
         $request->validate([
@@ -116,31 +139,74 @@ class EvaluacionController extends Controller
         }
     }
 
-    public function CalcularNotas($evaluacion) {
+    public function CalcularNotas($evaluacion, $tieneNiveles) {
         $atribustosEvaluacionNotas = [];
         foreach($evaluacion->matriz->atributos as $atributo)
         {
-            $sumatoriaNotas = 0;
-            foreach ($atributo->items as $item)
+            if ( $tieneNiveles){
+                $this->ProcesarEvaluacionNiveles($evaluacion, $atributo, $atribustosEvaluacionNotas);
+            } else {
+                $this->ProcesarEvaluacionSubitems($evaluacion, $atributo, $atribustosEvaluacionNotas);
+            }
+        }
+        $this->CreateUpdateEvaluacionAbreviaturas($evaluacion, $atribustosEvaluacionNotas);
+    }
+
+    public function ProcesarEvaluacionSubitems($evaluacion, $atributo, &$atribustosEvaluacionNotas) 
+    {
+        $sumatoriaNotas = 0;
+        foreach ($atributo->items as $item)
+        {
+            $valorPorcentualSubitem = $item->peso / $item->subitems->count();
+            $cantidadCumplen = 0;
+            foreach ($item->subitems as $subitem)
             {
-                $valorPorcentualSubitem = $item->peso / $item->subitems->count();
-                $cantidadCumplen = 0;
-                foreach ($item->subitems as $subitem)
+                $evaluacionSubItem = EvaluacionSubItem::where([
+                    'evaluacion_id' => $evaluacion->id,
+                    'sub_item_id'    => $subitem->id,
+                ])->first();
+                if ($evaluacionSubItem && $evaluacionSubItem->cumple){
+                    $cantidadCumplen += 1;
+                }
+            }
+            $sumatoriaNotas += $valorPorcentualSubitem * $cantidadCumplen;
+        }
+        $this->CreateUpdateEvaluacionAtributo($evaluacion, $atributo, $sumatoriaNotas);
+        Utility::AgregarNotaAtributoEvaluacion($atribustosEvaluacionNotas, $atributo->abreviatura_id, $sumatoriaNotas);
+    }
+
+    public function ProcesarEvaluacionNiveles($evaluacion, $atributo, &$atribustosEvaluacionNotas) 
+    {
+        $sumatoriaNotas = 0;
+        foreach ($atributo->items as $item)
+        {
+            $valorPorcentualNivel = $item->peso / $this->ObtenerCantidadNiveles($item);
+            $cantidadCumplen = 0;
+            foreach ($item->subitems as $subitem)
+            {
+                foreach($subitem->niveles as $nivel)
                 {
-                    $evaluacionSubItem = EvaluacionSubItem::where([
+                    $evaluacionNivel = EvaluacionNivel::where([
                         'evaluacion_id' => $evaluacion->id,
-                        'sub_item_id'    => $subitem->id,
+                        'nivel_id'    => $nivel->id,
                     ])->first();
-                    if ($evaluacionSubItem && $evaluacionSubItem->cumple){
+                    if ($evaluacionNivel && $evaluacionNivel->cumple){
                         $cantidadCumplen += 1;
                     }
                 }
-                $sumatoriaNotas += $valorPorcentualSubitem * $cantidadCumplen;
             }
-            $this->CreateUpdateEvaluacionAtributo($evaluacion, $atributo, $sumatoriaNotas);
-            Utility::AgregarNotaAtributoEvaluacion($atribustosEvaluacionNotas, $atributo->abreviatura_id, $sumatoriaNotas);
+            $sumatoriaNotas += $valorPorcentualNivel * $cantidadCumplen;
         }
-        $this->CreateUpdateEvaluacionAbreviaturas($evaluacion, $atribustosEvaluacionNotas);
+        $this->CreateUpdateEvaluacionAtributo($evaluacion, $atributo, $sumatoriaNotas);
+        Utility::AgregarNotaAtributoEvaluacion($atribustosEvaluacionNotas, $atributo->abreviatura_id, $sumatoriaNotas);
+    }
+
+    public function ObtenerCantidadNiveles($item){
+        $cantidadNiveles = 0;
+        foreach ($item->subitems as $subitem){
+            $cantidadNiveles += $subitem->niveles->count();
+        }
+        return $cantidadNiveles;
     }
 
 
@@ -215,6 +281,23 @@ class EvaluacionController extends Controller
         } 
         $evaluacionSubItem->cumple = $cumple;
         $evaluacionSubItem->save();
+    }
+
+    public function CreateUpdateEvaluacionNivel($evaluacion_id, $nivel_id, $cumple) {
+        $evaluacionNivel = EvaluacionNivel::where([
+            'evaluacion_id' => $evaluacion_id,
+            'nivel_id'    => $nivel_id,
+        ])->first();
+        
+        if (!$evaluacionNivel)
+        {
+            $evaluacionNivel = new EvaluacionNivel([
+                'evaluacion_id' => $evaluacion_id,
+                'nivel_id'    => $nivel_id,
+            ]);
+        } 
+        $evaluacionNivel->cumple = $cumple;
+        $evaluacionNivel->save();
     }
 
     public function CreateUpdateEvaluacionAtributo($evaluacion, $atributo, $nota){
