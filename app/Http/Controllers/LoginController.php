@@ -36,9 +36,10 @@ class LoginController extends Controller
                 $user->save();
                 Alert::success('Exitó', 'Usuario registrado correctamente.')->persistent(true);
             } 
-            catch (\Exception $e) 
+            catch (\Exception $ex) 
             {
                 DB::rollBack();
+                ErrorLogController::CreateErrorLog($ex,  __METHOD__, Auth::id());
                 Alert::error('Error', 'No fue posible registrar a el usuario.')->persistent(true);
             }    
         }

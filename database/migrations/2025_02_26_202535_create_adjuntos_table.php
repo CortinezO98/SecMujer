@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('peso')->nullable();
             $table->boolean('eliminado')->default(0);
             $table->date('fecha_borrado')->index();
-            $table->foreignId('evaluacion_id')->constrained()->onDelete('cascade');
+            $table->foreignId('evaluacion_id')->constrained('evaluacions')->onDelete('cascade');
         });
     }
 

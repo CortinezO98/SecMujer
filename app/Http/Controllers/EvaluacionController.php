@@ -37,9 +37,10 @@ class EvaluacionController extends Controller
             DB::commit();
             return redirect(route('editarEvaluacion', $evaluacion->consecutivo));
         } 
-        catch (Exception $e) 
+        catch (Exception $ex) 
         {
             DB::rollBack();
+            ErrorLogController::CreateErrorLog($ex,  __METHOD__, Auth::id());
             Alert::error('Error', 'Ocurrió un error al guardar los datos.')->persistent(true);
             return redirect()->back();
         }
@@ -84,9 +85,10 @@ class EvaluacionController extends Controller
             Alert::success('Exitó 3', 'La evaluación se guardó correctamente.');
             return redirect(route('home'));
         } 
-        catch (Exception $e)
+        catch (Exception $ex)
         {
             DB::rollBack();
+            ErrorLogController::CreateErrorLog($ex,  __METHOD__, Auth::id());
             Alert::error('Error', 'Ocurrió un error al guardar los datos.')->persistent(true);
             return redirect()->back();
         }
@@ -164,8 +166,9 @@ class EvaluacionController extends Controller
             Alert::success('Exitó', 'La evaluación se aprobó exitosamente.')->persistent(true);
             return redirect(route('home'));
         } 
-        catch (\Exception $e)  
+        catch (\Exception $ex)  
         {
+            ErrorLogController::CreateErrorLog($ex,  __METHOD__, Auth::id());
             Alert::error('Error', 'No fue posible aprobar la evaluación.')->persistent(true);
             return redirect()->back();
         }
@@ -187,9 +190,10 @@ class EvaluacionController extends Controller
             
             DB::commit();
         } 
-        catch (\Exception $e) 
+        catch (\Exception $ex) 
         {
             DB::rollBack();
+            ErrorLogController::CreateErrorLog($ex,  __METHOD__, Auth::id());
             Alert::error('Error', 'No fue posible eliminar la evaluación.')->persistent(true);
             return redirect()->back();
         }    
