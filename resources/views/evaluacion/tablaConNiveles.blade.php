@@ -18,14 +18,18 @@
             <div class="form-check">
                 <input class="form-check-input" type="radio" 
                 name="nivel-{{ $atributo->items->first()->subitems->first()->niveles->first()->id }}" 
-                id="nivel{{ $atributo->items->first()->subitems->first()->niveles->first()->id }}-1" value="1" checked>
+                id="nivel{{ $atributo->items->first()->subitems->first()->niveles->first()->id }}-1" value="1"
+                {{ $atributo->items->first()->subitems->first()->niveles->first()->checkCumple($evaluacion->id, 1) }}
+                {{ $disabledCumple }}>
             </div>
         </td>
         <td>
             <div class="form-check">
                 <input class="form-check-input" type="radio" 
                 name="nivel-{{ $atributo->items->first()->subitems->first()->niveles->first()->id }}" 
-                id="nivel{{ $atributo->items->first()->subitems->first()->niveles->first()->id }}-0" value="0">
+                id="nivel{{ $atributo->items->first()->subitems->first()->niveles->first()->id }}-0" value="0"
+                {{ $atributo->items->first()->subitems->first()->niveles->first()->checkCumple($evaluacion->id, 0) }}
+                {{ $disabledCumple }}>
             </div>
         </td>
     </tr>
@@ -47,14 +51,18 @@
                     <div class="form-check">
                         <input class="form-check-input" type="radio" 
                         name="nivel-{{ $item->subitems->first()->niveles->first()->id }}" 
-                        id="nivel{{ $item->subitems->first()->niveles->first()->id }}-1" value="1" checked>
+                        id="nivel{{ $item->subitems->first()->niveles->first()->id }}-1" value="1"
+                        {{ $item->subitems->first()->niveles->first()->checkCumple($evaluacion->id, 1) }}
+                        {{ $disabledCumple }}>
                     </div>
                 </td>
                 <td>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" 
                         name="nivel-{{ $item->subitems->first()->niveles->first()->id }}" 
-                        id="nivel{{ $item->subitems->first()->niveles->first()->id }}-0" value="0">
+                        id="nivel{{ $item->subitems->first()->niveles->first()->id }}-0" value="0"
+                        {{ $item->subitems->first()->niveles->first()->checkCumple($evaluacion->id, 0) }}
+                        {{ $disabledCumple }}>
                     </div>
                 </td>
             </tr>
@@ -75,14 +83,18 @@
                         <div class="form-check">
                             <input class="form-check-input" type="radio" 
                             name="nivel-{{ $subitem->niveles->first()->id }}" 
-                            id="nivel{{ $subitem->niveles->first()->id }}-1" value="1" checked>
+                            id="nivel{{ $subitem->niveles->first()->id }}-1" value="1"
+                            {{ $subitem->niveles->first()->checkCumple($evaluacion->id, 1) }}
+                            {{ $disabledCumple }}>
                         </div>
                     </td>
                     <td>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" 
                             name="nivel-{{ $subitem->niveles->first()->id }}" 
-                            id="nivel{{ $subitem->niveles->first()->id }}-0" value="0">
+                            id="nivel{{ $subitem->niveles->first()->id }}-0" value="0"
+                            {{ $subitem->niveles->first()->checkCumple($evaluacion->id, 0) }}
+                            {{ $disabledCumple }}>
                         </div>
                     </td>
                 </tr>
@@ -96,14 +108,18 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" 
                                 name="nivel-{{ $nivel->id }}" 
-                                id="nivel{{ $nivel->id }}-1" value="1" checked>
+                                id="nivel{{ $nivel->id }}-1" value="1"
+                                {{ $nivel->checkCumple($evaluacion->id, 1) }}
+                                {{ $disabledCumple }}>
                             </div>
                         </td>
                         <td>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" 
                                 name="nivel-{{ $nivel->id }}" 
-                                id="nivel{{ $nivel->id }}-0" value="0">
+                                id="nivel{{ $nivel->id }}-0" value="0"
+                                {{ $nivel->checkCumple($evaluacion->id, 0) }}
+                                {{ $disabledCumple }}>
                             </div>
                         </td>
                     </tr>
