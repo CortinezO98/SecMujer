@@ -17,7 +17,6 @@ class HomeController extends Controller
             switch ($userAuthenticared->roleId) 
             {
                 case Roles::Administrador->value:
-                    // dd($request);
                     return redirect(route('ViewRegister'));
 
                 case Roles::Supervisor->value:

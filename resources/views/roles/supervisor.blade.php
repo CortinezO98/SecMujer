@@ -171,7 +171,6 @@
 
     @include('base.paginacion') 
 
-
     <script>
         document.addEventListener("DOMContentLoaded", function () {
         const filtro = document.getElementById("filtro");

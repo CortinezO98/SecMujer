@@ -5,25 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EvaluacionAtributo extends Model
+class EvaluacionAbreviatura extends Model
 {
     use HasFactory;
-    protected $table = 'evaluacion_atributos';
+
+    protected $table = 'evaluacion_abreviaturas';
 
     public $timestamps = false;
 
     protected $fillable = [
         'evaluacion_id',
-        'atributo_id',
+        'abreviatura_id',
         'nota'
     ];
 
     protected $with = [
-        'atributo'
+        'abreviatura'
     ]; 
 
-    public function atributo()
+    public function abreviatura()
     {
-        return $this->belongsTo(Atributo::class, 'atributo_id');
+        return $this->belongsTo(Abreviatura::class, 'abreviatura_id');
     }
 }

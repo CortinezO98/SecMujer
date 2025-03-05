@@ -6,6 +6,7 @@ use App\Models\Evaluacion;
 use App\Enums\EstadosEvaluaciones;
 use App\Models\Adjunto;
 use App\Models\Atributo;
+use App\Models\EvaluacionAbreviatura;
 use App\Models\EvaluacionAtributo;
 use App\Models\EvaluacionSubItem;
 use App\Utilities\Utility;
@@ -39,7 +40,6 @@ class EvaluacionController extends Controller
         catch (Exception $e) 
         {
             DB::rollBack();
-            dd($e);
             Alert::error('Error', 'Ocurrió un error al guardar los datos.')->persistent(true);
             return redirect()->back();
         }
@@ -49,12 +49,10 @@ class EvaluacionController extends Controller
         $evaluacion = Evaluacion::where('consecutivo', $consecutivo)->first();
         $atributos = Atributo::where('matriz_id', $evaluacion->matriz_id)->get();
         $disabledCumple = '';
-        // dd($atributos);
         return view('evaluacion.editarEvaluacion', compact('evaluacion','atributos','disabledCumple'));
     }
 
     public function guardarEvaluacion(Request $request) {
-        // dd($request);
         $evaluacion = Evaluacion::where('id', $request->evaluacion_id)->first();
         $evaluacion->observaciones = $request->observaciones;
         $evaluacion->aspectos_positivos = $request->aspectos_positivos;
@@ -68,7 +66,6 @@ class EvaluacionController extends Controller
         try 
         {
             DB::beginTransaction();
-            // dd($request->all());
             $evaluacion->save();
             foreach($atributos as $atributo){
                 foreach ($atributo->items as $item){
@@ -84,13 +81,12 @@ class EvaluacionController extends Controller
             $this->GuardarAdjuntos($request, $evaluacion);
 
             DB::commit();
-            Alert::success('Exitó', 'La evaluación se guardó correctamente.')->persistent(true);
+            Alert::success('Exitó 3', 'La evaluación se guardó correctamente.');
             return redirect(route('home'));
         } 
         catch (Exception $e)
         {
             DB::rollBack();
-            dd($e);
             Alert::error('Error', 'Ocurrió un error al guardar los datos.')->persistent(true);
             return redirect()->back();
         }
@@ -98,7 +94,7 @@ class EvaluacionController extends Controller
 
     public function GuardarAdjuntos(Request $request, $evaluacion) {
         $request->validate([
-            'archivos.*'   => 'required|file|mimes:jpg,jpeg,png,pdf'
+            'archivos.*'   => 'required|file|mimes:jpg,jpeg,png,pdf,docx'
         ]);
 
         if ($request->hasFile('archivos')) {
@@ -119,6 +115,7 @@ class EvaluacionController extends Controller
     }
 
     public function CalcularNotas($evaluacion) {
+        $atribustosEvaluacionNotas = [];
         foreach($evaluacion->matriz->atributos as $atributo)
         {
             $sumatoriaNotas = 0;
@@ -139,8 +136,12 @@ class EvaluacionController extends Controller
                 $sumatoriaNotas += $valorPorcentualSubitem * $cantidadCumplen;
             }
             $this->CreateUpdateEvaluacionAtributo($evaluacion, $atributo, $sumatoriaNotas);
+            Utility::AgregarNotaAtributoEvaluacion($atribustosEvaluacionNotas, $atributo->abreviatura_id, $sumatoriaNotas);
         }
+        $this->CreateUpdateEvaluacionAbreviaturas($evaluacion, $atribustosEvaluacionNotas);
     }
+
+
 
     public function detalleEvaluacion($consecutivo,){
         $evaluacion = Evaluacion::where('consecutivo', $consecutivo)->first();
@@ -215,7 +216,7 @@ class EvaluacionController extends Controller
     public function CreateUpdateEvaluacionAtributo($evaluacion, $atributo, $nota){
         $evaluacionAtributo =  EvaluacionAtributo::where([
             'evaluacion_id' => $evaluacion->id,
-            'abreviatura_id' => $atributo->abreviatura_id
+            'atributo_id' => $atributo->id
         ])->first();
 
         if (!$evaluacionAtributo)
@@ -223,15 +224,39 @@ class EvaluacionController extends Controller
             $evaluacionAtributo = new EvaluacionAtributo([
                 'evaluacion_id' => $evaluacion->id,
                 'atributo_id' => $atributo->id,
-                'abreviatura_id' => $atributo->abreviatura_id,
                 'nota' => $nota
             ]);
         } 
         else 
         {
-            $evaluacionAtributo->nota += $nota;
+            $evaluacionAtributo->nota = $nota;
         }
         $evaluacionAtributo->save();
+    }
+
+    public function CreateUpdateEvaluacionAbreviaturas($evaluacion, $atribustosEvaluacionNotas)
+    {
+        foreach ($atribustosEvaluacionNotas as $abreviatura_id => $sumatoriaNotas) 
+        {
+            $evaluacionAbreviatura =  EvaluacionAbreviatura::where([
+                'evaluacion_id' => $evaluacion->id,
+                'abreviatura_id' => $abreviatura_id
+            ])->first();
+    
+            if (!$evaluacionAbreviatura)
+            {
+                $evaluacionAbreviatura = new EvaluacionAbreviatura([
+                    'evaluacion_id' => $evaluacion->id,
+                    'abreviatura_id' => $abreviatura_id,
+                    'nota' => $sumatoriaNotas
+                ]);
+            } 
+            else 
+            {
+                $evaluacionAbreviatura->nota = $sumatoriaNotas;
+            }
+            $evaluacionAbreviatura->save();
+        }
     }
     
     public function downloadAdjunto(Adjunto $adjunto)

@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('evaluacion_atributos', function (Blueprint $table) {
+        Schema::create('evaluacion_abreviaturas', function (Blueprint $table) {
             $table->id();
             $table->decimal('nota');
             $table->foreignId('evaluacion_id')->constrained('evaluacions')->onDelete('cascade');
-            $table->foreignId('atributo_id')->constrained('atributos')->onDelete('cascade');
+            $table->foreignId('abreviatura_id')->constrained('abreviaturas')->onDelete('cascade');
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('evaluacion_atributos');
+        Schema::dropIfExists('evaluacion_abreviaturas');
     }
 };

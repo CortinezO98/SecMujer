@@ -15,12 +15,13 @@
 <body>
     @include('base.header')
 
+    
     <div class="container">
         @yield('content')
     </div>
     
     @include('base.footer') 
-
+    
     @include('sweetalert::alert')
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

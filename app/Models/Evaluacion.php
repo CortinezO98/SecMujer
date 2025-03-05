@@ -60,9 +60,9 @@ class Evaluacion extends Model
         return $this->hasMany(SubItem::class, 'evaluacion_id');
     }
 
-    public function notas_atributos()
+    public function notas_abreviatura()
     {
-        return $this->hasMany(EvaluacionAtributo::class, 'evaluacion_id');
+        return $this->hasMany(EvaluacionAbreviatura::class, 'evaluacion_id');
     }
 
     public function usuario_registro()
@@ -81,8 +81,8 @@ class Evaluacion extends Model
     }
 
     public function mostrarNotas(){
-        return $this->notas_atributos->map(function ($nota) {
-            return $nota->abreviatura->abreviatura . ' ' . $nota->nota;
+        return $this->notas_abreviatura->map(function ($evaluacion_abreviatura) {
+            return $evaluacion_abreviatura->abreviatura->abreviatura . ' ' . $evaluacion_abreviatura->nota;
         })->implode(' | ');
     }
 

@@ -13,7 +13,13 @@ class Atributo extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['descripcion', 'peso', 'activo', 'matriz_id'];
+    protected $fillable = [
+        'descripcion', 
+        'peso', 
+        'activo', 
+        'matriz_id',
+        'abreviatura_id'
+    ];
 
     protected $with = ['items']; 
 
