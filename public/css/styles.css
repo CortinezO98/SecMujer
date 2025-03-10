@@ -131,6 +131,18 @@ h1, h2, h3, h4, h5, h6 {
     border: 1px solid #E6716E;
 }
 
+.tableDataQuality tbody tr {
+    height: 250px; 
+}
+
+.tableDataQuality tbody td {
+    vertical-align: middle; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
 
 .seccion {
     background-color: #6B3F73;
