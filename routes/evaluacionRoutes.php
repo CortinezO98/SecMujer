@@ -14,5 +14,7 @@ Route::prefix('evaluacion')->group(function () {
     Route::get('/eliminar/{id}', [EvaluacionController::class, 'eliminarEvaluacion'])->name('eliminarEvaluacion');
 
     Route::get('/adjuntos/{adjunto}/download', [EvaluacionController::class, 'downloadAdjunto'])->name('downloadAdjunto');
+    Route::get('/exportar-reporte-csv', [EvaluacionController::class, 'exportarReporteCsv'])->name('exportarReporteCsv');
+
 
 });

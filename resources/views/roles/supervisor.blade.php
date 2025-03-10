@@ -18,49 +18,41 @@
                 <a href="{{ route('viewSupervisor', ['filtro' => 'estado_evaluacion_id', 'valor' => EstadosEvaluaciones::Evaluado->value]) }}" class="btn btn-warning-custom">
                     <i class="bi bi-clipboard-check"></i> Evaluados
                 </a>
-                {{-- <a class="btn btn-warning-custom" id="menuBotonesExportarCanales"><i class="bi bi-chevron-down"></i> Exportar reporte por canal</a> --}}
+                <a class="btn btn-warning-custom" id="menuBotonesExportarCanales"><i class="bi bi-chevron-down"></i> Exportar reporte por canal</a> 
                 <a href="{{ route('viewSupervisor') }}" class="btn btn-warning-custom">
                     <i class="bi bi-x-octagon"></i> Limpiar filtros
                 </a>
             </div>
         </div>
 
-        {{-- <form method="post">            
-            <div class="row botonesExportarCanalesOcultar" id="btnsExportarCanales" style="display: none;">
-                <div class="row row-centered">
-                    <div class="col-md-6">
-                        <label class="form-label text-white" for="selectChannel">Seleccione el canal que desea exportar:</label>
-                    </div>
+        <form method="get" action="{{ route('exportarReporteCsv') }}">
+            @csrf
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="selectChannel" class="form-label text-white">Seleccione el canal (opcional):</label>
+                    <select class="form-select" name="selectChannel" id="selectChannel">
+                        <option value="" selected>Todos</option>
+                        <option value="inbound">Whatsapp + Bot</option>
+                        <option value="outbound">Telefonico</option>
+                    </select>
                 </div>
-
-                <div class="row row-centered">
-                    <div class="col-md-6">
-                        <select class="form-select" name="selectChannel" id="selectChannel">
-                            <option value="" selected></option>
-                            <option value="optionInbound">Inbound</option>
-                            <option value="optionOutbound">Outbound</option>
-                            <option value="optionVirtual">Virtual</option>
-                            <option value="optionPresencial">Presencial</option>
-                        </select>
-                    </div>
+                <div class="col-md-4">
+                    <label for="fechaInicio" class="form-label text-white">Fecha Inicio:</label>
+                    <input type="date" class="form-control" name="fechaInicio" id="fechaInicio" required>
                 </div>
-
-                <div class="row row-centered">
-                    <div class="col-md-6">
-                        <div class="date-inputs-container">
-                            <div class="date-inputs">
-                                <label for="dateStartChannel">Fecha Inicio:</label>
-                                <input type="date" name="dateStartChannel" id="dateStartChannel" required>
-                                <label for="dateEndChannel">Fecha Fin:</label>
-                                <input type="date" name="dateEndChannel" id="dateEndChannel" required>
-                            </div>
-                            <button class="btn btn-warning-custom" id="btnChannelDateRange">Exportar Reporte</button>
-                        </div>
-                    </div>
+                <div class="col-md-4">
+                    <label for="fechaFin" class="form-label text-white">Fecha Fin:</label>
+                    <input type="date" class="form-control" name="fechaFin" id="fechaFin" required>
                 </div>
             </div>
-
-        </form> --}}
+            <div class="row mt-3">
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-warning-custom">
+                        <i class="bi bi-file-earmark-spreadsheet"></i> Exportar Reporte
+                    </button>
+                </div>
+            </div>
+        </form>
         
         <form method="get" action="{{ route('viewSupervisor') }}">
 

@@ -357,4 +357,84 @@ class EvaluacionController extends Controller
         }
     }
 
+    public function exportarReporteCsv(Request $request)
+    {
+        // Recoger los parámetros del formulario
+        $params = $request->all();
+
+        // Construir la consulta
+        $query = Evaluacion::query();
+
+        // Filtrar por canal si se envía (asumiendo que 'selectChannel' es el nombre del input)
+        if (!empty($params['selectChannel'])) {
+            $query->whereHas('matriz.canal', function ($q) use ($params) {
+                $q->where('descripcion', $params['selectChannel']);
+            });
+        }
+
+        // Filtrar por rango de fechas (si se envían ambas fechas)
+        if (!empty($params['fechaInicio']) && !empty($params['fechaFin'])) {
+            $query->whereBetween('fecha_registro', [
+                $params['fechaInicio'],
+                $params['fechaFin']
+            ]);
+        }
+
+        // Obtener los registros filtrados
+        $evaluaciones = $query->get();
+
+        // Definir los encabezados del CSV
+        $columns = [
+            'Consecutivo',
+            'ID Llamada',
+            'Teléfono Mujer',
+            'Estado Evaluación',
+            'Canal',
+            'Matriz',
+            'Tipo Monitoreo',
+            'Agente',
+            'Fecha Registro',
+            'Nota Total'
+        ];
+
+        // Definir encabezados HTTP para el CSV
+        $headers = [
+            'Content-Type'        => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="reporte_evaluaciones.csv"',
+            'Pragma'              => 'no-cache',
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+            'Expires'             => '0'
+        ];
+
+        // Crear un callback para escribir el contenido CSV
+        $callback = function() use ($evaluaciones, $columns) {
+            $file = fopen('php://output', 'w');
+            // Escribir la fila de encabezados
+            fputcsv($file, $columns);
+
+            // Escribir cada fila de datos
+            foreach ($evaluaciones as $evaluacion) {
+                fputcsv($file, [
+                    $evaluacion->consecutivo,
+                    $evaluacion->llamada_id,
+                    $evaluacion->mujer_telefono,
+                    $evaluacion->estado_evaluacion->descripcion,
+                    $evaluacion->matriz->canal->descripcion,
+                    $evaluacion->matriz->descripcion,
+                    $evaluacion->tipo_monitoreo->descripcion,
+                    $evaluacion->agente->name,
+                    $evaluacion->fecha_registro,
+                    $evaluacion->nota_total,
+                ]);
+            }
+            fclose($file);
+        };
+
+        // Retornar la respuesta de streaming con el CSV
+        return response()->stream($callback, 200, $headers);
+    }
+
+
+
+
 }
