@@ -132,7 +132,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .tableDataQuality tbody tr {
-    height: 100px; 
+    height: 80px; 
 }
 
 .tableDataQuality tbody td {
@@ -140,6 +140,7 @@ h1, h2, h3, h4, h5, h6 {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    max-width: 350px;
 }
 
 

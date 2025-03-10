@@ -24,7 +24,7 @@ class CanalSeeder extends Seeder
 
         Canal::create([
             'id' => 2,
-            'descripcion' => '  Whatsapp + Bot'
+            'descripcion' => 'Whatsapp + Bot'
         ]);
     }
 }

@@ -25,22 +25,22 @@
             </div>
         </div>
 
-        <form method="get" action="{{ route('exportarReporteCsv') }}">
+        <form method="get" action="{{ route('exportarReporteCsv') }}" id="exportForm" style="display: none;">
             @csrf
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 my-2">
                     <label for="selectChannel" class="form-label text-white">Seleccione el canal (opcional):</label>
-                    <select class="form-select" name="selectChannel" id="selectChannel">
+                    <select class="form-select" name="canal_id" id="canal_id">
                         <option value="" selected>Todos</option>
-                        <option value="inbound">Whatsapp + Bot</option>
-                        <option value="outbound">Telefonico</option>
+                        <option value="1">Telefonico</option>
+                        <option value="2">Whatsapp + Bot</option>
                     </select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 my-2">
                     <label for="fechaInicio" class="form-label text-white">Fecha Inicio:</label>
                     <input type="date" class="form-control" name="fechaInicio" id="fechaInicio" required>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 my-2">
                     <label for="fechaFin" class="form-label text-white">Fecha Fin:</label>
                     <input type="date" class="form-control" name="fechaFin" id="fechaFin" required>
                 </div>
@@ -54,7 +54,7 @@
             </div>
         </form>
         
-        <form method="get" action="{{ route('viewSupervisor') }}">
+        <form method="get" action="{{ route('viewSupervisor') }}" >
 
             <div class="row mt-3 align-items-center">
                 <div class="col-sm-0 col-lg-2"></div>
@@ -165,6 +165,18 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+        const exportButton = document.getElementById("menuBotonesExportarCanales");
+            const exportForm = document.getElementById("exportForm");
+
+            exportButton.addEventListener("click", function () {
+                if (exportForm.style.display === "none" || exportForm.style.display === "") {
+                    exportForm.style.display = "block";
+                } else {
+                    exportForm.style.display = "none";
+                }
+            });
+
+
         const filtro = document.getElementById("filtro");
         const valor = document.getElementById("valor");
         const selectAgente = document.getElementById("agente_id");
