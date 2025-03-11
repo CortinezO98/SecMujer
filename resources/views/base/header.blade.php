@@ -8,9 +8,15 @@
         </div>
         <div class="col-auto">  
             @auth
-                <div class="d-flex align-items-center">  
+                <div class="d-flex align-items-center"> 
+                    <p class="pt-3 text-white">
+                        <a href="{{ route('home') }}" class="text-decoration-none text-white me-3">
+                            <i class="bi bi-house me-2" style="font-size: 22px;"></i>  
+                            Inicio
+                        </a>
+                    </p>
                     <p class="pt-3 px-3 text-white">
-                        <i class="bi bi-person-circle icono-usuario me-2"></i>  
+                        <i class="bi bi-person-circle me-2" style="font-size: 22px;"></i>  
                         {{ Auth::user()->name }}
                     </p>
                     <div class="dropdown">

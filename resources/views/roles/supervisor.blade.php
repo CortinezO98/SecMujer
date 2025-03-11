@@ -5,7 +5,7 @@
 @endphp
 
 @section('content')
-    <h2 class="text-center tittle">Gestión de Calidad</h2>
+    <h2 class="text-center tittle pt-3">Gestión de Calidad</h2>
     <div class="container seccion">
         <div class="row">
             <div class="col-mb-6 text-center botones-menu">

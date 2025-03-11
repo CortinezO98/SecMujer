@@ -1,7 +1,7 @@
 @extends('base.base')
 
 @section('content')
-<h2 class="text-center">Detalle Evaluación Presencial</h2>
+<h2 class="text-center pt-3">Detalle Evaluación Presencial</h2>
 
     <div class="container-fluid">
         <div class="row mb-3">
