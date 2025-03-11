@@ -47,5 +47,26 @@
             }
         });
 
+        $('#matriz_id').change(function () {
+            let matriz_id = $(this).val();
+            let agente_id = $('#agente_id');
+            
+            console.log('cambio', agente_id);
+            agente_id.empty().append('<option value="">Seleccione un agente</option>');
+
+            if (matriz_id) {
+                $.ajax({
+                    url: '/user/obtenerAgentes/' + matriz_id,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        $.each(data, function (key, user) {
+                            agente_id.append('<option value="' + user.id + '">' + user.name + '</option>');
+                        });
+                    }
+                });
+            }
+        });
+
     });
 </script>

@@ -39,11 +39,20 @@ class UserSeeder extends Seeder
 
         User::create([
             'id' => 3,
-            'name' => 'Agente 1',
-            'email' => 'Agente@iq-online.com',
+            'name' => 'Agente contacto inicial',
+            'email' => 'Agenteci@iq-online.com',
             'password' => Hash::make('123456789@iq'),
             'cedula' => '1234567891',
-            'roleId' => Roles::Agente->value
+            'roleId' => Roles::AgenteContactoInicial->value
+        ]);
+
+        User::create([
+            'id' => 4,
+            'name' => 'Agente profesional',
+            'email' => 'Agentep@iq-online.com',
+            'password' => Hash::make('123456789@iq'),
+            'cedula' => '1234567893',
+            'roleId' => Roles::AgenteProfesional->value
         ]);
     }
 }

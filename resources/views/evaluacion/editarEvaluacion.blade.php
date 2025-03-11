@@ -63,16 +63,17 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <input type="text" name="llamada_id" id="llamada_id" class="form-control" value="{{ $evaluacion->llamada_id }}" required>
+                                                        <input type="text" name="llamada_id" id="llamada_id" class="form-control" value="{{ $evaluacion->llamada_id }}" maxlength="50" required>
                                                     </td>
                                                     <td>
                                                         <input type="number" name="mujer_telefono" id="mujer_telefono" class="form-control" value="{{ $evaluacion->mujer_telefono }}" required>
+
                                                     </td>
                                                     <td>
                                                         <input type="number" name="mujer_identificacion" id="mujer_identificacion" value="{{ $evaluacion->mujer_identificacion }}" class="form-control">
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="mujer_nombre" id="mujer_nombre" value="{{ $evaluacion->mujer_nombre }}" class="form-control">
+                                                        <input type="text" name="mujer_nombre" id="mujer_nombre" value="{{ $evaluacion->mujer_nombre }}" maxlength="250" class="form-control">
                                                     </td>
                                                 </tr>
                                             </tbody>

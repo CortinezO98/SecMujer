@@ -192,7 +192,7 @@
             } else if (filtro.value === "agente_id") {
 
                 $.ajax({
-                    url: '/user/getUserWithRole/'+3,
+                    url: '/user/obtenerAgentes/'+0,
                     type: 'GET',
                     dataType: 'json',
                     success: function (data) {

@@ -35,22 +35,4 @@
 
 @section('script')
     @include('scripts.selectDatosMonitoreo')
-
-    <script>
-        $(document).ready(function () {
-            $.ajax({
-                url: '/user/getUserWithRole/'+3,
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    let agenteSelect = $('#agente_id');
-                    agenteSelect.empty().append('<option value="">Seleccione un agente</option>');
-                    $.each(data, function (key, user) {
-                        agenteSelect.append('<option value="' + user.id + '">' + user.name + '</option>');
-                    });
-                }
-            });
-        });
-    </script>
-
 @endsection

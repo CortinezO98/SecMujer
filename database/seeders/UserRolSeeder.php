@@ -24,22 +24,17 @@ class UserRolSeeder extends Seeder
 
         UserRole::create([
             'id' => 2,
-            'descripcion' => '  Supervisor'
+            'descripcion' => 'Supervisor'
         ]);
 
         UserRole::create([
             'id' => 3,
-            'descripcion' => '  Agente'
+            'descripcion' => 'Agente Contacto Inicial'
         ]);
 
         UserRole::create([
             'id' => 4,
-            'descripcion' => '  Líder'
-        ]);
-
-        UserRole::create([
-            'id' => 5,
-            'descripcion' => '  Coordinador'
+            'descripcion' => 'Agente Profesional'
         ]);
     }
 }

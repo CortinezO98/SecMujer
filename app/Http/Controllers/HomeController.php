@@ -22,9 +22,10 @@ class HomeController extends Controller
                 case Roles::Supervisor->value:
                     return redirect(route('viewSupervisor'));
 
-                case Roles::Agente->value:
+                case Roles::AgenteContactoInicial->value:
+                case Roles::AgenteProfesional->value:
                     return redirect(route('viewAgente'));
-
+                    
                 default:
                     return redirect(route('logout'));
             }
