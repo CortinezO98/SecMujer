@@ -151,7 +151,13 @@
                             </td>
                             <td>
                                 <a href="{{ route('editarEvaluacion', $evaluacion->consecutivo) }}"
-                                    class="btn btn-primary">Editar</a>
+                                    class="btn btn-primary">
+                                    Editar
+                                </a>
+                                <a href="{{ route('exportarEvaluacionDetalle', $evaluacion->consecutivo) }}"
+                                    class="btn btn-success">
+                                    Exportar Excel
+                                </a>
                             </td>
                         </tr>
                     @endforeach

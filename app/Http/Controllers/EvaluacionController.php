@@ -12,6 +12,7 @@ use App\Models\EvaluacionNivel;
 use App\Models\EvaluacionSubItem;
 use App\Utilities\Utility;
 use App\Exports\EvaluacionesExport;
+use App\Exports\EvaluacionDetalleExport;
 use App\Models\Canal;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -370,6 +371,15 @@ class EvaluacionController extends Controller
             $canal_nombre = 'Todos';
         }
         return Excel::download(new EvaluacionesExport($request), "Evaluaciones - {$canal_nombre} - {$params['fechaInicio']} a {$params['fechaFin']}.xlsx");
+    }
+
+    public function exportarEvaluacionDetalle($consecutivo)
+    {
+        $evaluacion = Evaluacion::where('consecutivo', $consecutivo)->firstOrFail();
+        return Excel::download(
+            new EvaluacionDetalleExport($evaluacion),
+            'Evaluacion-'.$evaluacion->consecutivo.'.xlsx'
+        );
     }
 
 
