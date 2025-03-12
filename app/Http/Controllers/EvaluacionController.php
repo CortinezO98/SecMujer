@@ -122,7 +122,7 @@ class EvaluacionController extends Controller
 
     public function GuardarAdjuntos(Request $request, $evaluacion) {
         $request->validate([
-            'archivos.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf,docx,xls,xlsx'
+            'archivos.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx,xls,xlsx'
         ]);
 
         if ($request->hasFile('archivos')) {
