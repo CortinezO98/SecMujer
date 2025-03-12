@@ -31,7 +31,7 @@
                 <div class="col-md-4 my-2">
                     <label for="selectChannel" class="form-label text-white">Seleccione el canal (opcional):</label>
                     <select class="form-select" name="canal_id" id="canal_id">
-                        <option value="" selected>Todos</option>
+                        <option value="" selected></option>
                         <option value="1">Telefonico</option>
                         <option value="2">Whatsapp + Bot</option>
                     </select>
