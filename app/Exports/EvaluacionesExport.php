@@ -3,7 +3,6 @@
 namespace App\Exports;
 
 use App\Models\Evaluacion;
-use App\Models\Atributo;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -36,28 +35,30 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping
         }
 
         $this->evaluaciones = $query->get();
-
-        if ($this->evaluaciones->isNotEmpty()) {
-            $matriz = $this->evaluaciones->first()->matriz;
+        $estructuraUnion = [];
+        foreach ($this->evaluaciones as $evaluacion) {
+            $matriz = $evaluacion->matriz;
             if ($matriz) {
                 foreach ($matriz->atributos as $atributo) {
                     foreach ($atributo->items as $item) {
                         foreach ($item->subitems as $subitem) {
                             if ($subitem->niveles->count() > 0) {
                                 foreach ($subitem->niveles as $nivel) {
+                                    $key = 'nivel_' . $nivel->id;
                                     $nombreColumna = $subitem->descripcion . ' / ' . $nivel->descripcion;
-                                    $this->estructura[] = [
-                                        'tipo'         => 'nivel',
-                                        'nivel_id'     => $nivel->id,
-                                        'nombre_columna' => $nombreColumna,
+                                    $estructuraUnion[$key] = [
+                                        'tipo'          => 'nivel',
+                                        'nivel_id'      => $nivel->id,
+                                        'nombre_columna'=> $nombreColumna,
                                     ];
                                 }
                             } else {
+                                $key = 'subitem_' . $subitem->id;
                                 $nombreColumna = $subitem->descripcion;
-                                $this->estructura[] = [
-                                    'tipo'        => 'subitem',
-                                    'subitem_id'  => $subitem->id,
-                                    'nombre_columna' => $nombreColumna,
+                                $estructuraUnion[$key] = [
+                                    'tipo'         => 'subitem',
+                                    'subitem_id'   => $subitem->id,
+                                    'nombre_columna'=> $nombreColumna,
                                 ];
                             }
                         }
@@ -65,15 +66,13 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping
                 }
             }
         }
-        
+        $this->estructura = array_values($estructuraUnion);
     }
-
 
     public function collection()
     {
         return $this->evaluaciones;
     }
-
 
     public function map($evaluacion): array
     {
@@ -93,7 +92,6 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping
             $evaluacion->comentarios,
             $evaluacion->fecha_registro,
         ];
-
         foreach ($this->estructura as $col) {
             if ($col['tipo'] === 'nivel') {
                 $valor = $this->checkCumpleNivel($evaluacion, $col['nivel_id']);
@@ -134,21 +132,27 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping
 
     protected function checkCumpleNivel(Evaluacion $evaluacion, $nivelId)
     {
-        $nivel = \App\Models\Nivel::find($nivelId);
-        if (!$nivel) {
-            return 0;
+        $evaluacionNivel = \App\Models\EvaluacionNivel::where([
+            'evaluacion_id' => $evaluacion->id,
+            'nivel_id'      => $nivelId,
+        ])->first();
+
+        if ($evaluacionNivel) {
+            return ((int)$evaluacionNivel->cumple === 1) ? 1 : 0;
         }
-        $cumple = $nivel->checkCumple($evaluacion->id, 1);
-        return $cumple === 'checked' ? 1 : 0;
+        return 0;
     }
 
     protected function checkCumpleSubitem(Evaluacion $evaluacion, $subitemId)
     {
-        $subitem = \App\Models\SubItem::find($subitemId);
-        if (!$subitem) {
-            return 0;
+        $evaluacionSubItem = \App\Models\EvaluacionSubItem::where([
+            'evaluacion_id' => $evaluacion->id,
+            'sub_item_id'   => $subitemId,
+        ])->first();
+
+        if ($evaluacionSubItem) {
+            return ((int)$evaluacionSubItem->cumple === 1) ? 1 : 0;
         }
-        $cumple = $subitem->checkCumple($evaluacion->id, 1);
-        return $cumple === 'checked' ? 1 : 0;
+        return 0;
     }
 }
