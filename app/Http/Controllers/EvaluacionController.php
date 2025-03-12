@@ -126,8 +126,11 @@ class EvaluacionController extends Controller
         ]);
 
         if ($request->hasFile('archivos')) {
-            foreach ($request->file('archivos') as $file) 
-            {
+            foreach ($request->file('archivos') as $file) {
+                // Depuración para ver el error específico de carga.
+                if ($file->getError() !== UPLOAD_ERR_OK) {
+                    dd("Error en el archivo: ", $file->getError());
+                }
                 $path = $file->store('adjuntos', 'public');
                 
                 Adjunto::create([
@@ -135,11 +138,12 @@ class EvaluacionController extends Controller
                     'nombre_archivo' => $file->getClientOriginalName(),
                     'ruta'           => $path,
                     'tipo'           => $file->getClientMimeType(),
-                    'peso'         => $file->getSize(),
-                    'fecha_borrado'   => now()->addDays(45)->toDateString()
+                    'peso'           => $file->getSize(),
+                    'fecha_borrado'  => now()->addDays(45)->toDateString()
                 ]);
             }
         }
+        
     }
 
     public function CalcularNotas($evaluacion, $tieneNiveles) {
