@@ -15,7 +15,6 @@ use App\Exports\EvaluacionesExport;
 use App\Models\Canal;
 use Maatwebsite\Excel\Facades\Excel;
 
-use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -121,23 +120,14 @@ class EvaluacionController extends Controller
     }
 
 
-    public function GuardarAdjuntos(Request $request, $evaluacion)
-    {
+    public function GuardarAdjuntos(Request $request, $evaluacion) {
         $request->validate([
             'archivos.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx,xls,xlsx'
         ]);
 
         if ($request->hasFile('archivos')) {
-            foreach ($request->file('archivos') as $file) {
-                if ($file->getError() !== UPLOAD_ERR_OK) {
-                    Log::error("Error al subir el archivo", [
-                        'error'  => $file->getError(), // Ejemplo: 1 = UPLOAD_ERR_INI_SIZE
-                        'mime'   => $file->getClientMimeType(),
-                        'nombre' => $file->getClientOriginalName(),
-                    ]);
-                    continue; // Puedes optar por manejar el error, mostrar un mensaje, etc.
-                }
-                
+            foreach ($request->file('archivos') as $file) 
+            {
                 $path = $file->store('adjuntos', 'public');
                 
                 Adjunto::create([
@@ -145,13 +135,12 @@ class EvaluacionController extends Controller
                     'nombre_archivo' => $file->getClientOriginalName(),
                     'ruta'           => $path,
                     'tipo'           => $file->getClientMimeType(),
-                    'peso'           => $file->getSize(),
-                    'fecha_borrado'  => now()->addDays(45)->toDateString()
+                    'peso'         => $file->getSize(),
+                    'fecha_borrado'   => now()->addDays(45)->toDateString()
                 ]);
             }
         }
     }
-
 
     public function CalcularNotas($evaluacion, $tieneNiveles) {
         $atribustosEvaluacionNotas = [];
