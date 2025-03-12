@@ -18,7 +18,6 @@
                         <div class="text-center">
                             <label class="form-label"><b>Filtro Rango Fechas:</b></label>
                             <p>Seleccione la fecha inicial y la fecha final para ver las evaluaciones correspondientes a ese rango de fechas.</p>
-                            <p>Para ver las evaluaciones correspondientes al mes de julio, seleccione como fecha inicial <b>01/07/2023</b> y como fecha final <b>31/07/2023</b>.</p>
                         </div>
                         <div class="row text-center">
                             <div class="col-sm-6 offset-lg-2 col-lg-2 py-1">
