@@ -19,7 +19,6 @@ Route::get('/run-adjuntos-borrar', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-
     require __DIR__ . '/monitoreoRoutes.php';
     require __DIR__ . '/evaluacionRoutes.php';
     require __DIR__ . '/userRoutes.php';
