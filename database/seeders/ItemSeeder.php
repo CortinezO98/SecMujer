@@ -222,18 +222,18 @@ class ItemSeeder extends Seeder
 
 
 
-
+// MATRIZ DE CALIDAD TELEFÓNICO EQUIPO DE CONTACTO INICIAL ERRORES NO CRITICOS
         Item::create([
             'id' => 28,
             'descripcion' => 'Apertura de la llamada',
-            'peso' => 6,
+            'peso' => 10,
             'atributo_id' => Atributos::ErroresNoCriticosCIT->value
         ]);
 
         Item::create([
             'id' => 29,
             'descripcion' => 'Disponibilidad',
-            'peso' => 5,
+            'peso' => 8,
             'atributo_id' => Atributos::ErroresNoCriticosCIT->value
         ]);
 
@@ -247,197 +247,251 @@ class ItemSeeder extends Seeder
         Item::create([
             'id' => 31,
             'descripcion' => 'Etiqueta Telefónica',
-            'peso' => 16,
+            'peso' => 7,
             'atributo_id' => Atributos::ErroresNoCriticosCIT->value
         ]);
 
         Item::create([
             'id' => 32,
             'descripcion' => 'Tiempos',
-            'peso' => 20,
+            'peso' => 14,
             'atributo_id' => Atributos::ErroresNoCriticosCIT->value
         ]);
 
         Item::create([
             'id' => 33,
             'descripcion' => 'Guiones de transferencia',
-            'peso' => 30,
+            'peso' => 20,
             'atributo_id' => Atributos::ErroresNoCriticosCIT->value
         ]);
 
         Item::create([
             'id' => 34,
-            'descripcion' => 'Uso de guiones',
-            'peso' => 5,
+            'descripcion' => 'Valida Información ',
+            'peso' => 7,
             'atributo_id' => Atributos::ErroresNoCriticosCIT->value
         ]);
 
         Item::create([
             'id' => 35,
             'descripcion' => 'Guion de Despedida',
-            'peso' => 4,
+            'peso' => 6,
             'atributo_id' => Atributos::ErroresNoCriticosCIT->value
         ]);
 
         Item::create([
             'id' => 36,
             'descripcion' => 'Encuesta',
-            'peso' => 4,
+            'peso' => 6,
             'atributo_id' => Atributos::ErroresNoCriticosCIT->value
         ]);
 
-
-
         Item::create([
             'id' => 37,
-            'descripcion' => 'Abandono de llamada',
-            'peso' => 20,
-            'atributo_id' => Atributos::ErroresCriticosNegocioCIT->value
+            'descripcion' => 'Tipificación Inconcert',
+            'peso' => 12,
+            'atributo_id' => Atributos::ErroresNoCriticosCIT->value
         ]);
+// FIN MATRIZ DE CALIDAD TELEFÓNICO EQUIPO DE CONTACTO INICIAL ERRORES NO CRITICOS
 
+
+
+
+// MATRIZ DE CALIDAD TELEFÓNICO EQUIPO DE CONTACTO INICIAL ERRORES CRITICOS DE NEGOCIOS
         Item::create([
             'id' => 38,
-            'descripcion' => 'Tipificación Inconcert',
-            'peso' => 10,
+            'descripcion' => 'Cuelgue Pasivo de la llamada',
+            'peso' => 5.2,
             'atributo_id' => Atributos::ErroresCriticosNegocioCIT->value
         ]);
 
         Item::create([
             'id' => 39,
             'descripcion' => 'SIMISIONAL',
-            'peso' => 10,
+            'peso' => 16.4,
             'atributo_id' => Atributos::ErroresCriticosNegocioCIT->value
         ]);
 
         Item::create([
             'id' => 40,
-            'descripcion' => 'Manejo de herramientas y aplicativos',
-            'peso' => 6,
+            'descripcion' => ' Información Confidencial',
+            'peso' => 2.70,
             'atributo_id' => Atributos::ErroresCriticosNegocioCIT->value
         ]);
 
+// FIN MATRIZ DE CALIDAD TELEFÓNICO EQUIPO DE CONTACTO INICIAL ERRORES CRITICOS DE NEGOCIOS
         
 
-
+// MATRIZ DE CALIDAD TELEFÓNICO EQUIPO DE CONTACTO INICIAL ERRORES CRITICOS USUARIO FINAL
         Item::create([
             'id' => 41,
             'descripcion' => 'Trato a la mujer',
-            'peso' => 18,
+            'peso' => 14.7,
             'atributo_id' => Atributos::ErroresCriticosUsuarioFinalCIT->value
         ]);
 
         Item::create([
             'id' => 42,
             'descripcion' => 'Preguntas Filtro',
-            'peso' => 18,
+            'peso' => 9,
             'atributo_id' => Atributos::ErroresCriticosUsuarioFinalCIT->value
         ]);
 
         Item::create([
             'id' => 43,
-            'descripcion' => 'Solución del Requerimiento',
-            'peso' => 18,
+            'descripcion' => 'Devolución de llamadas',
+            'peso' => 13,
             'atributo_id' => Atributos::ErroresCriticosUsuarioFinalCIT->value
         ]);
 
-
-
-
-
-
-
         Item::create([
             'id' => 44,
-            'descripcion' => 'Guion de Bienvenida',
-            'peso' => 11.2,
-            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
+            'descripcion' => 'Reporte ICBF',
+            'peso' => 6,
+            'atributo_id' => Atributos::ErroresCriticosUsuarioFinalCIT->value
         ]);
 
         Item::create([
             'id' => 45,
-            'descripcion' => 'Disponibilidad',
-            'peso' => 11.1,
-            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
+            'descripcion' => 'Reporte SISVECOS',
+            'peso' => 3,
+            'atributo_id' => Atributos::ErroresCriticosUsuarioFinalCIT->value
         ]);
 
         Item::create([
             'id' => 46,
-            'descripcion' => 'Tiempos',
-            'peso' => 22.2,
-            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
+            'descripcion' => 'Solución del Requerimiento',
+            'peso' => 9,
+            'atributo_id' => Atributos::ErroresCriticosUsuarioFinalCIT->value
         ]);
 
         Item::create([
             'id' => 47,
-            'descripcion' => 'Claridad de la Información',
-            'peso' => 11.1,
-            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
+            'descripcion' => 'Alertantes',
+            'peso' => 6,
+            'atributo_id' => Atributos::ErroresCriticosUsuarioFinalCIT->value
         ]);
 
         Item::create([
             'id' => 48,
-            'descripcion' => 'Despedida',
-            'peso' => 11.1,
-            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
+            'descripcion' => 'Intervención en Crisis',
+            'peso' => 3,
+            'atributo_id' => Atributos::ErroresCriticosUsuarioFinalCIT->value
         ]);
 
         Item::create([
             'id' => 49,
-            'descripcion' => 'Encuesta de satisfacción',
-            'peso' => 11.1,
-            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
+            'descripcion' => 'Activación linea 123',
+            'peso' => 6,
+            'atributo_id' => Atributos::ErroresCriticosUsuarioFinalCIT->value
         ]);
 
         Item::create([
             'id' => 50,
-            'descripcion' => 'Inconcert',
-            'peso' => 22.2,
-            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
+            'descripcion' => 'Uso de la documentación',
+            'peso' => 6,
+            'atributo_id' => Atributos::ErroresCriticosUsuarioFinalCIT->value
         ]);
+// FIN MATRIZ DE CALIDAD TELEFÓNICO EQUIPO DE CONTACTO INICIAL ERRORES CRITICOS USUARIO FINAL
 
 
-        
 
+// Atencion Psicosocial Telefonico Errores No Criticos 
 
         Item::create([
             'id' => 51,
-            'descripcion' => 'Cuelgue Pasivo',
-            'peso' => 5.01,
-            'atributo_id' => Atributos::ErroresCriticosAPT->value
+            'descripcion' => 'Guion de Bienvenida',
+            'peso' => 11.11,
+            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
         ]);
 
         Item::create([
             'id' => 52,
-            'descripcion' => 'SIMISIONAL',
-            'peso' => 24.96,
-            'atributo_id' => Atributos::ErroresCriticosAPT->value
+            'descripcion' => 'Disponibilidad',
+            'peso' => 11.11,
+            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
         ]);
 
         Item::create([
             'id' => 53,
-            'descripcion' => 'Información Confidencial',
-            'peso' => 5,
-            'atributo_id' => Atributos::ErroresCriticosAPT->value
+            'descripcion' => 'Tiempos',
+            'peso' => 22.22,
+            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
         ]);
 
         Item::create([
             'id' => 54,
-            'descripcion' => 'Acciones No Permitidas',
-            'peso' => 8.52,
-            'atributo_id' => Atributos::ErroresCriticosAPT->value
+            'descripcion' => 'Claridad de la Información',
+            'peso' => 11.11,
+            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
         ]);
 
         Item::create([
             'id' => 55,
-            'descripcion' => 'Atención Psicosocial',
-            'peso' => 51.5,
-            'atributo_id' => Atributos::ErroresCriticosAPT->value
+            'descripcion' => 'Despedida',
+            'peso' => 11.11,
+            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
         ]);
 
         Item::create([
             'id' => 56,
+            'descripcion' => 'Encuesta de satisfacción',
+            'peso' => 11.11,
+            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
+        ]);
+
+        Item::create([
+            'id' => 57,
+            'descripcion' => 'Inconcert',
+            'peso' => 22.23,
+            'atributo_id' => Atributos::ErroresNoCriticosAPT->value
+        ]);
+
+// FIN Atencion Psicosocial Telefonico Errores No Criticos 
+
+
+
+
+// Atencion Psicosocial Telefonico Errores Criticos 
+        Item::create([
+            'id' => 58,
+            'descripcion' => 'Cuelgue Pasivo',
+            'peso' => 3,
+            'atributo_id' => Atributos::ErroresCriticosAPT->value
+        ]);
+
+        Item::create([
+            'id' => 59,
+            'descripcion' => 'SIMISIONAL',
+            'peso' => 32,
+            'atributo_id' => Atributos::ErroresCriticosAPT->value
+        ]);
+
+        Item::create([
+            'id' => 60,
+            'descripcion' => 'Información Confidencial',
+            'peso' => 4,
+            'atributo_id' => Atributos::ErroresCriticosAPT->value
+        ]);
+
+        Item::create([
+            'id' => 61,
+            'descripcion' => 'Acciones No Permitidas',
+            'peso' => 3,
+            'atributo_id' => Atributos::ErroresCriticosAPT->value
+        ]);
+
+        Item::create([
+            'id' => 62,
+            'descripcion' => 'Atención Psicosocial',
+            'peso' => 55,
+            'atributo_id' => Atributos::ErroresCriticosAPT->value
+        ]);
+
+        Item::create([
+            'id' => 63,
             'descripcion' => 'Documentación de uso para LPD.',
-            'peso' => 5.01,
+            'peso' => 3,
             'atributo_id' => Atributos::ErroresCriticosAPT->value
         ]);
 

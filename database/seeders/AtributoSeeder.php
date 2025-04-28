@@ -72,7 +72,7 @@ class AtributoSeeder extends Seeder
 
 
 
-
+// MATRIZ DE CALIDAD Y CALIBRACIONES PROCESO TELEFONICO CONTACTO INICIAL
         Atributo::create([
             'id' => 7,
             'descripcion' => 'Errores No Críticos',
@@ -84,7 +84,7 @@ class AtributoSeeder extends Seeder
         Atributo::create([
             'id' => 8,
             'descripcion' => 'Errores Críticos de Negocio',
-            'peso' => 46,
+            'peso' => 24.3,
             'abreviatura_id' => 2,
             'matriz_id' => Matrices::ContactoInicialTelefonico->value
         ]);
@@ -92,14 +92,14 @@ class AtributoSeeder extends Seeder
         Atributo::create([
             'id' => 9,
             'descripcion' => 'Errores Críticos de Usuario Final',
-            'peso' => 54,
+            'peso' => 75.7,
             'abreviatura_id' => 2,
             'matriz_id' => Matrices::ContactoInicialTelefonico->value
         ]);
 
 
 
-
+// MATRIZ DE CALIDAD Y CALIBRACIONES PROCESO TELEFONICO ATENCIÓN PSICOSOCIAL
         Atributo::create([
             'id' => 10,
             'descripcion' => 'Errores No Críticos',
