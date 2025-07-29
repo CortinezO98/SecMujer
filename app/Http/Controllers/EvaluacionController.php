@@ -40,7 +40,7 @@ class EvaluacionController extends Controller
             $evaluacion->save();
 
             DB::commit();
-            return redirect(route('editarEvaluacion', $evaluacion->consecutivo));
+            return redirect()->route('editarEvaluacion', ['consecutivo' => $evaluacion->consecutivo,'modo'        => 'crear']);
         } 
         catch (Exception $ex) 
         {
@@ -51,11 +51,14 @@ class EvaluacionController extends Controller
         }
     }
 
-    public function editarEvaluacion($consecutivo){
-        $evaluacion = Evaluacion::where('consecutivo', $consecutivo)->first();
+    public function editarEvaluacion(Request $request, $consecutivo){
+        $evaluacion = Evaluacion::where('consecutivo', $consecutivo)->firstOrFail();
         $atributos = Atributo::where('matriz_id', $evaluacion->matriz_id)->get();
         $disabledCumple = '';
-        return view('evaluacion.editarEvaluacion', compact('evaluacion','atributos','disabledCumple'));
+        $modo = $request->get('modo', 'editar');
+        return view('evaluacion.editarEvaluacion', 
+                    compact('evaluacion', 'atributos', 'disabledCumple', 'modo'));
+
     }
 
     public function guardarEvaluacion(Request $request) {
@@ -216,7 +219,7 @@ class EvaluacionController extends Controller
 
 
     public function detalleEvaluacion($consecutivo,){
-        $evaluacion = Evaluacion::where('consecutivo', $consecutivo)->first();
+        $evaluacion = Evaluacion::where('consecutivo', $consecutivo)->firstOrFail();
         $atributos = Atributo::where('matriz_id', $evaluacion->matriz_id)->get();
         $disabledCumple = 'disabled';
 

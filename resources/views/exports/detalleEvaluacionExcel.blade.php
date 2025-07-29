@@ -84,6 +84,8 @@
                     <th>Observaciones</th>
                     <th>Aspectos Positivos</th>
                     <th>Aspectos a Mejorar</th>
+                    <th>Observación Final</th>
+                    <th>Compromisos</th>
                 </tr>
             </thead>
             <tbody>
@@ -91,6 +93,8 @@
                     <td>{{ $evaluacion->observaciones }}</td>
                     <td>{{ $evaluacion->aspectos_positivos }}</td>
                     <td>{{ $evaluacion->aspectos_a_mejorar }}</td>
+                    <td>{{ $evaluacion->comentarios }}</td>
+                    <td>{{ $evaluacion->compromisos }}</td>
                 </tr>
             </tbody>
         </table>

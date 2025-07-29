@@ -90,6 +90,7 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping
             $evaluacion->aspectos_positivos,
             $evaluacion->aspectos_a_mejorar,
             $evaluacion->comentarios,
+            $evaluacion->compromisos,
             $evaluacion->fecha_registro,
         ];
         foreach ($this->estructura as $col) {
@@ -120,6 +121,7 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping
             'Aspectos Positivos',
             'Aspectos a Mejorar',
             'Observación Final',
+            'Compromisos',
             'Fecha Evaluación',
         ];
 

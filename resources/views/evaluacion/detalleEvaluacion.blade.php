@@ -37,6 +37,38 @@
                             </table>
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <div class="card card-generalInfoQM">
+                            <div class="card-header">
+                                <h5 class="card-header card-titleQM text-center">Datos de la Mujer</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <label>A continuación se muestran los datos de la mujer asociados a esta evaluación:</label>
+                                    <div class="col">
+                                        <table class="table table-responsive tableDataQuality text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th>Llamada ID</th>
+                                                    <th>Teléfono Mujer</th>
+                                                    <th>Identificación Mujer</th>
+                                                    <th>Nombre Mujer</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{ $evaluacion->llamada_id }}</td>
+                                                    <td>{{ $evaluacion->mujer_telefono }}</td>
+                                                    <td>{{ $evaluacion->mujer_identificacion }}</td>
+                                                    <td>{{ $evaluacion->mujer_nombre }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col mb-3">
                             <label>Observaciones:</label>

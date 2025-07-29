@@ -66,7 +66,7 @@
                                                         <input type="text" name="llamada_id" id="llamada_id" class="form-control" value="{{ $evaluacion->llamada_id }}" maxlength="50" required>
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="mujer_telefono" id="mujer_telefono" class="form-control" value="{{ $evaluacion->mujer_telefono }}" required>
+                                                        <input type="text" name="mujer_telefono" id="mujer_telefono" class="form-control" value="{{ $evaluacion->mujer_telefono }}" pattern="^\d{7,15}(-\d{7,15})?$" maxlength="35" placeholder="Ej: 3001234567-3107654321" required>
 
                                                     </td>
                                                     <td>
@@ -146,8 +146,23 @@
 
                                 <div class="pt-4 text-center">
                                     <button type="submit" class="btn btn-primary">Evaluar</button>
-                                    <a href="{{ route('eliminarEvaluacion', $evaluacion->id) }}" class="btn btn-outline-danger">Cancelar</a>
+
+                                    @if($modo === 'editar')
+                                        {{-- En edición: solo vuelvo atrás sin borrar nada --}}
+                                        <a href="{{ url()->previous() }}"
+                                        class="btn btn-outline-secondary">
+                                        Cancelar
+                                        </a>
+                                    @else
+                                        {{-- En creación: confirmo y borro el registro --}}
+                                        <a href="{{ route('eliminarEvaluacion', $evaluacion->id) }}"
+                                        onclick="return confirm('¿Seguro que deseas cancelar y eliminar este monitoreo?')"
+                                        class="btn btn-outline-danger">
+                                        Borrar
+                                        </a>
+                                    @endif
                                 </div>
+
                             </div>
                         </div>
                     </div>

@@ -8,6 +8,7 @@
             success: function (data) {
                 let canalSelect = $('#canal_id');
                 canalSelect.empty().append('<option value="">Seleccione un canal</option>');
+                data.sort((a, b) => a.descripcion.localeCompare(b.descripcion));
                 $.each(data, function (key, canal) {
                     canalSelect.append('<option value="' + canal.id + '">' + canal.descripcion + '</option>');
                 });
@@ -26,6 +27,7 @@
                     type: 'GET',
                     dataType: 'json',
                     success: function (data) {
+                        data.sort((a, b) => a.descripcion.localeCompare(b.descripcion));
                         $.each(data, function (key, matriz) {
                             matrizSelect.append('<option value="' + matriz.id + '">' + matriz.descripcion + '</option>');
                         });
@@ -41,6 +43,7 @@
             success: function (data) {
                 let tipoMonitoreoSelect = $('#tipo_monitoreo_id');
                 tipoMonitoreoSelect.empty().append('<option value="">Seleccione un tipo de monitoreo</option>');
+                data.sort((a, b) => a.descripcion.localeCompare(b.descripcion));
                 $.each(data, function (key, tipoMonitoreo) {
                     tipoMonitoreoSelect.append('<option value="' + tipoMonitoreo.id + '">' + tipoMonitoreo.descripcion + '</option>');
                 });
@@ -60,6 +63,7 @@
                     type: 'GET',
                     dataType: 'json',
                     success: function (data) {
+                        data.sort((a, b) => a.name.localeCompare(b.name));
                         $.each(data, function (key, user) {
                             agente_id.append('<option value="' + user.id + '">' + user.name + '</option>');
                         });
