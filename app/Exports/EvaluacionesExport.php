@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping
 {
     use Exportable;
-    
+
     protected $evaluaciones;
     protected $estructura = [];
 
@@ -21,20 +21,33 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping
         $params = $request->all();
         $query = Evaluacion::query();
 
-        if (!empty($params['canal_id'])) {
-            $query->whereHas('matriz.canal', function ($q) use ($params) {
-                $q->where('id', $params['canal_id']);
+        // ✅ Filtro combinado por canal y matriz dentro de la relación matriz
+        if (!empty($params['canal_id']) && !empty($params['matriz_id'])) {
+            $query->whereHas('matriz', function ($q) use ($params) {
+                $q->where('canal_id', $params['canal_id'])
+                  ->where('id', $params['matriz_id']);
+            });
+        } elseif (!empty($params['canal_id'])) {
+            $query->whereHas('matriz', function ($q) use ($params) {
+                $q->where('canal_id', $params['canal_id']);
+            });
+        } elseif (!empty($params['matriz_id'])) {
+            $query->whereHas('matriz', function ($q) use ($params) {
+                $q->where('id', $params['matriz_id']);
             });
         }
 
+        // ✅ Filtro por fecha
         if (!empty($params['fechaInicio']) && !empty($params['fechaFin'])) {
             $query->whereBetween('fecha_registro', [
                 $params['fechaInicio'],
-                $params['fechaFin']
+                $params['fechaFin'],
             ]);
         }
 
         $this->evaluaciones = $query->get();
+
+        // ✅ Estructura dinámica de columnas
         $estructuraUnion = [];
         foreach ($this->evaluaciones as $evaluacion) {
             $matriz = $evaluacion->matriz;
@@ -47,18 +60,17 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping
                                     $key = 'nivel_' . $nivel->id;
                                     $nombreColumna = $subitem->descripcion . ' / ' . $nivel->descripcion;
                                     $estructuraUnion[$key] = [
-                                        'tipo'          => 'nivel',
-                                        'nivel_id'      => $nivel->id,
-                                        'nombre_columna'=> $nombreColumna,
+                                        'tipo'           => 'nivel',
+                                        'nivel_id'       => $nivel->id,
+                                        'nombre_columna' => $nombreColumna,
                                     ];
                                 }
                             } else {
                                 $key = 'subitem_' . $subitem->id;
-                                $nombreColumna = $subitem->descripcion;
                                 $estructuraUnion[$key] = [
-                                    'tipo'         => 'subitem',
-                                    'subitem_id'   => $subitem->id,
-                                    'nombre_columna'=> $nombreColumna,
+                                    'tipo'           => 'subitem',
+                                    'subitem_id'     => $subitem->id,
+                                    'nombre_columna' => $subitem->descripcion,
                                 ];
                             }
                         }
@@ -66,6 +78,7 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping
                 }
             }
         }
+
         $this->estructura = array_values($estructuraUnion);
     }
 
@@ -93,6 +106,7 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping
             $evaluacion->compromisos,
             $evaluacion->fecha_registro,
         ];
+
         foreach ($this->estructura as $col) {
             if ($col['tipo'] === 'nivel') {
                 $valor = $this->checkCumpleNivel($evaluacion, $col['nivel_id']);
@@ -139,10 +153,7 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping
             'nivel_id'      => $nivelId,
         ])->first();
 
-        if ($evaluacionNivel) {
-            return ((int)$evaluacionNivel->cumple === 1) ? 1 : 0;
-        }
-        return 0;
+        return $evaluacionNivel ? ((int)$evaluacionNivel->cumple === 1 ? 1 : 0) : 0;
     }
 
     protected function checkCumpleSubitem(Evaluacion $evaluacion, $subitemId)
@@ -152,9 +163,6 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping
             'sub_item_id'   => $subitemId,
         ])->first();
 
-        if ($evaluacionSubItem) {
-            return ((int)$evaluacionSubItem->cumple === 1) ? 1 : 0;
-        }
-        return 0;
+        return $evaluacionSubItem ? ((int)$evaluacionSubItem->cumple === 1 ? 1 : 0) : 0;
     }
 }

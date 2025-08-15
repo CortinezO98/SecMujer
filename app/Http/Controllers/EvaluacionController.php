@@ -385,6 +385,17 @@ class EvaluacionController extends Controller
         );
     }
 
+    public function exportarPorMatriz(Request $request)
+    {
+        $request->validate([
+            'canal_id' => 'required|exists:canals,id',
+            'matriz_id' => 'required|exists:matrizs,id',
+            'fechaInicio' => 'required|date',
+            'fechaFin' => 'required|date|after_or_equal:fechaInicio',
+        ]);
+
+        return Excel::download(new EvaluacionesExport($request), 'evaluaciones_matriz.xlsx');
+    }
 
 
 }

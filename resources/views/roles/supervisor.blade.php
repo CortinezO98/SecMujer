@@ -19,6 +19,9 @@
                     <i class="bi bi-clipboard-check"></i> Evaluados
                 </a>
                 <a class="btn btn-warning-custom" id="menuBotonesExportarCanales"><i class="bi bi-chevron-down"></i> Exportar reporte por canal</a> 
+                <a class="btn btn-warning-custom" id="menuBotonesExportarMatriz">
+                    <i class="bi bi-chevron-double-down"></i> Exportar reporte por matriz
+                </a>
                 <a href="{{ route('viewSupervisor') }}" class="btn btn-warning-custom">
                     <i class="bi bi-x-octagon"></i> Limpiar filtros
                 </a>
@@ -53,6 +56,42 @@
                 </div>
             </div>
         </form>
+
+        <form method="get" action="{{ route('exportarReportePorMatriz') }}" id="exportFormMatriz" style="display: none;">
+            @csrf
+            <div class="row">
+                <div class="col-md-4 my-2">
+                    <label for="canal_id_matriz" class="form-label text-white">Seleccione el canal:</label>
+                    <select class="form-select" name="canal_id" id="canal_id_matriz" required>
+                        <option value="">Seleccione un canal</option>
+                        {{-- Canales cargados dinámicamente --}}
+                    </select>
+                </div>
+                <div class="col-md-4 my-2">
+                    <label for="matriz_id" class="form-label text-white">Seleccione la matriz:</label>
+                    <select class="form-select" name="matriz_id" id="matriz_id" required>
+                        <option value="">Seleccione una matriz</option>
+                        {{-- Matrices cargadas dinámicamente --}}
+                    </select>
+                </div>
+                <div class="col-md-4 my-2">
+                    <label for="fechaInicioM" class="form-label text-white">Fecha Inicio:</label>
+                    <input type="date" class="form-control" name="fechaInicio" id="fechaInicioM" required>
+                </div>
+                <div class="col-md-4 my-2">
+                    <label for="fechaFinM" class="form-label text-white">Fecha Fin:</label>
+                    <input type="date" class="form-control" name="fechaFin" id="fechaFinM" required>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-warning-custom">
+                        <i class="bi bi-file-earmark-spreadsheet"></i> Exportar Reporte por Matriz
+                    </button>
+                </div>
+            </div>
+        </form>
+
         
         <form method="get" action="{{ route('viewSupervisor') }}" >
 
@@ -170,19 +209,58 @@
     @include('base.paginacion') 
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
         const exportButton = document.getElementById("menuBotonesExportarCanales");
-            const exportForm = document.getElementById("exportForm");
+        const exportForm = document.getElementById("exportForm");
 
-            exportButton.addEventListener("click", function () {
-                if (exportForm.style.display === "none" || exportForm.style.display === "") {
-                    exportForm.style.display = "block";
-                } else {
-                    exportForm.style.display = "none";
-                }
-            });
+        exportButton.addEventListener("click", function () {
+            exportForm.style.display = exportForm.style.display === "none" ? "block" : "none";
+        });
 
+        const exportButtonMatriz = document.getElementById("menuBotonesExportarMatriz");
+        const exportFormMatriz = document.getElementById("exportFormMatriz");
 
+        exportButtonMatriz.addEventListener("click", function () {
+            exportFormMatriz.style.display = exportFormMatriz.style.display === "none" ? "block" : "none";
+        });
+
+        // ✅ Cargar canales para el formulario de matriz
+        $.ajax({
+            url: '/monitoreo/canales',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                let canalSelect = $('#canal_id_matriz');
+                canalSelect.empty().append('<option value="">Seleccione un canal</option>');
+                data.sort((a, b) => a.descripcion.localeCompare(b.descripcion));
+                $.each(data, function (key, canal) {
+                    canalSelect.append('<option value="' + canal.id + '">' + canal.descripcion + '</option>');
+                });
+            }
+        });
+
+        // ✅ Cargar matrices según canal seleccionado
+        $('#canal_id_matriz').change(function () {
+            let canalId = $(this).val();
+            let matrizSelect = $('#matriz_id');
+            matrizSelect.empty().append('<option value="">Seleccione una matriz</option>');
+
+            if (canalId) {
+                $.ajax({
+                    url: '/monitoreo/matrices/' + canalId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        data.sort((a, b) => a.descripcion.localeCompare(b.descripcion));
+                        $.each(data, function (key, matriz) {
+                            matrizSelect.append('<option value="' + matriz.id + '">' + matriz.descripcion + '</option>');
+                        });
+                    }
+                });
+            }
+        });
+
+        // ✅ Manejo del filtro
         const filtro = document.getElementById("filtro");
         const valor = document.getElementById("valor");
         const selectAgente = document.getElementById("agente_id");
@@ -190,15 +268,12 @@
 
         filtro.addEventListener("change", function () {
             if (["consecutivo", "llamada_id", "mujer_telefono"].includes(filtro.value)) {
-                
                 cambiarVisibilidadInputValor(true);
                 cambiarVisibilidadSelectAgente(false);
                 cambiarVisibilidadSelectorFechas(false);
-
             } else if (filtro.value === "agente_id") {
-
                 $.ajax({
-                    url: '/user/obtenerAgentes/'+0,
+                    url: '/user/obtenerAgentes/0',
                     type: 'GET',
                     dataType: 'json',
                     success: function (data) {
@@ -209,17 +284,13 @@
                         });
                     }
                 });
-
                 cambiarVisibilidadInputValor(false);
                 cambiarVisibilidadSelectAgente(true);
                 cambiarVisibilidadSelectorFechas(false);
-
             } else if (filtro.value === "rangoFechas") {
-                
                 cambiarVisibilidadInputValor(false);
                 cambiarVisibilidadSelectAgente(false);
                 cambiarVisibilidadSelectorFechas(true);
-
             } else {
                 cambiarVisibilidadInputValor(true);
                 cambiarVisibilidadSelectAgente(false);
@@ -228,36 +299,21 @@
         });
 
         function cambiarVisibilidadInputValor(mostrar) {
-            if (mostrar) {
-                valor.style.display = "block";
-                valor.required = true;
-            } else {
-                valor.style.display = "none";
-                valor.required = false;
-            }
+            valor.style.display = mostrar ? "block" : "none";
+            valor.required = mostrar;
             valor.value = "";
         }
 
         function cambiarVisibilidadSelectAgente(mostrar) {
-            if (mostrar) {
-                selectAgente.style.display = "block";
-                selectAgente.required = true;
-            } else {
-                selectAgente.style.display = "none";
-                selectAgente.required = false;
-            }
+            selectAgente.style.display = mostrar ? "block" : "none";
+            selectAgente.required = mostrar;
         }
 
         function cambiarVisibilidadSelectorFechas(mostrar) {
-            if (mostrar) {
-                selectorFechas.style.display = "block";
-                selectorFechas.required = true;
-            } else {
-                selectorFechas.style.display = "none";
-                selectorFechas.required = false;
-            }
+            selectorFechas.style.display = mostrar ? "block" : "none";
         }
     });
-
     </script>
+
+
 @endsection

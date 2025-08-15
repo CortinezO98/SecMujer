@@ -134,6 +134,22 @@
                                         <textarea class="form-control" name="aspectos_a_mejorar" id="aspectos_a_mejorar" rows="2">{{ $evaluacion->aspectos_a_mejorar }}</textarea>
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="comentarios">Comentarios:</label>
+                                        <textarea class="form-control" name="comentarios" id="comentarios" rows="2">{{ $evaluacion->comentarios }}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="compromisos">Compromisos:</label>
+                                        <textarea class="form-control" name="compromisos" id="compromisos" rows="2">{{ $evaluacion->compromisos }}</textarea>
+                                    </div>
+                                </div>
+
+
                                 <div class="row">
                                     <div class="col py-3">
                                         <label for="archivos">Selecciona los archivos:</label>
