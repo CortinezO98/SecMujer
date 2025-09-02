@@ -18,8 +18,25 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
+    RedirectMatch 404 ^/(vendor|storage|resources)/
+    RedirectMatch 404 /\.(?!well-known\/)
+    <FilesMatch "\.(phpt|phps)$">
+      Require all denied
+    </FilesMatch>
+
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+</IfModule>
+# Seguridad: HSTS 
+<IfModule mod_headers.c>
+  SetEnvIf X-Forwarded-Proto "https" HTTPS=on
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+</IfModule>
+
+<IfModule mod_php.c>
+  php_flag display_errors Off
+  php_flag display_startup_errors Off
+  php_value error_reporting 0
 </IfModule>
