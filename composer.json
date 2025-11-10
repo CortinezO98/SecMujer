@@ -10,16 +10,18 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "laravel/framework": "^11",
+        "ezyang/htmlpurifier": "^4.18",
+        "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
+        "league/commonmark": "^2.7",
         "maatwebsite/excel": "^3.1",
+        "phpoffice/phpspreadsheet": "^1.30",
         "realrashid/sweet-alert": "^7.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
-        "laravel/pail": "^1.2.3",
-        "laravel/pint": "1.24",
-        "laravel/sail": "^1.45",
+        "laravel/pail": "^1.1",
+        "laravel/pint": "^1.13",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.4",
         "pestphp/pest": "^3.7",

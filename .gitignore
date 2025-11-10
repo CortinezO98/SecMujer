@@ -21,3 +21,11 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+# --- Remediación 2025-11-10 ---
+# Backups locales de .env
+.env.bak.*
+# Evidencias y artefactos locales de auditoría
+/evidencias/
+# Archivos temporales varios
+*.log
