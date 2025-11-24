@@ -7,8 +7,6 @@ define('LARAVEL_START', microtime(true));
 $appEnv = $_ENV['APP_ENV'] ?? getenv('APP_ENV') ?? 'production';
 
 if (in_array($appEnv, ['production', 'testing'], true)) {
-    ini_set('display_errors', '0');
-    ini_set('display_startup_errors', '0');
     error_reporting(0);
 }
 
