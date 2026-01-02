@@ -242,19 +242,23 @@ class EvaluacionController extends Controller
             return redirect()->back();
         }
 
-        // 2) Guardar fechas de respuesta (solo la primera vez)
-        if ($request->filled('comentarios') && empty($evaluacion->comentarios_respondido_at)) {
-            $evaluacion->comentarios_respondido_at = now();
-        }
-        if ($request->filled('compromisos') && empty($evaluacion->compromisos_respondido_at)) {
-            $evaluacion->compromisos_respondido_at = now();
-        }
-        // 3) Guardar comentarios y compromisos
+        // 2) Guardar comentarios/compromisos (sin romper funcionalidad original)
         if ($request->has('comentarios')) {
             $evaluacion->comentarios = $request->comentarios;
         }
         if ($request->has('compromisos')) {
             $evaluacion->compromisos = $request->compromisos;
+        }
+
+        // 3) Guardar fechas SOLO si el valor final tiene contenido y es la primera vez
+        $comentariosFinal = trim((string) $evaluacion->comentarios);
+        if ($comentariosFinal !== '' && empty($evaluacion->comentarios_respondido_at)) {
+            $evaluacion->comentarios_respondido_at = now();
+        }
+
+        $compromisosFinal = trim((string) $evaluacion->compromisos);
+        if ($compromisosFinal !== '' && empty($evaluacion->compromisos_respondido_at)) {
+            $evaluacion->compromisos_respondido_at = now();
         }
 
         // 4) Aprobar
@@ -270,6 +274,7 @@ class EvaluacionController extends Controller
             return redirect()->back();
         }
     }
+
 
     public function eliminarEvaluacion($id) {
         $evaluacion = Evaluacion::find($id);
