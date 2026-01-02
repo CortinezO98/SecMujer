@@ -86,6 +86,8 @@
                     <th>Aspectos a Mejorar</th>
                     <th>Observación Final</th>
                     <th>Compromisos</th>
+                    <th>Fecha respuesta comentarios</th>
+                    <th>Fecha respuesta compromisos</th>
                 </tr>
             </thead>
             <tbody>
@@ -95,6 +97,12 @@
                     <td>{{ $evaluacion->aspectos_a_mejorar }}</td>
                     <td>{{ $evaluacion->comentarios }}</td>
                     <td>{{ $evaluacion->compromisos }}</td>
+                    <td>
+                    {{ $evaluacion->comentarios_respondido_at ? $evaluacion->comentarios_respondido_at->format('Y-m-d H:i:s') : '' }}
+                    </td>
+                    <td>
+                    {{ $evaluacion->compromisos_respondido_at ? $evaluacion->compromisos_respondido_at->format('Y-m-d H:i:s') : '' }}
+                    </td>
                 </tr>
             </tbody>
         </table>

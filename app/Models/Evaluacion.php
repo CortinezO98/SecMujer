@@ -23,12 +23,20 @@ class Evaluacion extends Model
         'aspectos_a_mejorar',
         'comentarios',
         'compromisos',
+        'comentarios_respondido_at',
+        'compromisos_respondido_at',
         'fecha_registro',
         'agente_id',
         'matriz_id',
         'tipo_monitoreo_id',
         'estado_evaluacion_id'
     ];
+
+    protected $casts = [
+        'comentarios_respondido_at' => 'datetime',
+        'compromisos_respondido_at' => 'datetime',
+    ];
+
     
     protected $with = [
         'matriz', 

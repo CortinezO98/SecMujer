@@ -104,6 +104,8 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping
             $evaluacion->aspectos_a_mejorar,
             $evaluacion->comentarios,
             $evaluacion->compromisos,
+            optional($evaluacion->comentarios_respondido_at)->format('Y-m-d H:i:s'),
+            optional($evaluacion->compromisos_respondido_at)->format('Y-m-d H:i:s'),
             $evaluacion->fecha_registro,
         ];
 
@@ -136,6 +138,8 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping
             'Aspectos a Mejorar',
             'Observación Final',
             'Compromisos',
+            'Fecha respuesta comentarios',
+            'Fecha respuesta compromisos',
             'Fecha Evaluación',
         ];
 

@@ -3,6 +3,10 @@
 @section('content')
 <h2 class="text-center pt-3">Detalle Evaluación Presencial</h2>
 
+@php
+    $esEvaluado = strtolower(trim($evaluacion->estado_evaluacion->descripcion ?? '')) === 'evaluado';
+@endphp
+
     <div class="container-fluid">
         <div class="row mb-3">
             <div class="card card-generalInfoQM">
@@ -37,6 +41,7 @@
                             </table>
                         </div>
                     </div>
+
                     <div class="row mb-3">
                         <div class="card card-generalInfoQM">
                             <div class="card-header">
@@ -69,18 +74,21 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col mb-3">
                             <label>Observaciones:</label>
                             <textarea class="form-control" name="observations" id="observations" rows="3" disabled>{{ $evaluacion->observaciones }}</textarea>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col mb-3">
                             <label>Aspectos Positivos:</label>
                             <textarea class="form-control" name="positiveAspects" id="positiveAspects" rows="3" disabled>{{ $evaluacion->aspectos_positivos }}</textarea>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col">
                             <label>Aspectos a Mejorar:</label>
@@ -88,8 +96,6 @@
                         </div>
                     </div>
 
-                    
-                    
                     @include('evaluacion.descargaDeAdjuntos')
 
                     <div id="divCompromisos">
@@ -99,26 +105,65 @@
                             <div class="row mt-4">
                                 <div class="col">
                                     <label>Comentarios agente:</label>
-                                    <textarea class="form-control" name="comentarios" id="comentarios" rows="3"></textarea>
+                                    <textarea
+                                        class="form-control"
+                                        name="comentarios"
+                                        id="comentarios"
+                                        rows="3"
+                                        {{ $esEvaluado ? 'readonly' : '' }}
+                                    >{{ old('comentarios', $evaluacion->comentarios) }}</textarea>
+
+                                    @if(!empty($evaluacion->comentarios_respondido_at))
+                                        <small class="text-muted">
+                                            Respondido el:
+                                            {{ \Illuminate\Support\Carbon::parse($evaluacion->comentarios_respondido_at)->format('Y-m-d H:i') }}
+                                        </small>
+                                    @endif
                                 </div>
                             </div>
 
                             <div class="row mt-4">
                                 <div class="col">
                                     <label>Compromisos:</label>
-                                    <textarea class="form-control" name="compromisos" id="compromisos" rows="3"></textarea>
+                                    <textarea
+                                        class="form-control"
+                                        name="compromisos"
+                                        id="compromisos"
+                                        rows="3"
+                                        {{ $esEvaluado ? 'readonly' : '' }}
+                                    >{{ old('compromisos', $evaluacion->compromisos) }}</textarea>
+
+                                    @if(!empty($evaluacion->compromisos_respondido_at))
+                                        <small class="text-muted">
+                                            Respondido el:
+                                            {{ \Illuminate\Support\Carbon::parse($evaluacion->compromisos_respondido_at)->format('Y-m-d H:i') }}
+                                        </small>
+                                    @endif
                                 </div>
                             </div>
-
 
                             <div class="row mt-3">
                                 <div class="col mb-4 text-center">
-                                    <button type="submit" class="btn btn-success" id="btnContinuarAprobacionEvaluacion">
+                                    <button
+                                        type="submit"
+                                        class="btn btn-success"
+                                        id="btnContinuarAprobacionEvaluacion"
+                                        {{ $esEvaluado ? 'disabled' : '' }}
+                                    >
                                         Continuar Aprobación Evaluación
                                     </button>
+
+                                    @if($esEvaluado)
+                                        <div class="mt-2">
+                                            <small class="text-danger">
+                                                Esta evaluación está en estado <strong>Evaluado</strong> y no permite edición.
+                                            </small>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
-                        </form> 
+
+                        </form>
                     </div>
 
                 </div>
@@ -164,4 +209,3 @@
         </div>
     </div>
 @endsection
-

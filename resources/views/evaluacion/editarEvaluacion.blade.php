@@ -63,7 +63,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <input type="text" name="llamada_id" id="llamada_id" class="form-control" value="{{ $evaluacion->llamada_id }}" maxlength="50" required>
+                                                        <input type="text" name="llamada_id" id="llamada_id" class="form-control" value="{{ $evaluacion->llamada_id }}" required>
                                                     </td>
                                                     <td>
                                                         <input type="text" name="mujer_telefono" id="mujer_telefono" class="form-control" value="{{ $evaluacion->mujer_telefono }}" pattern="^\d{7,15}(-\d{7,15})?$" maxlength="35" placeholder="Ej: 3001234567-3107654321" required>

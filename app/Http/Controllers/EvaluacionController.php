@@ -226,26 +226,49 @@ class EvaluacionController extends Controller
         return view('evaluacion.detalleEvaluacion', compact('evaluacion', 'atributos', 'disabledCumple'));
     }
 
-    public function aprobarEvaluacion(Request $request){
+    public function aprobarEvaluacion(Request $request)
+    {
+        $request->validate([
+            'evaluacion_id' => 'required|integer',
+            'comentarios'   => 'nullable|string',
+            'compromisos'   => 'nullable|string',
+        ]);
 
-        $evaluacion = Evaluacion::where('id', $request->evaluacion_id)->first();
-        $evaluacion->comentarios = $request->comentarios;
-        $evaluacion->compromisos = $request->compromisos;
-        $evaluacion->estado_evaluacion_id = EstadosEvaluaciones::Evaluado;
-        
-        try 
-        {
-            $evaluacion->save();
-            Alert::success('Exitó', 'La evaluación se aprobó exitosamente.')->persistent(true);
-            return redirect(route('home'));
-        } 
-        catch (\Exception $ex)  
-        {
-            ErrorLogController::CreateErrorLog($ex,  __METHOD__, Auth::id());
-            Alert::error('Error', 'No fue posible aprobar la evaluación.')->persistent(true);
+        $evaluacion = Evaluacion::where('id', $request->evaluacion_id)->firstOrFail();
+
+        // 1) Si ya está evaluada, NO permitir edición
+        if ((int)$evaluacion->estado_evaluacion_id === (int)\App\Enums\EstadosEvaluaciones::Evaluado->value) {
+            Alert::warning('Atención', 'La evaluación ya está en estado Evaluado y no permite edición.')->persistent(true);
             return redirect()->back();
         }
 
+        // 2) Guardar fechas de respuesta (solo la primera vez)
+        if ($request->filled('comentarios') && empty($evaluacion->comentarios_respondido_at)) {
+            $evaluacion->comentarios_respondido_at = now();
+        }
+        if ($request->filled('compromisos') && empty($evaluacion->compromisos_respondido_at)) {
+            $evaluacion->compromisos_respondido_at = now();
+        }
+        // 3) Guardar comentarios y compromisos
+        if ($request->has('comentarios')) {
+            $evaluacion->comentarios = $request->comentarios;
+        }
+        if ($request->has('compromisos')) {
+            $evaluacion->compromisos = $request->compromisos;
+        }
+
+        // 4) Aprobar
+        $evaluacion->estado_evaluacion_id = \App\Enums\EstadosEvaluaciones::Evaluado->value;
+
+        try {
+            $evaluacion->save();
+            Alert::success('Exitó', 'La evaluación se aprobó exitosamente.')->persistent(true);
+            return redirect(route('home'));
+        } catch (\Exception $ex) {
+            ErrorLogController::CreateErrorLog($ex, __METHOD__, Auth::id());
+            Alert::error('Error', 'No fue posible aprobar la evaluación.')->persistent(true);
+            return redirect()->back();
+        }
     }
 
     public function eliminarEvaluacion($id) {
